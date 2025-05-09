@@ -3,7 +3,7 @@ from .views import *
 
 urlpatterns = [
     
-    path('aut/',view=AuthorizaView.as_view(), name="aut" ),
+    path('auth/',view=AuthorizaView.as_view(), name="auth" ),
     path('reg/' ,view = RegistrationView.as_view(), name = "reg")
 
 ]
