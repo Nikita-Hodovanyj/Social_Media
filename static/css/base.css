@@ -1,0 +1,139 @@
+@font-face {
+    font-family: 'GT Walsheim Pro';
+    src: url('/static/fonts/GTWalsheimPro-Regular.otf') format('opentype'),
+         url('/static/fonts/GTWalsheimPro-Regular.woff') format('woff'),
+         url('/static/fonts/GTWalsheimPro-Regular.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'GT Walsheim Pro';
+    src: url('/static/fonts/GTWalsheimPro-Medium.otf') format('opentype'),
+         url('/static/fonts/GTWalsheimPro-Medium.woff') format('woff'),
+         url('/static/fonts/GTWalsheimPro-Medium.woff2') format('woff2');
+    font-weight: 500;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'GT Walsheim Pro';
+    src: url('/static/fonts/GTWalsheimPro-Bold.otf') format('opentype'),
+         url('/static/fonts/GTWalsheimPro-Bold.woff') format('woff'),
+         url('/static/fonts/GTWalsheimPro-Bold.woff2') format('woff2');
+    font-weight: bold;
+    font-style: normal;
+}
+
+body, h1, h2, h3, h4, h5, h6, p, a, span {
+    font-weight: normal;
+    margin: 0;
+    padding: 0;
+  }
+
+body{
+    display: flex;
+    flex-direction: column;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    background-color: #E8ECFC;
+  }
+
+  header{
+    display: flex;
+    box-sizing: border-box;
+    /* width: 1440px; */
+    height: 88px;
+    align-items: center;
+    background-color: white;
+    justify-content: space-between;
+    padding: 24px 80px 24px 80px;
+  }
+
+.logo{
+    display: flex;
+    width: 145px;
+    height: 18px;
+    
+    align-items: center;
+}
+.logo h1{
+    height: 18px;
+    font-size: 18px;
+  }
+.logo-img{
+    width: 145px;
+    height: 18x;
+}
+
+.links{
+    display: flex;
+    align-items: center;
+    /* justify-content: center; */
+    width: 775px;
+    height: 40px;
+    gap: 24px;
+    
+
+}
+
+a{
+    text-decoration: none;
+    color: black;
+}
+.text{
+    display: flex;
+    /* font-family: GT Walsheim Pro; */
+    align-items: center;
+    justify-content: space-between;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 100%;
+    text-align: center; 
+
+    padding-top: 4px;
+    padding-right: 8px;
+    padding-bottom: 4px;
+    padding-left: 8px;
+    gap: 8px;
+    border-radius: 3px; 
+
+
+}
+
+.img{
+    width: 20px;
+    height: 20px;
+    /* margin-right: 100%; */
+
+}
+.button {
+    display: inline-flex;  
+    align-items: center;  
+    background: transparent;
+    border: none;         
+    cursor: pointer;     
+    padding: 0;           
+}
+
+.redirect {
+    width: 95px;
+    height: 40px;
+    padding: 10px 16px;   
+    border: 1px solid #543C52; 
+    border-radius: 1234px; 
+    color: #543C52;
+    background: transparent; 
+    display: flex;        
+    align-items: center;
+    justify-content: center;
+    gap: 8px;           
+}
+
+.button-img {
+    width: 20px;
+    height: 20px;
+    
+
+}

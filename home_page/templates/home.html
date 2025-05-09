@@ -1,0 +1,313 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+
+{% block title %}
+  Головна сторінка
+{% endblock %}
+
+{% block link %}
+<link rel="stylesheet" href="{% static 'css/home.css' %}">
+{% endblock %}
+
+{% block content %}
+    <main>
+        <div class = "left">
+            <div class="accaunt" >
+                <div class="data" >
+                    <div class="avatar" >
+                        <img src="{% static '/image/avatar.png' %}" alt="">
+                    </div>
+                    <div class="nick" >
+                        <h5>Lina Li</h5>
+                        <h2>@thelili</h2>
+                    </div>
+
+                </div>
+                
+                <div class="popular">
+                    <div class="post" >
+                        <h3>566</h3>
+                        <h4>Дописи</h4>
+                    </div>
+                    <div class="post" >
+                        <h3>12.1К</h3>
+                        <h4>Читачі</h4>
+                    </div>
+                    <div class="post" >
+                        <h3>222</h3>
+                        <h4>Друзі</h4>
+                    </div>
+
+
+
+                </div>
+
+            </div>
+            <div class="request" >
+                <div class="button-requests" >
+                    <h6><img class="person-img" src="{% static '/image/person.png' %}" alt=""> Запити</h6>
+                    <button class="watch" >Дивитись всі</button>
+                </div>
+                <div class="people" >
+                    <div class="people-all">
+                        <img class="people-img" src="{% static '/image/Yehor.png' %}" alt="">
+                        <div>
+                            <p class="name" >Yehor Aung</p>
+                            <p class = "folower" >4.3к підписників</p>
+                        </div>
+                    </div>
+                    <div class="people-all">
+                        <img class="people-img" src="{% static '/image/Ann.png' %}" alt="">
+                        <div>
+                            <p class="name" >Ann Ann</p>
+                            <p class = "folower" >1.6к підписників</p>
+                        </div>
+                    </div>
+                    <div class="people-all">
+                        <img class="people-img" src="{% static '/image/Yeugen.png' %}" alt="">
+                        <div>
+                            <p class="name" >Yeugen Jenua</p>
+                            <p class = "folower" >10.3к підписників</p>
+                        </div>
+                    </div>
+                    <div>
+                        
+                    </div>
+                    <div>
+                        
+                    </div>
+
+
+                </div>
+
+            </div>
+            <div class="frends" >
+                <div class="button-meessage" >
+                    <h6><img class="person-img" src="{% static '/image/message.png' %}" alt="">Повідомлення</h6>
+                    <button class="watch" >Дивитись всі</button>
+                </div>
+                <div class="people" >
+                    <div class="people-all">
+                        <img class="people-img" src="{% static '/image/Yehor.png' %}" alt="">
+                        <div>
+                            <p class="name" >Yehor Aung</p>
+                            <p class = "folower" >Привіт Як справи</p>
+                        </div>
+                    </div>
+                    <div class="people-all">
+                        <img class="people-img" src="{% static '/image/Ann.png' %}" alt="">
+                        <div>
+                            <p class="name" >Ann Ann</p>
+                            <p class = "folower" >Привіт!</p>
+                        </div>
+                    </div>
+                    <div class="people-all">
+                        <img class="people-img" src="{% static '/image/Yeugen.png' %}" alt="">
+                        <div>
+                            <p class="name" >Yeugen Jenua</p>
+                            <p class = "folower" >Привіт!</p>
+                        </div>
+                    </div>
+                    <div>
+                        
+                    </div>
+                    <div>
+                        
+                    </div>
+
+
+                </div>
+
+            </div>
+        </div>
+        <div class="right">
+            <div class="coments">
+                <div>
+                    <input class="write-coment" type="text" placeholder="Про що ти зараз думаєшь?" >
+
+                </div>
+                <div class="buttons">
+                    <div>
+                        <button class="photo-button" ><img class="photo" src="{% static '/image/Photo.png' %}" alt=""></button>
+                    </div>
+                    <div>
+                        <button class="photo-button" ><img class="photo" src="{% static '/image/emoji.png' %}" alt=""></button>
+                    </div>
+                    <div>
+                        <button class="pub" >
+                            Публікація
+                            <img class="img-pub" src="{% static '/image/PlaneR.png' %}" alt="">
+                        </button>
+                    </div>
+
+
+                </div>
+                
+            </div>
+            
+            <div class="publicaation">
+                <div class="header">
+                    <img src="{% static 'image/Dots.png' %}"  class="dot">
+                    <div class="people-pub">
+                        <img src="{% static 'image/Size=M.png' %}"  class="avatar">
+                        <p>X_AE_A-13</p>
+                    </div>
+                <div class="pub-content">
+                    <p>
+                        Інколи найкращі ідеї народжуються в тиші 🌿<br>
+                        Природа, книга і спокій — усе, що потрібно, аби перезавантажитись.<br>
+                        #відпочинок #натхнення #життя #природа #читання #спокій #гармонія<br>   
+                    </p>
+                    <div class="photo">
+                        <div class="photo1" >
+                            <img src="{% static 'image/Frame.png' %}"  class="frame">
+                            <img src="{% static 'image/Frame1.png' %}"  class="frame1">
+                        </div>
+                        <div class="photo2" >
+                            <img src="{% static 'image/Frame2.png' %}"  class="frame2">
+                            <img src="{% static 'image/Frame3.png' %}"  class="frame3">
+                            <img src="{% static 'image/Frame4.png' %}"  class="frame4">
+
+                        </div>
+                        <div class="reaction" >
+                            <div class="likes" >
+                                <img src="{% static 'image/Like.png' %}"  class="like-photo">
+                                <p>120 Вподобань</p>
+                            </div>
+                            <div class="views" >
+                                <img src="{% static 'image/eye.png' %}"  class="views-photo">
+                                <p>890 Переглядів</p>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+            </div>
+            
+        </div>
+        <div class="coment1" >
+            <div class="people-coment">
+                <img src="{% static 'image/Dots.png' %}"  class="dots">
+                <div class="coment-avatar" >
+                    <img src="{% static 'image/Component1.png' %}" alt="">  
+                    <p class="nick-com" >Alex_03</p>
+                </div>
+
+            </div>
+            <div class="text-com">
+                <p>буває такий настрій: просто лежиш і існуєш<br>
+                    😅 чай в одній руці, телефон в іншій, думки десь у космосі 🌌 і знаєте шо? норм<br>
+                    #вайб</p>
+                    <div class="reaction" >
+                        <div class="likes" >
+                             <img src="{% static 'image/Like.png' %}"  class="like-photo">
+                             <p>120 Вподобань</p>
+                        </div>
+                        <div class="views" >
+                             <img src="{% static 'image/eye.png' %}"  class="views-photo">
+                             <p class="a" >890 Переглядів</p>
+                        </div>
+         
+                    </div>
+            </div>
+            
+
+
+        </div>
+        <div class="coment1" >
+            <div class="people-coment">
+                <img src="{% static 'image/Dots.png' %}"  class="dots">
+                <div class="coment-avatar" >
+                    <img src="{% static 'image/Component2.png' %}" alt="">  
+                    <p class="nick-com" >Alex_03</p>
+                </div>
+
+            </div>
+            <div class="text-com">
+                <p>буває такий настрій: просто лежиш і існуєш<br>
+                    😅 чай в одній руці, телефон в іншій, думки десь у космосі 🌌 і знаєте шо? норм<br>
+                    #вайб</p>
+                    <div class="reaction" >
+                        <div class="likes" >
+                             <img src="{% static 'image/Like.png' %}"  class="like-photo">
+                             <p>120 Вподобань</p>
+                        </div>
+                        <div class="views" >
+                             <img src="{% static 'image/eye.png' %}"  class="views-photo">
+                             <p class="a" >890 Переглядів</p>
+                        </div>
+         
+                    </div>
+            </div>
+            
+
+
+        </div>
+        <div class="coment1" >
+            <div class="people-coment">
+                <img src="{% static 'image/Dots.png' %}"  class="dots">
+                <div class="coment-avatar" >
+                    <img src="{% static 'image/Component3.png' %}" alt="">  
+                    <p class="nick-com" >Alex_03</p>
+                </div>
+
+            </div>
+            <div class="text-com">
+                <p>буває такий настрій: просто лежиш і існуєш<br>
+                    😅 чай в одній руці, телефон в іншій, думки десь у космосі 🌌 і знаєте шо? норм<br>
+                    #вайб</p>
+                    <div class="reaction" >
+                        <div class="likes" >
+                             <img src="{% static 'image/Like.png' %}"  class="like-photo">
+                             <p>120 Вподобань</p>
+                        </div>
+                        <div class="views" >
+                             <img src="{% static 'image/eye.png' %}"  class="views-photo">
+                             <p class="a" >890 Переглядів</p>
+                        </div>
+         
+                    </div>
+            </div>
+            
+
+
+        </div>
+        <div class="coment1" >
+            <div class="people-coment">
+                <img src="{% static 'image/Dots.png' %}"  class="dots">
+                <div class="coment-avatar" >
+                    <img src="{% static 'image/Component1.png' %}" alt="">  
+                    <p class="nick-com" >Alex_03</p>
+                </div>
+
+            </div>
+            <div class="text-com">
+                <p>буває такий настрій: просто лежиш і існуєш<br>
+                    😅 чай в одній руці, телефон в іншій, думки десь у космосі 🌌 і знаєте шо? норм<br>
+                    #вайб</p>
+                    <div class="reaction" >
+                        <div class="likes" >
+                             <img src="{% static 'image/Like.png' %}"  class="like-photo">
+                             <p>120 Вподобань</p>
+                        </div>
+                        <div class="views" >
+                             <img src="{% static 'image/eye.png' %}"  class="views-photo">
+                             <p class="a" >890 Переглядів</p>
+                        </div>
+         
+                    </div>
+            </div>
+            
+
+
+        </div>
+    
+
+    </main>
+{% endblock %}
