@@ -4,49 +4,98 @@ from django.views.generic.base import TemplateView
 from django.contrib.auth.models import User
 from django.conf import settings
 from django.core.mail import send_mail
-from .forms import RegistrationForm
 from Social_Media.settings import EMAIL_HOST_USER
+from .forms import RegistrationForm
+
+from Social_Media.settings import EMAIL_HOST_USER
+
+from .models import ConfirmCode
+import random
+
+from django.shortcuts import render, redirect
+from django.contrib.auth import authenticate, login
+from django.contrib import messages
 
 # Create your views here.
 
 class RegistrationView(FormView):
     template_name = 'registration.html'  
     form_class = RegistrationForm  
-    success_url = '/login/reg/'
+    success_url = '/login/auth/'
 
 
     def form_valid(self, form):
         email = form.cleaned_data['email']
         password = form.cleaned_data['password']
         confirm_password = form.cleaned_data['confirm_password']
+        confirm_code = form.cleaned_data['confirm_code']
+        
+        code = str(random.randint(100000, 999999))
+
+
 
         if User.objects.filter(email=email).exists():
             form.add_error('email', 'Користувач з таким email вже існує!')
             return self.form_invalid(form)
         
-        if password == confirm_password:
-            User.objects.create_user(username = email, email = email, password = password)
+
+        if not confirm_code:
+
+            if password != confirm_password:
+                form.add_error('confirm_password', 'Паролі не співпадають!')
+                return self.form_invalid(form)
+            
+
+            ConfirmCode.objects.update_or_create(email = email, defaults= {'confirm_code':code})
 
             send_mail(
-                subject='Код підтвердження реєстрації',
-                message='Ваш код підтвердження реєстрації:  123',
-                from_email= EMAIL_HOST_USER,
+                subject='Код підтвердження реєстрації WORLD.IT Messenge`r',
+                message= f'Ваш код підтвердження реєстрації: {code} ',
+                from_email = EMAIL_HOST_USER,
+
                 recipient_list=[email],
                 fail_silently=False,
             )
+
+            return render(
+                request=self.request, 
+                template_name= self.template_name, 
+                context={'form': form,'show_code': True, }
+            )
+        
+        else:
+            
+            saved_code = ConfirmCode.objects.get(email=email)
+
+            if saved_code.confirm_code != confirm_code:
+                form.add_error('confirm_code', 'Неправильний код підтвердження.')
+          
+
+            # Створення користувача
+            User.objects.create_user(username=email, email=email, password=password)
+            saved_code.delete()
+
             return super().form_valid(form)
 
-    
+
+
 
         
 
-        
-
-
-
-
-
 
     
-class AuthorizaView(TemplateView):
-    template_name = "authorization.html"
+def render_auth(request):
+
+    if request.method == 'POST':
+        email = request.POST.get('email')
+        password = request.POST.get('password')
+
+        user = authenticate(request, username=email, password=password)
+
+        if user is not None:
+            login(request, user)
+            return redirect('/')  
+        else:
+            messages.error(request, 'Невірний email або пароль.')
+
+    return render(request, 'authorization.html') 
