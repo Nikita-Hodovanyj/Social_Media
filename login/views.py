@@ -2,11 +2,10 @@ from django.shortcuts import render
 from django.views.generic.edit import FormView
 from django.views.generic.base import TemplateView
 from django.contrib.auth.models import User
+from django.conf import settings
 from django.core.mail import send_mail
 from .forms import RegistrationForm
-
-import ssl
-ssl._create_default_https_context = ssl._create_unverified_context
+from Social_Media.settings import EMAIL_HOST_USER
 
 # Create your views here.
 
@@ -31,8 +30,8 @@ class RegistrationView(FormView):
             send_mail(
                 subject='Код підтвердження реєстрації',
                 message='Ваш код підтвердження реєстрації:  123',
-                from_email='',
-                recipient_list=[''],
+                from_email= EMAIL_HOST_USER,
+                recipient_list=[email],
                 fail_silently=False,
             )
             return super().form_valid(form)
