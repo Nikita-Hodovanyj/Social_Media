@@ -7,45 +7,30 @@
 
 {% block content %}
    <form method="post">
-        {% csrf_token %}
-        
-        {% if not show_code %}
-            <p>
-               {{ form.email.label_tag }} 
-               {{ form.email }}
-            </p>
-
-            <p>
-               {{ form.password.label_tag }} 
-               {{ form.password }}
-            </p>
-
-            <p>
-               {{ form.confirm_password.label_tag }} 
-               {{ form.confirm_password }}
-            </p>
-         {% else %}
-            <p>
-               {{ form.email.label_tag }}
-               {{ form.email }}
-            </p>
-
-            <p>
-               {{ form.password.label_tag }} 
-               {{ form.password }}
-            </p>
-
-            <p>
-               {{ form.confirm_password.label_tag }} 
-               {{ form.confirm_password }}
-            </p>
-
-            <p>
-               {{ form.confirm_code.label_tag }} 
-               {{ form.confirm_code }}
-            </p>
+      {% csrf_token %}
+      
+      {% for field in form %}
+         {% if field.name != 'confirm_code' %}
+               <p>
+                  {{ field.label_tag }} 
+                  {{ field }}
+               </p>
          {% endif %}
-        
+      {% endfor %}
+
+      {% if show_code %}
+         <p>
+            {{ form.confirm_code.label_tag }} 
+            {{ form.confirm_code }}
+         </p>
+      {% endif %}
+               
+             
+            
+
+               
+            
+
 
         <button type="submit">Зареєструватися</button>
    </form>
