@@ -4,10 +4,61 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>{% block title %}{% endblock %}</title>
+        <link rel="stylesheet" href="{% static 'css/base.css' %}">
+
+        
         {% block link %}{% endblock %}
     </head>
 
     <body>
+        {% if not hide_header %}
+
+        <header>
+            
+
+            <div class="logo">
+                <h1><img class="logo-img" src="{% static 'images/logo.png' %}"></h1>
+
+            </div>
+            <div class="links">
+                <div class="text">
+                    <img class="img" src="{% static 'images/House.png' %}">
+                    <a href=""  >Головна</a>
+                </div>
+                <div class="text">
+                    <img class="img" src="{% static 'images/image.png' %}">
+                    <a href="">Мої публікації</a>
+                </div>
+                <div class="text">
+                    <img class="img" src="{% static 'images/people.png' %}">
+                    <a href="">Друзі</a>
+                </div>
+                <div class="text">
+                    <img class="img" src="{% static 'images/chat.png' %}">
+                    <a href="">Чати</a>
+                </div>
+                <div class="text">
+                    <img class="img" src="{% static 'images/Setting.png' %}">
+                    <a href="">Налаштування</a>
+                </div>
+
+                    
+                    
+                    
+                    
+                 <div class="button">
+                   
+                    <button  class="redirect"> 
+                        <img class="button-img" src="{% static 'images/exit.png' %}">
+                         Вихід
+                    </button>
+                </div>   
+                
+            </div>
+
+            
+        </header>
+        {% endif %}
         {% block content %} 
             
         {% endblock %}
