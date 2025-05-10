@@ -11,6 +11,10 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 """
 
 from pathlib import Path
+from dotenv import load_dotenv
+import os
+
+load_dotenv()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -130,9 +134,28 @@ STATICFILES_DIRS = [
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+
+
+
+
+""" 
+    SMTP це - протокол, який дозволяє надсилати електронні листи 
+    через певний сервер.
+"""
+
+# Шлях до класу в Django, який відповідає за відправку листів через бекенд SMTP.
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+
+# Адреса SMTP-сервера, за якою Django буде підключатись до SMTP-серверу
 EMAIL_HOST = 'smtp.gmail.com' 
+
+#Порт для відправки через з'єднання TLS протоколу
 EMAIL_PORT = 587
+
+# Захищене з'єднання через протокол TLS
 EMAIL_USE_TLS = True
-EMAIL_HOST_USER = 'mikikit93@gmail.com'
-EMAIL_HOST_PASSWORD = 'fkvo zauy wmsr unuv'
+# Пошта відправника
+EMAIL_HOST_USER = os.getenv('EMAIL_HOST_USER')
+
+# Пароль застосунку — спеціальний одноразовий пароль, який створюється в Двохетапній перевірці гугл та  працює лише для SMTP-сервера.
+EMAIL_HOST_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD')
