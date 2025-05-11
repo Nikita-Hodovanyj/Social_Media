@@ -154,8 +154,14 @@ EMAIL_PORT = 587
 
 # Захищене з'єднання через протокол TLS
 EMAIL_USE_TLS = True
+EMAIL_HOST_USER = 'nikitagodovanyj@gmail.com'
+EMAIL_HOST_PASSWORD = 'wyqf flef gnyq ayvl'
+
+
+
 # Пошта відправника
 EMAIL_HOST_USER = os.getenv('EMAIL_HOST_USER')
 
 # Пароль застосунку — спеціальний одноразовий пароль, який створюється в Двохетапній перевірці гугл та  працює лише для SMTP-сервера.
 EMAIL_HOST_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD')
+

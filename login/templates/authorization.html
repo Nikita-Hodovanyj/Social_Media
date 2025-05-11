@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block title %}
+   Авторизація
+{% endblock %}
+
+{% block content %}
+    <header>
+        <div class="logo">
+            <h1><img class="logo-img" src="{% static 'images/logo.png' %}"></h1>
+        </div>
+    </header>
+    <form method="POST">
+        {% csrf_token %}
+        <input type="email" name="email" placeholder="Email" required>
+        <input type="password" name="password" placeholder="Пароль" required>
+        <button type="submit">Увійти</button>
+    </form>
+
+    {% if messages %}
+        {% for message in messages %}
+            <p style="color: red;">{{ message }}</p>
+        {% endfor %}
+    {% endif %}
+
+{% endblock %}
+
