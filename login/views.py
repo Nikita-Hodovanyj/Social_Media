@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.views.generic.edit import FormView
 from django.views.generic.base import TemplateView
+from django.contrib.auth.views import LogoutView
 from django.contrib.auth.models import User
 from django.conf import settings
 from django.core.mail import send_mail
@@ -14,7 +15,7 @@ from .models import ConfirmCode
 import random
 
 from django.shortcuts import render, redirect
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 
 
@@ -97,7 +98,7 @@ class RegistrationView(FormView):
             # Надсилання коду підтвердження на email
             send_mail(
 
-                subject='Код підтвердження реєстрації WORLD.IT Messenge`r',
+                subject='Код підтвердження реєстрації WORLD.IT Messenger',
                 message=f'Ваш код підтвердження реєстрації: {code} ',
 
                 from_email=EMAIL_HOST_USER,
@@ -159,7 +160,8 @@ def render_auth(request):
 
     return render(request, 'authorization.html', {'form': form, 'hide_header': True}) 
 
-# Представлення для сторінки авторизації (вхід)
-class AuthorizaView(TemplateView):
-    template_name = "authorization.html"  # Шаблон сторінки авторизації
+def logout_user(request):
+    logout(request)
+    print(f'{request.user.username} Logout')
+    return redirect('auth')
 

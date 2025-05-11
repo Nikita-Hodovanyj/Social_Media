@@ -114,7 +114,8 @@ a{
     background: transparent;
     border: none;         
     cursor: pointer;     
-    padding: 0;           
+    padding: 0;  
+    cursor: pointer;         
 }
 
 .redirect {
