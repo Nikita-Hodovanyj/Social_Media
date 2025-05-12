@@ -1,34 +1,70 @@
 {% extends 'base.html' %}
+{% load static %}
 
 {% block title %}
    Реєстрація 
 {% endblock %}
 
+{% block link %}
+   <link rel="stylesheet" href="{% static 'css/reg.css' %}">
+
+{% endblock %}
+
 
 {% block content %}
-   <form method="post">
-      {% csrf_token %}
-      
-      {% for field in form %}
-         {% if field.name != 'confirm_code' %}
-               <p>
-                  {{ field.label_tag }} 
-                  {{ field }}
-               </p>
-         {% endif %}
-      {% endfor %}
+   <header class="header-reg" >
+      <div class="logo">
+         <h1><img src="{% static 'images/logo.png' %}" alt=""> </h1>
+      </div>
+   </header>
+   <div class="main" >
 
-      {% if show_code %}
-         <p>
-            {{ form.confirm_code.label_tag }} 
-            {{ form.confirm_code }}
-         </p>
-      {% endif %}
-               
+      <div class="registr" >
+         <div class="a" >
+   
+            <div class="choice" >
+               <div class="choice-reg" >
+                  <p class="text-reg" >Реєстрація</p>
+               </div>
+               <div class="choice-auth" >
+                  <p class="text-auth">Авторизація</p>
+               </div>
+            </div>
+            <p class="text-join" >Приєднуйся до World IT</p>
+            <div class="form-div" >
+               <form method="post">
+                  {% csrf_token %}
+                  
+                  {% for field in form %}
+                     {% if field.name != 'confirm_code' %}
+                     <div class="input" >
+                        <p class="input-eye" >
+                           {{ field.label_tag }} 
+                           {{ field }}
+                           
+                              <img class="eye" src="{% static 'images/eye2.png' %}" alt="">
+                           
+                        </p>
+                     </div>
+                     {% endif %}
+                  {% endfor %}
+            
+                  {% if show_code %}
+                     <p>
+                        {{ form.confirm_code.label_tag }} 
+                        {{ form.confirm_code }}
+                     </p>
+                  {% endif %}
+                  <button class="button" type="submit">Створити акаунт</button> 
+               </form>
+            </div>
+            
+         </div>
+      </div>
+      <img  class="background" src="{% static 'images/pc.png' %}" alt="">
+   </div>
+   
 
-
-
-        <button type="submit">Зареєструватися</button>
-   </form>
 {% endblock %}
+
 
