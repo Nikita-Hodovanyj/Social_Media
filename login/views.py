@@ -146,7 +146,7 @@ class RegistrationView(FormView):
     
 def render_auth(request):
     form = RegistrationForm()
-    if request.method == 'POST':
+    if request.method == "POST": 
         email = request.POST.get('email')
         password = request.POST.get('password')
 

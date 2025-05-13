@@ -40,16 +40,21 @@
                     </div>
                     
                     <div class = 'input-label'>
-                        <label for="password">Пароль</label>
-                        <input id = 'password' type="password" name="password" placeholder="Пароль" required>
+                        <p class = 'input-eye'>
+                           <label for="password">Пароль</label>
+                           <input id = 'password' type="password" name="password" placeholder="Пароль" required>
+                           <img class = 'eye' src="{% static 'images/eye2.png' %}" onclick="showPassword(event)"/>
+
+                        </p>
+                        
                     </div>
                     
-                    <button class="button" type="submit">Увійти</button>
+                    <button class="button"  type="submit">Увійти</button>
                 </form>
 
                 {% if messages %}
                     {% for message in messages %}
-                        <p style="color: red;">{{ message }}</p>
+                        <p class = 'error-message' style="color: red;">{{ message }}</p>
                     {% endfor %}
                 {% endif %}
 
@@ -74,6 +79,8 @@
       <img  class="background" src="{% static 'images/pc.png' %}" alt="">
    </div>
    
+   <script src="{% static 'js/showPassword.js' %}"></script>
+
 
 {% endblock %}
 
