@@ -65,6 +65,8 @@ body {
 
 }
 
+
+
 .choice{
     display: flex;
     justify-content: space-between;
@@ -215,4 +217,110 @@ label {
     height: 20;
 
 }
+
+
+
+
+
+.authorization {
+    box-sizing: border-box;
+    width: 487px;
+    height: 657px;
+    border-radius: 20px;
+    padding: 44px;
+    gap: 36px;
+    background-color: white;
+    z-index: 2;
+    position: relative;
+    transform: translatex(-47%);
+
+}
+
+
+
+.choice2{
+    display: flex;
+    justify-content: space-between;
+
+
+    width: 399px;
+    height: 47px;
+    gap: 24px;
+
+}
+.choice-auth2{
+    width: 204;
+    height: 47;
+    gap: 8px;
+
+}
+.auth-text{
+
+    display: flex;
+    font-family: GT Walsheim Pro;
+    font-weight: 700;
+    font-size: 34px;
+    line-height: 100%;
+    letter-spacing: -1%;
+    text-align: center;
+    border-bottom: 2px solid #543C52;
+    padding-bottom: 5px; 
+
+}
+.choice-reg2{
+    width: 189px;
+    height: 33px;
+    gap: 8px;
+    opacity: 0.5;
+
+
+}
+
+
+.reg-text{
+    display: flex;
+    font-family: GT Walsheim Pro;
+    font-weight: 500;
+    font-size: 34px;
+    line-height: 100%;
+    letter-spacing: -1%;
+    text-align: center;
+
+}
+
+.qrcode-image{
+    width: 100%;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 36px;
+    gap: 24px;
+
+
+}
+.qrcode-image img{
+    width: 100px;
+    height: 100px;
+
+
+}
+
+.text-line{
+    width: 100%;
+    display: flex;
+    font-family: GT Walsheim Pro;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 100%;
+    letter-spacing: -1%;
+    
+
+}
+
+hr { 
+    width: 55px;
+    height: 1px; 
+}
+
 

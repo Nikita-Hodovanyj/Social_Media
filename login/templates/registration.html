@@ -7,7 +7,6 @@
 
 {% block link %}
    <link rel="stylesheet" href="{% static 'css/reg.css' %}">
-
 {% endblock %}
 
 
@@ -24,10 +23,10 @@
    
             <div class="choice" >
                <div class="choice-reg" >
-                  <p class="text-reg" >Реєстрація</p>
+                  <a href= "{% url 'reg' %}" class="text-reg" >Реєстрація</a>
                </div>
                <div class="choice-auth" >
-                  <p class="text-auth">Авторизація</p>
+                  <a href= "{% url 'auth' %}" class="text-auth">Авторизація</a>
                </div>
             </div>
             <p class="text-join" >Приєднуйся до World IT</p>
