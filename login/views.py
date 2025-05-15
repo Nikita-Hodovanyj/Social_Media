@@ -20,44 +20,35 @@ from django.contrib import messages
 
 
 
-import random, os
-
-from django.views.generic.edit import FormView
-from django.contrib.auth.models import User
-from django.core.mail import send_mail
-from django.shortcuts import render
-from django.conf import settings
-from .forms import RegistrationForm
-from .models import ConfirmCode
-import random
-
-
-import random
-from django.views.generic.edit import FormView
-from django.core.mail import send_mail
-from django.shortcuts import render
-from django.conf import settings
-from django.contrib.auth.models import User
-from .models import ConfirmCode
-from .forms import RegistrationForm
 
 class RegistrationView(FormView):
     template_name = 'registration.html'
     form_class = RegistrationForm
-    success_url = '/authorizatio.html'
+    success_url = '/login/auth/'  # Адрес для редиректа после успешной регистрации
+
+    def get(self, request, *args, **kwargs):
+        form = self.form_class()
+        return render(request, self.template_name, {
+            'form': form,
+            'hide_header': True  # Скрыть хедер при первом заходе
+        })
 
     def post(self, request, *args, **kwargs):
+        # Проверка: был ли введён код
         show_code = any(request.POST.get(f'code{i}', '') for i in range(1, 7))
 
         if not show_code:
+            # Первый этап: регистрация и отправка кода
             form = self.form_class(request.POST)
             if form.is_valid():
                 email = form.cleaned_data['email']
                 password = form.cleaned_data['password']
 
+                # Генерируем код
                 code = str(random.randint(100000, 999999))
                 ConfirmCode.objects.update_or_create(email=email, defaults={'confirm_code': code})
 
+                # Отправляем письмо
                 send_mail(
                     'Код підтвердження',
                     f'Ваш код підтвердження: {code}',
@@ -69,12 +60,14 @@ class RegistrationView(FormView):
                 return render(request, self.template_name, {
                     'show_code': True,
                     'email': email,
-                    'password': password
+                    'password': password,
+                    'hide_header': True  # Скрываем хедер при вводе кода
                 })
             else:
                 return self.form_invalid(form)
+
         else:
-            # Получаем данные из скрытых полей
+            # Второй этап: проверка кода и создание пользователя
             email = request.POST.get('email')
             password = request.POST.get('password')
             code_input = ''.join([request.POST.get(f'code{i}', '') for i in range(1, 7)])
@@ -86,7 +79,8 @@ class RegistrationView(FormView):
                     'show_code': True,
                     'email': email,
                     'password': password,
-                    'code_error': 'Код підтвердження не знайдено.'
+                    'code_error': 'Код підтвердження не знайдено.',
+                    'hide_header': True
                 })
 
             if saved.confirm_code != code_input:
@@ -94,14 +88,15 @@ class RegistrationView(FormView):
                     'show_code': True,
                     'email': email,
                     'password': password,
-                    'code_error': 'Невірний код підтвердження.'
+                    'code_error': 'Невірний код підтвердження.',
+                    'hide_header': True
                 })
 
             # Создаём пользователя
             User.objects.create_user(username=email, email=email, password=password)
             saved.delete()
-            return super().form_valid(self.get_form())
 
+            return redirect(self.success_url)
 
 
     
@@ -125,4 +120,3 @@ def logout_user(request):
     logout(request)
     print(f'{request.user.username} Logout')
     return redirect('auth')
-

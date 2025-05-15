@@ -1,29 +1,86 @@
 {% extends 'base.html' %}
 {% load static %}
 
-
 {% block title %}
-   Авторизація
+    Авторизація
 {% endblock %}
 
-{% block content %}
-    <header>
-        <div class="logo">
-            <h1><img class="logo-img" src="{% static 'images/logo.png' %}"></h1>
-        </div>
-    </header>
-    <form method="POST">
-        {% csrf_token %}
-        <input type="email" name="email" placeholder="Email" required>
-        <input type="password" name="password" placeholder="Пароль" required>
-        <button type="submit">Увійти</button>
-    </form>
+{% block link %}
+   <link rel="stylesheet" href="{% static 'css/auth.css' %}">
+{% endblock %}
 
-    {% if messages %}
-        {% for message in messages %}
-            <p style="color: red;">{{ message }}</p>
-        {% endfor %}
-    {% endif %}
+
+{% block content %}
+   <header class="header-reg" >
+      <div class="logo">
+         <h1><img src="{% static 'images/logo.png' %}" alt=""> </h1>
+      </div>
+   </header>
+   <div class="main" >
+
+      <div class="authorization" >
+         <div class="a" >
+   
+            <div class="choice2" >
+               <div class="choice-reg2" >
+                  <a href= "{% url 'reg' %}" class="reg-text" >Реєстрація</a>
+               </div>
+               <div class="choice-auth2" >
+                  <a href= "{% url 'auth' %}" class="auth-text">Авторизація</a>
+               </div>
+            </div>
+            <p class="text-join" >Раді тебе знову бачити!</p>
+            <div class="form-div" >
+                <form method="POST">
+                    {% csrf_token %}
+                    
+                    <div class="input-label">
+                        <label for="email">Електронна пошта</label>
+                        <input id= "email" type="email" name="email" placeholder="Email" required>
+                    </div>
+                    
+                    <div class = 'input-label'>
+                        <p class = 'input-eye'>
+                           <label for="password">Пароль</label>
+                           <input id = 'password' type="password" name="password" placeholder="Пароль" required>
+                           <img class = 'eye' src="{% static 'images/eye2.png' %}" onclick="showPassword(event)"/>
+
+                        </p>
+                        
+                    </div>
+                    
+                    <button class="button"  type="submit">Увійти</button>
+                </form>
+
+                {% if messages %}
+                    {% for message in messages %}
+                        <p class = 'error-message' style="color: red;">{{ message }}</p>
+                    {% endfor %}
+                {% endif %}
+
+                <div class = 'qrcode-image'>
+
+                    <div class = 'text-line'>
+                        <hr>
+                        <p>або увійдіть за допомогою QR-коду</p>
+                        <hr>
+                    </div>
+
+                    <img src="{% static 'images/qr-code.png' %}" alt="">
+
+
+                </div>
+      
+            </div>
+            
+         </div>
+
+      </div>
+      <img  class="background" src="{% static 'images/pc.png' %}" alt="">
+   </div>
+   
+   <script src="{% static 'js/showPassword.js' %}"></script>
+
 
 {% endblock %}
 

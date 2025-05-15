@@ -46,13 +46,7 @@
                     
                     
                     
-                 <form action="{% url 'logout' %}" method="post">
-                    {% csrf_token %}
-                    <button type="submit" class="redirect">
-                        <img class="button-img" src="{% static 'images/exit.png' %}" alt="Вихід">
-                        Вихід
-                    </button>
-                </form>  
+                 
                 
             </div>
 
@@ -62,6 +56,9 @@
         {% block content %} 
             
         {% endblock %}
+
+        <script src="{% static 'login/js/showPassword' %}"></script>
+
 
 
     </body>
