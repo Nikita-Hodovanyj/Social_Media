@@ -22,125 +22,86 @@ from django.contrib import messages
 
 import random, os
 
+from django.views.generic.edit import FormView
+from django.contrib.auth.models import User
+from django.core.mail import send_mail
+from django.shortcuts import render
+from django.conf import settings
+from .forms import RegistrationForm
+from .models import ConfirmCode
+import random
 
-# Створюємо клас представлення, який відображає форму 
+
+import random
+from django.views.generic.edit import FormView
+from django.core.mail import send_mail
+from django.shortcuts import render
+from django.conf import settings
+from django.contrib.auth.models import User
+from .models import ConfirmCode
+from .forms import RegistrationForm
+
 class RegistrationView(FormView):
-
     template_name = 'registration.html'
     form_class = RegistrationForm
-    success_url = '/login/auth/'
+    success_url = '/authorizatio.html'
 
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['hide_header'] = True
-        return context
+    def post(self, request, *args, **kwargs):
+        show_code = any(request.POST.get(f'code{i}', '') for i in range(1, 7))
 
-    template_name = 'registration.html'  # Шаблон форми реєстрації
-    form_class = RegistrationForm        # Клас форми
-    success_url = '/login/auth/'         # Куди перенаправити після успішної реєстрації
+        if not show_code:
+            form = self.form_class(request.POST)
+            if form.is_valid():
+                email = form.cleaned_data['email']
+                password = form.cleaned_data['password']
 
+                code = str(random.randint(100000, 999999))
+                ConfirmCode.objects.update_or_create(email=email, defaults={'confirm_code': code})
 
-    # Метод, який викликається, якщо форма валідна
-    def form_valid(self, form):
+                send_mail(
+                    'Код підтвердження',
+                    f'Ваш код підтвердження: {code}',
+                    settings.EMAIL_HOST_USER,
+                    [email],
+                    fail_silently=False
+                )
 
-        # Отримання даних з форми
-        email = form.cleaned_data['email']
-        password = form.cleaned_data['password']
-        confirm_password = form.cleaned_data['confirm_password']
-
-        confirm_code = form.cleaned_data.get('confirm_code')  # без ошибки, если пусто
-
-        code = str(random.randint(100000, 999999))
-
-
-        confirm_code = form.cleaned_data['confirm_code']
-
-        # Генерація випадкового 6-значного коду
-        code = str(random.randint(100000, 999999))
-
-        # Перевірка, чи вже існує користувач з таким email
-
-        if User.objects.filter(email=email).exists():
-            form.add_error('email', 'Користувач з таким email вже існує!')
-            # Повертаємо форму без збережень
-            return self.form_invalid(form)
-
-
-        
-        
-        
-         # Перевірка, чи паролі збігаються
-        if password != confirm_password:
-                form.add_error('confirm_password', 'Паролі не співпадають!')
+                return render(request, self.template_name, {
+                    'show_code': True,
+                    'email': email,
+                    'password': password
+                })
+            else:
                 return self.form_invalid(form)
-       
-
-        # Якщо код підтвердження ще не введено
-        if not confirm_code:
-            
-            """
-            Примітка: Якщо використовувати функцію create, 
-            то вона просто додає новий об'єкт. І якщо буде спроба на створення нового об'єкта, який вже існує
-            та в нього unique = True, то виведе Integrity error.
-             
-            Натомість, update_or_create спочатку шукає чи існує такий об'єкт чи ні
-            Якщо такий є - оновлює, якщо немає - створює.
-            Таким чином, цей метод обходить Integrity error.
-
-            """
-            # Збереження коду в базі даних
-            ConfirmCode.objects.update_or_create(
-                email=email, #  Якщо такий вже існує
-                defaults={'confirm_code': code} # Вказуємо, що оновлюємо, а саме код підтвердження
-            )
-
-
-            # Надсилання коду підтвердження на email
-            send_mail(
-
-                subject='Код підтвердження реєстрації WORLD.IT Messenger',
-                message=f'Ваш код підтвердження реєстрації: {code} ',
-
-                from_email=EMAIL_HOST_USER,
-                recipient_list=[email],
-                fail_silently=False,
-            )
-
-            # Відображення форми з полем для вводу коду
-            return render(
-                request=self.request,
-                template_name=self.template_name,
-
-                context={'form': form, 'show_code': True, 'hide_header': True}
-            )
-        
-
-
         else:
-            # Отримуємо об’єкт моделі ConfirmCode, у якого поле email дорівнює введеному користувачем email
-            saved_code = ConfirmCode.objects.get(email=email)
-            if saved_code.confirm_code != confirm_code:
-                form.add_error('confirm_code', 'Неправильний код підтвердження.')
+            # Получаем данные из скрытых полей
+            email = request.POST.get('email')
+            password = request.POST.get('password')
+            code_input = ''.join([request.POST.get(f'code{i}', '') for i in range(1, 7)])
 
-                return self.form_invalid(form)
+            try:
+                saved = ConfirmCode.objects.get(email=email)
+            except ConfirmCode.DoesNotExist:
+                return render(request, self.template_name, {
+                    'show_code': True,
+                    'email': email,
+                    'password': password,
+                    'code_error': 'Код підтвердження не знайдено.'
+                })
 
+            if saved.confirm_code != code_input:
+                return render(request, self.template_name, {
+                    'show_code': True,
+                    'email': email,
+                    'password': password,
+                    'code_error': 'Невірний код підтвердження.'
+                })
 
-
-            # В інакшому випадку створюємо нового користувача
+            # Создаём пользователя
             User.objects.create_user(username=email, email=email, password=password)
-            # Видаляємо код
-            saved_code.delete()
+            saved.delete()
+            return super().form_valid(self.get_form())
 
-            # Звертаємось до батьківського класу FormView, зберігаємо форму та перенаправляємо на success_url
-            return super().form_valid(form)
-
-
-       
-
-
-
-
-        
 
 
     

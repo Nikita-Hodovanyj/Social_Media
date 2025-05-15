@@ -1,70 +1,105 @@
 {% extends 'base.html' %}
 {% load static %}
 
-{% block title %}
-   Реєстрація 
-{% endblock %}
+{% block title %}Реєстрація{% endblock %}
 
 {% block link %}
-   <link rel="stylesheet" href="{% static 'css/reg.css' %}">
-
+<link rel="stylesheet" href="{% static 'css/reg.css' %}">
 {% endblock %}
-
 
 {% block content %}
-   <header class="header-reg" >
-      <div class="logo">
-         <h1><img src="{% static 'images/logo.png' %}" alt=""> </h1>
-      </div>
-   </header>
-   <div class="main" >
+<header class="header-reg">
+   <div class="logo">
+      <h1><img src="{% static 'images/logo.png' %}" alt=""></h1>
+   </div>
+</header>
 
-      <div class="registr" >
-         <div class="a" >
-   
-            <div class="choice" >
-               <div class="choice-reg" >
-                  <p class="text-reg" >Реєстрація</p>
-               </div>
-               <div class="choice-auth" >
-                  <p class="text-auth">Авторизація</p>
-               </div>
+<div class="main">
+   <div class="registr {% if show_code %}confirm-mode{% else %}register-mode{% endif %}">
+      <div class="a">
+
+         {% if not show_code %}
+         <div class="choice">
+            <div class="choice-reg">
+               <p class="text-reg">Реєстрація</p>
             </div>
-            <p class="text-join" >Приєднуйся до World IT</p>
-            <div class="form-div" >
-               <form method="post">
-                  {% csrf_token %}
-                  
+            <div class="choice-auth">
+               <p class="text-auth">Авторизація</p>
+            </div>
+         </div>
+         {% endif %}
+
+         <p class="text-join {% if show_code %}confirm-text{% endif %}">
+            {% if show_code %} Підтвердження пошти {% else %} Приєднуйся до World IT {% endif %}
+         </p>
+
+         <div class="form-div">
+            <form method="post">
+               {% csrf_token %}
+
+               <!-- Показываем ошибки -->
+               {% if form.errors %}
+               <div style="color: red;">
                   {% for field in form %}
-                     {% if field.name != 'confirm_code' %}
-                     <div class="input" >
-                        <p class="input-eye" >
-                           {{ field.label_tag }} 
+                     {% for error in field.errors %}
+                        <p>{{ error }}</p>
+                     {% endfor %}
+                  {% endfor %}
+                  {% for error in form.non_field_errors %}
+                     <p>{{ error }}</p>
+                  {% endfor %}
+               </div>
+               {% endif %}
+
+               {% if code_error %}
+               <p style="color: red;">{{ code_error }}</p>
+               {% endif %}
+
+               {% if not show_code %}
+                  {% for field in form %}
+                     <div class="input">
+                        <p class="input-eye">
+                           {{ field.label_tag }}
                            {{ field }}
-                           
-                              <img class="eye" src="{% static 'images/eye2.png' %}" alt="">
-                           
+                           <img class="eye" src="{% static 'images/eye2.png' %}" alt="">
                         </p>
                      </div>
-                     {% endif %}
                   {% endfor %}
-            
-                  {% if show_code %}
-                     <p>
-                        {{ form.confirm_code.label_tag }} 
-                        {{ form.confirm_code }}
-                     </p>
-                  {% endif %}
-                  <button class="button" type="submit">Створити акаунт</button> 
-               </form>
-            </div>
-            
+                  <button class="button" type="submit">Створити акаунт</button>
+               {% else %}
+                  <p class="instruction">
+                     Ми надіслали 6-значний код на вашу пошту ({{ email|default:"you@example.com" }}).
+                     Введіть його нижче, щоб підтвердити акаунт.
+                  </p>
+                  <div class="code-input">
+                     <div class="text-input">
+                        <label class="text-label">Код підтвердження:</label>
+                        <div class="inputs">
+                           {% for i in "123456" %}
+                              <input type="text" name="code{{ forloop.counter }}" maxlength="1" class="code-input" inputmode="numeric" pattern="[0-9]*" required>
+                           {% endfor %}
+                        </div>
+                     </div>
+                  </div>
+
+                  <!-- Скрытые поля -->
+                  <input type="hidden" name="email" value="{{ email }}">
+                  <input type="hidden" name="password" value="{{ password }}">
+
+                  <div class="buttons">
+                     <button class="button-m" type="submit">Підтвердити</button>
+                     <p class="back-a"><a class="back" href="{% url 'reg' %}">Назад</a></p>
+                  </div>
+               {% endif %}
+            </form>
          </div>
       </div>
-      <img  class="background" src="{% static 'images/pc.png' %}" alt="">
    </div>
-   
 
+   <img class="background" src="{% static 'images/pc.png' %}" alt="">
+</div>
 {% endblock %}
 
-
+{% block script %}
+<script src="{% static 'js/reg.js' %}"></script>
+{% endblock %}
