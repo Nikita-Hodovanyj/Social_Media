@@ -2,18 +2,22 @@ from django import forms
 from django.contrib.auth.models import User
 
 class RegistrationForm(forms.ModelForm):
-    password = forms.CharField(widget=forms.PasswordInput)
-    confirm_password = forms.CharField(widget=forms.PasswordInput, label='Підтвердження паролю')
+    password = forms.CharField(label= 'Пароль', widget=forms.PasswordInput(attrs={'id': 'password'}))
+    confirm_password = forms.CharField(widget=forms.PasswordInput(attrs={'id': 'confirm_password'}), label='Підтвердження паролю')
 
     class Meta:
         model = User
         fields = ['email', 'password']
+        labels = {"email": "Електронна пошта" }
+
+
 
     def clean_email(self):
         email = self.cleaned_data['email']
         if User.objects.filter(email=email).exists():
-            raise forms.ValidationError("Користувач з таким email вже існує!")
-        return email
+            self.add_error("Користувач з таким email вже існує!")
+    
+        
 
     def clean(self):
         cleaned_data = super().clean()

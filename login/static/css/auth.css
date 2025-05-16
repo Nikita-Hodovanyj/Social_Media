@@ -323,3 +323,11 @@ hr {
     height: 1px; 
 }
 
+
+
+.error-message {
+    font-family: GT Walsheim Pro;
+    font-weight: 400;
+    line-height: 100%;
+    letter-spacing: -0.7%;
+}
