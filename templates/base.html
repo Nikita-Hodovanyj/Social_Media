@@ -23,11 +23,11 @@
             <div class="links">
                 <div class="text">
                     <img class="img" src="{% static 'images/House.png' %}">
-                    <a href=""  >Головна</a>
+                    <a href="{% url 'home' %}">Головна</a>
                 </div>
                 <div class="text">
                     <img class="img" src="{% static 'images/image.png' %}">
-                    <a href="">Мої публікації</a>
+                    <a href="{% url 'publications' %}">Мої публікації</a>
                 </div>
                 <div class="text">
                     <img class="img" src="{% static 'images/people.png' %}">

@@ -1,0 +1,149 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+
+{% block title %}
+  Головна сторінка
+{% endblock %}
+
+{% block link %}
+<link rel="stylesheet" href="{% static 'css/pub.css' %}">
+{% endblock %}
+
+{% block content %}
+
+    <div class="modal" id="publicationModal" style="display: none;">
+        <div class="modal-win">
+            <div class="close" onclick="closeModal()">
+                <img src="{% static '/image/close.png' %}" alt="">
+            </div>
+            <p class="title">Создание публикации</p>
+            <form method="post" action="{% url 'create_publication' %}" enctype="multipart/form-data" id="publicationForm">
+                {% csrf_token %}
+                <div class="form-modal">
+                    {% for field in form %}
+                        <div class="field-container">
+                            <label class="form-label">{{ field.label }}</label>
+                            {{ field }}
+                        </div>
+                    {% endfor %}
+                </div>
+
+                <div class="buttons-modal">
+                    <input type="file" id="id_image" name="image" style="display: none;">
+                    
+                    <label сlass="buttons-load-img-lable" for="id_image" >
+                        <img class="buttons-load-img" src="{% static 'image/Photo.png' %}" alt="Фото">
+                    </label>
+
+                    <button type="submit" class="pub-buttons">
+                        Публікація
+                        <img src="{% static 'image/PlaneModal.png' %}" class="plane-modal">
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <main>
+        <div class="left">
+            <div class="accaunt">
+                <div class="data">
+                    <div class="avatar">
+                        <img src="{% static '/image/avatar.png' %}" alt="">
+                    </div>
+                    <div class="nick">
+                        <h5>Lina Li</h5>
+                        <h2>@thelili</h2>
+                    </div>
+                </div>
+                
+                <div class="popular">
+                    <div class="post">
+                        <h3>566</h3>
+                        <h4>Дописи</h4>
+                    </div>
+                    <div class="post">
+                        <h3>12.1К</h3>
+                        <h4>Читачі</h4>
+                    </div>
+                    <div class="post">
+                        <h3>222</h3>
+                        <h4>Друзі</h4>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="right">
+            <div class="coments">
+                <div>
+                    <input class="write-coment" type="text" placeholder="Про що ти зараз думаєшь?">
+                </div>
+                <div class="buttons">
+                    <div>
+                        <button class="photo-button"><img class="photo" src="{% static '/image/Photo.png' %}" alt=""></button>
+                    </div>
+                    <div>
+                        <button class="photo-button"><img class="photo" src="{% static '/image/emoji.png' %}" alt=""></button>
+                    </div>
+                    <div>
+                        <button onclick="openModal()" class="pub" id="open-modal">
+                            Перейти до оформлення
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            {% for post in all_posts %}
+                <div class="publication">
+                    <div class="header">
+                        <div class="dots-container">
+                            <button class="dots-button">
+                                <img src="{% static 'image/Dots.png' %}" class="dot" alt="Меню">
+                            </button>
+                            <div class="dropdown-menu">
+                                <button class="menu-item">Редактировать</button>
+                                <form method="POST" action="{% url 'delete_post' post.pk %}" class="delete-form">
+                                    {% csrf_token %}
+                                    <button class="menu-item">Удалить</button>
+                                </form>
+                            </div>
+                        </div>
+                        
+                        <div class="people-pub">
+                            <img src="{% if post.author %}{{ post.author.profile.avatar.url|default:'/static/image/Lina.png' }}{% else %}{% static 'image/Lina.png' %}{% endif %}" class="avatar">
+                            <p>{% if post.author %}{{ post.author.username }}{% else %}Аноним{% endif %}</p>
+                        </div>
+                    </div>
+                    <div class="pub-content">
+                        <h3 class="name">{{ post.name }}</h3>
+                        <p>{{ post.text }}</p>
+                        {% if post.link %}
+                            <a href="{{ post.link }}" target="_blank">{{ post.link }}</a>
+                        {% endif %}
+                        {% if post.image %}
+                            <img src="{{ post.image.url }}" class="post-image">
+                        {% endif %}
+                        <div class="reaction">
+                            <div class="likes">
+                                <img src="{% static 'image/Like.png' %}" class="like-photo">
+                                <p>120 Вподобань</p>
+                            </div>
+                            <div class="views">
+                                <img src="{% static 'image/eye.png' %}" class="views-photo">
+                                <p>890 Переглядів</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% empty %}
+                <div class="no-posts">
+                    <p>Публикаций пока нет. Будьте первым!</p>
+                </div>
+            {% endfor %}
+        </div>
+    </main>
+    <script src="{% static 'js/pub.js' %}"></script>
+{% endblock %}

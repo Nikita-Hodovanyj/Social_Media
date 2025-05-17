@@ -42,7 +42,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'login',
-    'home_page'
+    'home_page',
+    'my_publications'
     
     
 ]
@@ -93,7 +94,18 @@ DATABASES = {
 # https://docs.djangoproject.com/en/5.1/ref/settings/#auth-password-validators
 
 AUTH_PASSWORD_VALIDATORS = [
-   
+    {
+        'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
+    },
+    {
+        'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
+    },
+    {
+        'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
+    },
+    {
+        'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
+    },
 ]
 
 
@@ -147,7 +159,8 @@ EMAIL_HOST_USER = 'nikitagodovanyj@gmail.com'
 EMAIL_HOST_PASSWORD = 'wyqf flef gnyq ayvl'
 
 
-
+MEDIA_URL = "/media/"
+MEDIA_ROOT = BASE_DIR/"media"
 # Пошта відправника
 EMAIL_HOST_USER = os.getenv('EMAIL_HOST_USER')
 
