@@ -46,7 +46,8 @@ class RegistrationView(FormView):
 
                 # Генерируем код
                 code = str(random.randint(100000, 999999))
-                ConfirmCode.objects.update_or_create(email=email, defaults={'confirm_code': code})
+                if email:
+                    ConfirmCode.objects.update_or_create(email=email, defaults={'confirm_code': code})
 
                 # Отправляем письмо
                 send_mail(
