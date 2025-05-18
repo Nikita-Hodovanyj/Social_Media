@@ -20,12 +20,13 @@
 
          {% if not show_code %}
          <div class="choice">
-            <div class="choice-reg">
-               <p class="text-reg">Реєстрація</p>
+            <div class="choice-reg" >
+               <a href= "{% url 'reg' %}" class="text-reg" >Реєстрація</a>
             </div>
-            <div class="choice-auth">
-               <p class="text-auth">Авторизація</p>
+            <div class="choice-auth" >
+               <a href= "{% url 'auth' %}" class="text-auth">Авторизація</a>
             </div>
+           
          </div>
          {% endif %}
 
@@ -38,37 +39,56 @@
                {% csrf_token %}
 
                <!-- Показываем ошибки -->
-               {% if form.errors %}
-               <div style="color: red;">
-                  {% for field in form %}
-                     {% for error in field.errors %}
-                        <p>{{ error }}</p>
-                     {% endfor %}
-                  {% endfor %}
-                  {% for error in form.non_field_errors %}
-                     <p>{{ error }}</p>
-                  {% endfor %}
-               </div>
-               {% endif %}
-
-               {% if code_error %}
-               <p style="color: red;">{{ code_error }}</p>
-               {% endif %}
+               
 
                {% if not show_code %}
                   {% for field in form %}
+                     {% if field.name != 'email' %}
+
                      <div class="input">
                         <p class="input-eye">
-                           {{ field.label_tag }}
+
+                           <label for="{{ field.id_for_label }}">{{ field.label_tag }}</label>
                            {{ field }}
-                           <img class="eye" src="{% static 'images/eye2.png' %}" alt="">
+                           {% if field.name == 'password' or field.name == 'confirm_password'  %}
+                              <img src="{% static 'images/eye2.png' %}" class="eye"  onclick="showRegPassword(this)" id="{{ field.id_for_label }}"/>
+
+                           {% endif %}
                         </p>
+                     {% else %}
+                      <div class="input">
+                        {{ field.label_tag }}
+                        {{ field }}
+                      </div>
+                        
+                        
+                     
+                     {% endif %}
+
+                        
                      </div>
                   {% endfor %}
-                  <button class="button" type="submit">Створити акаунт</button>
-               {% else %}
+
+                  {% if form.errors %}
+                     <div style="color: red;">
+                        {% for field in form %}
+                           {% for error in field.errors %}
+                              <p class = 'error-message' >{{ error }}</p>
+                           {% endfor %}
+                        {% endfor %}
+                      
+                     </div>
+                  {% endif %}
+
+                  {% if code_error %}
+                  <p style="color: red;">{{ code_error }}</p>
+                  {% endif %}
+
+
+                     <button class="button" type="submit">Створити акаунт</button>
+                  {% else %}'
                   <p class="instruction">
-                     Ми надіслали 6-значний код на вашу пошту ({{ email|default:"you@example.com" }}).
+                     Ми надіслали 6-значний код на вашу пошту ({{ email }}).
                      Введіть його нижче, щоб підтвердити акаунт.
                   </p>
                   <div class="code-input">
@@ -98,8 +118,8 @@
 
    <img class="background" src="{% static 'images/pc.png' %}" alt="">
 </div>
+
 <script src="{% static 'js/showPassword.js' %}"></script>
 
 {% endblock %}
-
 
