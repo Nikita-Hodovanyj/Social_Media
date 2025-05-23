@@ -2,11 +2,30 @@ from django.db import models
 from django.contrib.auth.models import User
 
 class Post(models.Model):
-    name = models.CharField(max_length=255)
-    topic =  models.CharField(max_length=255)
-    text = models.TextField()
-    link =  models.CharField(max_length=255)
-    image = models.ImageField(upload_to='images/posts')
-    author = models.ForeignKey(User, on_delete=models.SET_NULL,  null=True,blank=True, verbose_name='Автор')
+    TAG_CHOICES = [
+        ('music', 'Музика'),
+        ('vacation', 'Відпочинок'),
+        ('inspiration', 'Натхнення'),
+        ('life', 'Життя'),
+        ('travel', 'Подорожі'),
+        ('nature', 'Природа'),
+        ('harmony', 'Гармонія'),
+        ('movies', 'Фільми'),
+        ('reading', 'Читання'),
+        ('calm', 'Спокій'),
+    ]
+
+    name = models.CharField(max_length=255, verbose_name="Название")
+    topic = models.CharField(max_length=255, verbose_name="Тема")
+    tags = models.CharField(max_length=255, blank=True) 
+    text = models.TextField(verbose_name="Текст")
+    link = models.CharField(max_length=255, blank=True, verbose_name="Ссылка")
+    image = models.ImageField(upload_to='images/posts/', verbose_name="Изображение")
+    author = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True)
+
     def __str__(self):
         return self.name
+
+    def get_tags_list(self):
+        """Возвращает список выбранных тегов"""
+        return [tag.strip() for tag in self.tags.split(',')] if self.tags else []

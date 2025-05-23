@@ -41,9 +41,10 @@ body{
   }
 
   header{
+    
     display: flex;
     box-sizing: border-box;
-    /* width: 1440px; */
+    z-index: 1000;
     height: 88px;
     align-items: center;
     background-color: white;
@@ -137,4 +138,13 @@ a{
     height: 20px;
     
 
+}
+.text-l {
+    border: 1px solid black; 
+    
+    display: flex;
+    border-radius: 20px;           /* Скругление углов */
+    text-align: center;           /* Текст по центру */
+    padding: 6px 12px;            
+    flex-direction: row;
 }

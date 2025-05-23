@@ -34,12 +34,12 @@
                 <form method="POST">
                     {% csrf_token %}
                     
-                    <div class="input-label">
+                    <div class="input">
                         <label for="email">Електронна пошта</label>
                         <input id= "email" type="email" name="email" placeholder="Email" required>
                     </div>
                     
-                    <div class = 'input-label'>
+                    <div class = 'input'>
                         <p class = 'input-eye'>
                            <label for="password">Пароль</label>
                            <input id = 'password' type="password" name="password" placeholder="Пароль" required>
@@ -83,3 +83,4 @@
 
 
 {% endblock %}
+

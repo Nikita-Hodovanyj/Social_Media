@@ -2,7 +2,6 @@
 body{
     margin: 0;
     padding: 0;
-    /* min-height: 100vh; */
     overflow-x: hidden;
     background-color: #FAF8FF;
 }
@@ -20,7 +19,6 @@ main{
  }
 
 .left{
-    /* display: flex; */
     position: fixed;
     background-color: #FAF8FF;
     width: 350.87px;
@@ -39,10 +37,8 @@ main{
     width: 350.87px;
     height: 271px;
     border-radius: 10px;
-    /* gap: 16px; */
     border-width: 1px;
-    /* padding-top: 16px; */
-    /* padding-bottom: 16px; */
+
 
 }
 .data{
@@ -68,13 +64,11 @@ main{
     justify-content: center;
     width: 350.87px;
     height: 55;
-    /* gap: 10px; */
 
 }
 
 .popular{
     display: flex;
-    /* flex-direction: row; */
     justify-content: space-between;
     width: 350.870361328125;
     height: 48;
@@ -92,17 +86,7 @@ h5{
     text-align: center;
 }
 h2{
-    /* width: 53;
-    height: 18;
-    margin-top: -30px;
-    font-family: GT Walsheim Pro;
-    font-weight: 3px ;
-    font-size: 16px;
-    size: 16px;
-    line-height: 100%;
-    letter-spacing: -1%;
-    text-align: center; */
-    /* font-family: GT Walsheim Pro; */
+
     margin-top:15px ;
     font-family: GT Walsheim Pro;
     font-weight: 500;
@@ -129,7 +113,6 @@ h2{
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    /* margin-top: 50px; */
     gap: 7px;
     width: 33%; 
     border-right: 1px solid #CDCED2;
@@ -164,7 +147,6 @@ h2{
 .request{
     box-sizing: border-box;
     border: 1px solid #CDCED2;
-    /* display: flex; */
     background-color: white;
     width: 350.87px;
     height: 249px;
@@ -262,7 +244,6 @@ h6{
 .frends{
     box-sizing: border-box;
     border: 1px solid #CDCED2;
-    /* display: flex; */
     background-color: white;
     width: 350.87px;
     height: 249px;
@@ -368,7 +349,6 @@ h6{
 
 .pub{
     display: flex;
-    /* box-sizing: border-box; */
     justify-content: center;
     align-items: center;
     width: 190px;
@@ -387,7 +367,6 @@ h6{
 
 
 .publication{
-    /* height: 622px; */
     height: auto;
     border-radius: 10px;
     border-width: 1px;
@@ -493,12 +472,7 @@ h6{
 
 }
 .likes p{
-    /* font-family: GT Walsheim Pro;
-    font-weight: 400;
-    font-size: 14px;
-    line-height: 20px;
-    letter-spacing: -0.6%;
-    display: flex; */
+
     font-family: 'GT Walsheim Pro', sans-serif;
     font-weight: 400;
     font-size: 14px;
@@ -623,9 +597,7 @@ h6{
     width: 100%;
     box-sizing: border-box;
 }
-.img-pub{
 
-}
 .dots-container {
     position: absolute;
     top: 20px;
@@ -679,26 +651,40 @@ h6{
 
 
 
-
 /* modal */
 .modal-win {
     position: fixed;
-    box-sizing: border-box;
     width: 770px;
-    /* height: 868px; */
-    height: auto;
-    min-height: 50px;
-    overflow: visible; 
-    white-space: normal; 
-    word-wrap: break-word;
+    max-height: 90vh; 
+    overflow-y: auto; 
     border-radius: 20px;
     padding: 24px 44px 44px 44px;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
     display: none;
-    background:  #FFFFFF;
+    background: #FFFFFF;
+    overflow-x: hidden;
     z-index: 101;
+    box-sizing: border-box;
+}
+
+.modal-win::-webkit-scrollbar {
+    width: 8px;
+}
+
+.modal-win::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 4px;
+}
+
+.modal-win::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 4px;
+}
+
+.modal-win::-webkit-scrollbar-thumb:hover {
+    background: #555;
 }
 .modal{
     box-sizing: border-box;
@@ -712,6 +698,7 @@ h6{
     display: none;
     z-index: 100;
 }
+
 .close{
     display: flex;
     width: 685px;
@@ -736,17 +723,15 @@ h6{
     letter-spacing: -1%;
 
 }
-.form-modal{
+.form-modal {
     display: flex;
-    box-sizing: border-box;
     flex-direction: column;
     width: 685px;
-    height: 701px;
+    min-height: auto;
     gap: 16px;
     padding-top: 24px;
     padding-bottom: 24px;
-    
-
+    box-sizing: border-box;
 }
 .form-group {
     display: flex;
@@ -885,4 +870,40 @@ input[type="file"]::-webkit-file-upload-button {
 }
 input[type="file"]::before {
     content: none !important;
+}
+
+
+
+
+
+
+.tags-scroll-container::-webkit-scrollbar {
+    height: 4px;
+}
+
+.tags-scroll-container::-webkit-scrollbar-thumb {
+    background-color: #ccc;
+    border-radius: 2px;
+}
+
+
+.tag {
+    background-color: #f0f0f0;
+    border-radius: 16px;
+    padding: 4px 12px;
+    font-size: 14px;
+    white-space: nowrap;
+    flex-shrink: 0;
+    color: #555;
+}
+.horizontal-scroll-checkboxes {
+    display: flex;
+    overflow-x: auto;
+    gap: 12px;
+    padding: 8px 0;
+}
+
+.horizontal-scroll-checkboxes li {
+    display: inline-flex;
+    margin-right: 12px;
 }

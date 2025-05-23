@@ -1,4 +1,7 @@
+
+
 .header-reg {
+    position: fixed;
     display: flex;
     box-sizing: border-box;
     height: 88px;
@@ -14,15 +17,15 @@
     align-items: center;
     justify-content: center;
     width: 100%;
-    position: relative;
-    min-height: calc(100vh - 88px);
+    position: absolute;
+    min-height: calc(100% - 88px);
 }
 
 body {
-    margin: 0;
-    padding: 0;
-    width: 100vw;
-    min-height: 100vh;
+    /* margin: 0;
+    padding: 0; */
+    /* width: 100vw;
+    min-height: 100vh; */
     box-sizing: border-box;
     background-color: #E9E5EE;
     display: flex;
@@ -39,10 +42,11 @@ body {
 .background {
     width: 679.30px;
     height: 527.10px;
-    position: absolute;
-    right: 50%;
-    transform: translateX(19%);
-    margin-right: -487px; 
+    position:  fixed;
+    top: 4%;
+    left: 25%;
+    transform: translate(40%, 35%);
+    /* margin-right: -487px;  */
     z-index: 1;
 }
 
@@ -52,15 +56,18 @@ body {
 }
 
 .registr {
+    width: 487px;
+    height: 552px;
     box-sizing: border-box;
-
     border-radius: 20px;
     padding: 44px;
     gap: 36px;
     background-color: white;
     z-index: 2;
-    position: relative;
-    transform: translatex(-47%);
+    position: fixed;
+    transform: translate(-55%, 20%);
+    top: 10%;
+    left: 30%;
 }
 .registr-mod{
     width: 487px;
@@ -285,13 +292,13 @@ body {
     line-height: 100%;
     /* letter-spacing: -1%; */
     text-align: center;
+    text-wrap: nowrap;
     /* margin: 0; */
 
 }
 .instruction{
     width: 400px;
     height: 54px;
-    margin-top: -10px;
 
     font-family: GT Walsheim Pro;
     font-weight: 500;
@@ -424,3 +431,7 @@ body {
     line-height: 100%;
     letter-spacing: -0.7%;
 }
+
+
+
+

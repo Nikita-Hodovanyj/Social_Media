@@ -1,26 +1,42 @@
 from django import forms
 from .models import Post
 
+
 class PublicationForm(forms.ModelForm):
+    TAG_CHOICES = Post.TAG_CHOICES
+
+    tags = forms.MultipleChoiceField(
+        choices=TAG_CHOICES,
+        widget=forms.CheckboxSelectMultiple(attrs={
+            'class': 'horizontal-scroll-checkboxes'
+        }),
+        required=False,
+        label="Теги"
+)
+
     class Meta:
         model = Post
-        fields = ["name", "topic", "text", "link", "image"]
+        fields = ["name", "topic", "tags", "text", "link", "image"]
         labels = {
-            'name': 'Назва публікації',
-            'topic': 'Тема публікації',
+            'name': 'Название публикации',
+            'topic': 'Тема публикации',
             'text': '',
-            'link': 'Посилання',
+            'link': 'Ссылка',
             'image': '',
         }
         widgets = {
-            "name": forms.TextInput(attrs={"class": "form-field", "placeholder": "Назва публікації"}),
-            "topic": forms.TextInput(attrs={"class": "form-field", "placeholder": "Тема публікації"}),
+            "name": forms.TextInput(attrs={"class": "form-field", "placeholder": "Название"}),
+            "topic": forms.TextInput(attrs={"class": "form-field", "placeholder": "Тема"}),
             "text": forms.Textarea(attrs={"class": "form-textarea"}),
-            "link": forms.TextInput(attrs={"class": "form-field", "placeholder": "Посилання"})
+            "link": forms.TextInput(attrs={"class": "form-field", "placeholder": "Ссылка"})
         }
-    
-    def save(self, commit=True):
-        post = super().save(commit=False)
-        if commit:
-            post.save()
-        return post
+
+    def clean_tags(self):
+        """Преобразуем список тегов в строку, разделенную запятыми"""
+        tags = self.cleaned_data.get('tags', [])
+        return ','.join(tags) if tags else ''
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        if self.instance and self.instance.tags:
+            self.initial['tags'] = self.instance.get_tags_list()
