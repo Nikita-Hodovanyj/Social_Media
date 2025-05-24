@@ -134,9 +134,9 @@
                         {% if post.link %}
                             <a href="{{ post.link }}" target="_blank">{{ post.link }}</a>
                         {% endif %}
-                        {% for image in post.images.all %}
-                            <img src="{{ image.image.url }}" class="post-image">
-                        {% endfor %}
+                        {% if post.image %}
+                            <img src="{{ post.image.url }}" class="post-image">
+                        {% endif %}
                         <div class="reaction">
                             <div class="likes">
                                 <img src="{% static 'image/Like.png' %}" class="like-photo">
