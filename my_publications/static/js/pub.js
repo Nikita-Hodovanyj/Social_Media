@@ -88,3 +88,13 @@ document.addEventListener('DOMContentLoaded', function () {
         })
     })
 })
+
+document.addEventListener('click', function(e) {
+  if (e.target.classList.contains('custom-tag')) {
+    const tag = e.target.textContent.trim();
+    const textarea = document.getElementById("id_text");
+    textarea.value += ` #${tag} `;
+    textarea.focus();
+  }
+
+});

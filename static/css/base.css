@@ -40,74 +40,66 @@ body{
     background-color: #E8ECFC;
   }
 
-  header{
-    
-    display: flex;
-    box-sizing: border-box;
-    z-index: 1000;
-    height: 88px;
-    align-items: center;
+header {
+    position: relative;
+    width: 100%;
     background-color: white;
-    justify-content: space-between;
-    padding: 24px 80px 24px 80px;
-  }
+    box-sizing: border-box;
+    padding: 0;
+}
 
-.logo{
+.header-inner {
     display: flex;
-    width: 145px;
-    height: 18px;
-    
+    justify-content: space-between;
+    align-items: center;
+    height: 88px;
+    padding: 0 40px;
+    max-width: 1200px;
+    margin: 0 auto;
+    width: 100%;
+}
+
+.logo {
+    display: flex;
     align-items: center;
 }
 .logo h1{
     height: 18px;
     font-size: 18px;
   }
-.logo-img{
+.logo-img {
     width: 145px;
-    height: 18x;
+    height: 18px;
+    right: 70px;
+    padding-right: 20px;
+    position: relative; 
 }
 
-.links{
+.links {
     display: flex;
     align-items: center;
-    /* justify-content: center; */
-    width: 775px;
-    height: 40px;
     gap: 24px;
-    
-
+    flex-wrap: wrap; 
 }
 
 a{
     text-decoration: none;
     color: black;
 }
-.text{
+.text, .text-l {
     display: flex;
-    /* font-family: GT Walsheim Pro; */
     align-items: center;
-    justify-content: space-between;
-    font-weight: 500;
     font-size: 16px;
-    line-height: 100%;
-    text-align: center; 
-
-    padding-top: 4px;
-    padding-right: 8px;
-    padding-bottom: 4px;
-    padding-left: 8px;
+    font-weight: 500;
     gap: 8px;
-    border-radius: 3px; 
-
-
+    border-radius: 3px;
+    padding: 4px 8px;
+    white-space: nowrap;
 }
 
-.img{
+.img {
     width: 20px;
     height: 20px;
-    /* margin-right: 100%; */
-
 }
 .button {
     display: inline-flex;  
@@ -140,11 +132,12 @@ a{
 
 }
 .text-l {
-    border: 1px solid black; 
-    
-    display: flex;
-    border-radius: 20px;           /* Скругление углов */
-    text-align: center;           /* Текст по центру */
-    padding: 6px 12px;            
-    flex-direction: row;
+    border: 1px solid black;
+    border-radius: 20px;
+    padding: 6px 12px;
+}
+
+
+.text.active {
+    background-color: #E9E5EE; 
 }

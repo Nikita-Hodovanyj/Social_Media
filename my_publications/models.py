@@ -13,6 +13,21 @@ class Post(models.Model):
         ('movies', 'Фільми'),
         ('reading', 'Читання'),
         ('calm', 'Спокій'),
+        ('calm', 'Спокій'),
+        ('calm', 'Спокій'),
+        ('calm', 'Спокій'),
+        ('calm', 'Спокій'),
+        ('calm', 'Спокій'),
+        ('calm', 'Спокій'),
+        ('calm', 'Спокій'),
+        ('calm', 'Спокій'),
+        ('calm', 'Спокій'),
+        ('calm', 'Спокій'),
+        ('calm', 'Спокій'),
+        ('calm', 'Спокій'),
+        ('calm', 'Спокій'),
+        ('calm', 'Спокій'),
+        
     ]
 
     name = models.CharField(max_length=255, verbose_name="Название")

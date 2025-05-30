@@ -8,7 +8,7 @@ class PublicationForm(forms.ModelForm):
     tags = forms.MultipleChoiceField(
         choices=TAG_CHOICES,
         widget=forms.CheckboxSelectMultiple(attrs={
-            'class': 'horizontal-scroll-checkboxes'
+            'class': 'vertically-scroll'
         }),
         required=False,
         label="Теги"

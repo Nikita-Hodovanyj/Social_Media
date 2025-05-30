@@ -19,13 +19,32 @@
             <p class="title">Создание публикации</p>
             <form method="post" action="{% url 'create_publication' %}" enctype="multipart/form-data" id="publicationForm">
                 {% csrf_token %}
-                <div class="form-modal">
-                    {% for field in form %}
-                        <div class="field-container">
-                            <label class="form-label">{{ field.label }}</label>
-                            {{ field }}
-                        </div>
-                    {% endfor %}
+                <div class="field-container">
+                    <label class="form-label">Назва публікації</label>
+                    {{ form.name }}
+                </div>
+
+                <div class="field-container">
+                    <label class="form-label">Тема</label>
+                    {{ form.topic }}
+                </div>
+
+                <div class="field-container">
+                    <label class="form-label">Теги</label>
+                    <div class="tags-scroll-vertical">
+                        {% for value, label in form.fields.tags.choices %}
+                            <span class="custom-tag" data-value="{{ value }}">{{ label }}</span>
+                        {% endfor %}
+                    </div>
+                </div>
+
+                <div class="field-container">
+                    {{ form.text }}
+                </div>
+
+                <div class="field-container">
+                    <label class="form-label">Силка</label>
+                    {{ form.link }}
                 </div>
 
                 <div class="buttons-modal">
@@ -45,116 +64,120 @@
     </div>
 
     <main>
-        <div class="left">
-            <div class="accaunt">
-                <div class="data">
-                    <div class="avatar">
-                        <img src="{% static '/image/avatar.png' %}" alt="">
+        <div class="main-wrapper" >
+
+            <div class="left">
+                <div class="accaunt">
+                    <div class="data">
+                        <div class="avatar">
+                            <img src="{% static '/image/avatar.png' %}" alt="">
+                        </div>
+                        <div class="nick">
+                            <h5>Lina Li</h5>
+                            <h2>@thelili</h2>
+                        </div>
                     </div>
-                    <div class="nick">
-                        <h5>Lina Li</h5>
-                        <h2>@thelili</h2>
+                    
+                    <div class="popular">
+                        <div class="post">
+                            <h3>566</h3>
+                            <h4>Дописи</h4>
+                        </div>
+                        <div class="post">
+                            <h3>12.1К</h3>
+                            <h4>Читачі</h4>
+                        </div>
+                        <div class="post">
+                            <h3>222</h3>
+                            <h4>Друзі</h4>
+                        </div>
                     </div>
                 </div>
-                
-                <div class="popular">
-                    <div class="post">
-                        <h3>566</h3>
-                        <h4>Дописи</h4>
+            </div>
+            
+            <div class="right">
+                <div class="coments">
+                    <div>
+                        <input id="thought-input" class="write-coment" type="text" placeholder="Про що ти зараз думаєшь?">
                     </div>
-                    <div class="post">
-                        <h3>12.1К</h3>
-                        <h4>Читачі</h4>
-                    </div>
-                    <div class="post">
-                        <h3>222</h3>
-                        <h4>Друзі</h4>
+                    <div class="buttons">
+                        <div>
+                            <button class="photo-button"><img class="photo" src="{% static '/image/Photo.png' %}" alt=""></button>
+                        </div>
+                        <div>
+                            <button class="photo-button"><img class="photo" src="{% static '/image/emoji.png' %}" alt=""></button>
+                        </div>
+                        <div>
+                            <button class="pub" id="open-modal">
+                                Перейти до оформлення
+                            </button>
+                        </div>
                     </div>
                 </div>
+    
+                {% for post in all_posts %}
+                    <div class="publication">
+                        <div class="header">
+                            <div class="dots-container">
+                                <button class="dots-button">
+                                    <img src="{% static 'image/Dots.png' %}" class="dot" alt="Меню">
+                                </button>
+                                <div class="dropdown-menu">
+                                    <button class="menu-item"
+                                        data-id="{{ post.pk }}"
+                                        data-name="{{ post.name}}"
+                                        data-topic="{{ post.topic}}"
+                                        data-text="{{ post.text}}"
+                                        data-link="{{ post.link}}">
+                                        Редактировать
+                                </button>
+                                    <form method="POST" action="{% url 'delete_post' post.pk %}" class="delete-form">
+                                        {% csrf_token %}
+                                        <button class="menu-item">Удалить</button>
+                                    </form>
+                                </div>
+                            </div>
+                            
+                            <div class="people-pub">
+                                <img src="{% static 'image/Lina.png' %}" class="avatar">
+                                <p>{% if post.author %}{{ post.author.username }}{% else %}Аноним{% endif %}</p>
+                            </div>
+                        </div>
+                        <div class="pub-content">
+                            <h3 class="name">{{ post.name }}</h3>
+                            <p>{{ post.text }}</p>
+                            <p>{{post.topic}}</p>
+                            <div class="tags-scroll-container">
+                                {% for tag in post.get_tags_list %}
+                                    <span class="tag">{{ tag }}</span>
+                                {% endfor %}
+                            </div>
+                            {% if post.link %}
+                                <a href="{{ post.link }}" target="_blank">{{ post.link }}</a>
+                            {% endif %}
+                            {% if post.image %}
+                                <img src="{{ post.image.url }}" class="post-image">
+                            {% endif %}
+                            <div class="reaction">
+                                <div class="likes">
+                                    <img src="{% static 'image/Like.png' %}" class="like-photo">
+                                    <p>120 Вподобань</p>
+                                </div>
+                                <div class="views">
+                                    <img src="{% static 'image/eye.png' %}" class="views-photo">
+                                    <p>890 Переглядів</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% empty %}
+                    <div class="no-posts">
+                        <p>Публикаций пока нет. Будьте первым!</p>
+                    </div>
+                {% endfor %}
             </div>
         </div>
         
-        <div class="right">
-            <div class="coments">
-                <div>
-                    <input id="thought-input" class="write-coment" type="text" placeholder="Про що ти зараз думаєшь?">
-                </div>
-                <div class="buttons">
-                    <div>
-                        <button class="photo-button"><img class="photo" src="{% static '/image/Photo.png' %}" alt=""></button>
-                    </div>
-                    <div>
-                        <button class="photo-button"><img class="photo" src="{% static '/image/emoji.png' %}" alt=""></button>
-                    </div>
-                    <div>
-                        <button class="pub" id="open-modal">
-                            Перейти до оформлення
-                        </button>
-                    </div>
-                </div>
-            </div>
-
-            {% for post in all_posts %}
-                <div class="publication">
-                    <div class="header">
-                        <div class="dots-container">
-                            <button class="dots-button">
-                                <img src="{% static 'image/Dots.png' %}" class="dot" alt="Меню">
-                            </button>
-                            <div class="dropdown-menu">
-                                <button class="menu-item"
-                                    data-id="{{ post.pk }}"
-                                    data-name="{{ post.name}}"
-                                    data-topic="{{ post.topic}}"
-                                    data-text="{{ post.text}}"
-                                    data-link="{{ post.link}}">
-                                    Редактировать
-                            </button>
-                                <form method="POST" action="{% url 'delete_post' post.pk %}" class="delete-form">
-                                    {% csrf_token %}
-                                    <button class="menu-item">Удалить</button>
-                                </form>
-                            </div>
-                        </div>
-                        
-                        <div class="people-pub">
-                            <img src="{% static 'image/Lina.png' %}" class="avatar">
-                            <p>{% if post.author %}{{ post.author.username }}{% else %}Аноним{% endif %}</p>
-                        </div>
-                    </div>
-                    <div class="pub-content">
-                        <h3 class="name">{{ post.name }}</h3>
-                        <p>{{ post.text }}</p>
-                        <p>{{post.topic}}</p>
-                        <div class="tags-scroll-container">
-                            {% for tag in post.get_tags_list %}
-                                <span class="tag">{{ tag }}</span>
-                            {% endfor %}
-                        </div>
-                        {% if post.link %}
-                            <a href="{{ post.link }}" target="_blank">{{ post.link }}</a>
-                        {% endif %}
-                        {% if post.image %}
-                            <img src="{{ post.image.url }}" class="post-image">
-                        {% endif %}
-                        <div class="reaction">
-                            <div class="likes">
-                                <img src="{% static 'image/Like.png' %}" class="like-photo">
-                                <p>120 Вподобань</p>
-                            </div>
-                            <div class="views">
-                                <img src="{% static 'image/eye.png' %}" class="views-photo">
-                                <p>890 Переглядів</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            {% empty %}
-                <div class="no-posts">
-                    <p>Публикаций пока нет. Будьте первым!</p>
-                </div>
-            {% endfor %}
-        </div>
     </main>
     <script src="{% static 'js/pub.js' %}"></script>
 {% endblock %}

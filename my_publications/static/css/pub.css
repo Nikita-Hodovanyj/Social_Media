@@ -1,4 +1,5 @@
 
+
 body{
     margin: 0;
     padding: 0;
@@ -10,23 +11,34 @@ body{
 
 main{
     display: flex;
+    justify-content: center;
+    padding-top: 10px;
+    width: 100%;
+    box-sizing: border-box;
     background-color: #FAF8FF;
-    width: 100vw;
-    height: auto;        
-    min-height: 100vh;
     
 
  }
-
-.left{
-    position: fixed;
-    background-color: #FAF8FF;
-    width: 350.87px;
-    height: 801px;
-    top: 104px;
-    left: 80.47px;
-    gap: 8px;
+.main-wrapper {
+    display: flex;
+    gap: 64px;
+    max-width: 1440px;
+    width: 100%;
+    padding: 0 40px;
+    box-sizing: border-box;
+    justify-content: center;
+    
 }
+
+.left {
+    position: fixed;
+    margin-left: -1000px;
+    width: 350px;
+    background-color: white;
+}
+
+
+
 .accaunt{
     display: flex;
     flex-direction: column;
@@ -294,13 +306,12 @@ h6{
 
 
 .right {
+    flex: 1;
+    margin-left: 300px;
+    max-width: 923px;
+    width: 100%;
     display: flex;
     flex-direction: column;
-    background-color: #FAF8FF;
-    width: 923px;
-    height: auto; 
-    margin-top: 16px;
-    margin-left: 437px;
     gap: 8px;
 }
 
@@ -600,8 +611,8 @@ h6{
 
 .dots-container {
     position: absolute;
-    top: 20px;
-    right: 20px;
+    top: 0px;
+    right: 0px;
     z-index: 10;
 }
 
@@ -877,33 +888,40 @@ input[type="file"]::before {
 
 
 
-.tags-scroll-container::-webkit-scrollbar {
-    height: 4px;
+.tags-scroll-vertical {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    overflow-y: auto;
+    gap: 8px;
+    max-height: 80px;
+    padding: 8px;
+    border-radius: 8px;
+    background-color: #ffffff;
 }
 
-.tags-scroll-container::-webkit-scrollbar-thumb {
-    background-color: #ccc;
-    border-radius: 2px;
-}
+.custom-tag {
+    background-color: #E9E5EE;
+    font-family: GT Walsheim Pro;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 100%;
+    letter-spacing: 0%;
 
-
-.tag {
-    background-color: #f0f0f0;
+    color: #543C52;
     border-radius: 16px;
     padding: 4px 12px;
     font-size: 14px;
+    cursor: pointer;
     white-space: nowrap;
-    flex-shrink: 0;
-    color: #555;
 }
-.horizontal-scroll-checkboxes {
+.tags-scroll-vertical {
     display: flex;
-    overflow-x: auto;
-    gap: 12px;
-    padding: 8px 0;
-}
-
-.horizontal-scroll-checkboxes li {
-    display: inline-flex;
-    margin-right: 12px;
+    flex-wrap: wrap;              
+    max-height: 50px;           
+    overflow-y: auto;           
+    gap: 8px;
+    padding: 8px;
+    border-radius: 8px;
+    background-color: #ffffff;
 }

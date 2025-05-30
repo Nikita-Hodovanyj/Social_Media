@@ -15,7 +15,7 @@ class PublicationsView(LoginRequiredMixin, ListView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['form'] = PublicationForm()
-        return context
+        return context  
 
 class CreatePublicationView(LoginRequiredMixin, CreateView):
     model = Post
