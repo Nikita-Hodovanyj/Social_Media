@@ -8,7 +8,7 @@ class PublicationForm(forms.ModelForm):
     tags = forms.MultipleChoiceField(
         choices=TAG_CHOICES,
         widget=forms.CheckboxSelectMultiple(attrs={
-            'class': 'horizontal-scroll-checkboxes'
+            'class': 'vertically-scroll'
         }),
         required=False,
         label="Теги"
@@ -24,10 +24,10 @@ class PublicationForm(forms.ModelForm):
             'link': 'Ссылка',
         }
         widgets = {
-            "name": forms.TextInput(attrs={"class": "form-field", "placeholder": "Название"}),
-            "topic": forms.TextInput(attrs={"class": "form-field", "placeholder": "Тема"}),
-            "text": forms.Textarea(attrs={"class": "form-textarea"}),
-            "link": forms.TextInput(attrs={"class": "form-field", "placeholder": "Ссылка"})
+            "name": forms.TextInput(attrs={"class": "form-field", "placeholder": "Назвіть публікацію"}),
+            "topic": forms.TextInput(attrs={"class": "form-field", "placeholder": "Придумайте тему публікації"}),
+            "text": forms.Textarea(attrs={"class": "form-textarea", "placeholder": "Опишіть публікацію"}),
+            "link": forms.TextInput(attrs={"class": "form-field", "placeholder": "Посилання на цікаву статтю"})
         }
 
     def clean_tags(self):

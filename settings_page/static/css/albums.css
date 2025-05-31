@@ -41,3 +41,76 @@ aside a{
 
 }
 
+
+.album-card{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    padding: 16px;
+    top: 104px;
+    gap: 16px;
+    border: solid #CDCED2 1px;
+    border-radius: 10px;
+    background-color: white;
+
+    
+}
+
+.profile-avatar{
+    position: relative;
+    width: 200px;
+    height: 200px;
+    border-radius: 10px;
+    object-fit: cover;
+
+}
+
+
+
+.image-album-div{
+    position: absolute;
+    display: flex;
+    gap: 10px;
+    top: 230px;
+    left: 110px;
+}
+
+.image-album-div img{
+    cursor: pointer;
+}
+
+.text-info2{
+    width: 623px;
+    height: 18px;
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 100%
+}
+
+.button-container{
+    width: 238.5px;
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+
+}
+
+.edit-profile{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+}
+
+.edit-profile2{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px;
+    gap: 16px;
+    border: solid #CDCED2 1px;
+    border-radius: 10px;
+    background-color: white;
+}

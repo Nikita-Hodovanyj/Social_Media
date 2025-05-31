@@ -9,16 +9,17 @@ body{
 
 
 
-main{
+main {
+    margin-top: 7%;
+    position: absolute;
     display: flex;
     justify-content: center;
     padding-top: 10px;
     width: 100%;
     box-sizing: border-box;
     background-color: #FAF8FF;
-    
+}
 
- }
 .main-wrapper {
     display: flex;
     gap: 64px;
@@ -36,6 +37,8 @@ main{
     width: 350px;
     background-color: white;
 }
+
+
 
 
 
@@ -64,6 +67,7 @@ main{
 
 }
 .avatar img{
+    border-radius: 50px;
     margin-top: -12px;
     width: 96;
     height: 96;
@@ -707,7 +711,7 @@ h6{
     height: 100%;
     background: rgba(0, 0, 0, 0.5);
     display: none;
-    z-index: 100;
+    z-index: 1000;
 }
 
 .close{
@@ -841,12 +845,37 @@ h6{
     height: 20px;
 
 }
-.post-image{
-    width: 283.px;
-    height: 327px;
-    border-radius: 16px;
 
+
+.post-images{
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 14px;
 }
+
+.post-image:nth-child(1),
+.post-image:nth-child(2),
+.post-image:nth-child(6),
+.post-image:nth-child(7) {
+    width: 433.5px;
+    height: 327px;
+    object-fit: cover;
+    border-radius: 16px;
+}
+
+.post-image:nth-child(3),
+.post-image:nth-child(4),
+.post-image:nth-child(5),
+.post-image:nth-child(8),
+.post-image:nth-child(9) {
+    width: 283.6px;
+    height: 327px;
+    object-fit: cover;
+    border-radius: 16px;
+}
+
+
 .buttons-load-img{
     display: flex;
     width: 40px;
@@ -924,4 +953,31 @@ input[type="file"]::before {
     padding: 8px;
     border-radius: 8px;
     background-color: #ffffff;
+}
+
+.image-posts{
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    
+}
+.image-post{
+    width: 217.6px;
+    height: 265px;
+    background-size: cover;
+    border-radius: 16px;
+}
+
+.image-wrapper {
+    position: relative;
+}
+
+.trash-image{
+    position: absolute;
+    top: 10px;
+    left: 167.67px;
+
+
+
 }
