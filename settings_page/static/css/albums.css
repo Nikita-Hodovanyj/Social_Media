@@ -1,0 +1,43 @@
+
+*{
+    font-family: "GT Walsheim Pro";
+}
+
+aside{
+    position: absolute;
+    width: 254px;
+    display: flex;
+    flex-direction: column;
+    top: 104px;
+    left: 80px;
+    gap: 16px;
+}
+
+aside a{
+    align-items: center;
+    font-size: 16px;
+    line-height: 100%;
+    letter-spacing: -1;
+}
+
+.div-link-albums1{
+    border-bottom: solid black 2px;
+    
+
+}
+
+.link-info2{
+    font-weight: 500;
+    color: #81818D;
+    
+
+}
+
+
+.link-albums2{
+    border-bottom: solid black 2px;
+    font-weight: 600;
+    
+
+}
+

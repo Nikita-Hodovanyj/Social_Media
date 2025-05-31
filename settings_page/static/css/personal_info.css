@@ -1,0 +1,284 @@
+
+*{
+    padding: 0;
+    margin: 0;
+    font-family: "GT Walsheim Pro";
+}
+
+aside{
+    position: absolute;
+    width: 254px;
+    display: flex;
+    flex-direction: column;
+    top: 104px;
+    left: 80px;
+    gap: 16px;
+}
+
+aside a{
+    align-items: center;
+    font-size: 16px;
+    line-height: 100%;
+    letter-spacing: -1;
+}
+
+.div-link-info{
+    border-bottom: solid black 2px;
+    
+
+}
+
+.link-info1{
+    border-bottom: solid black 2px;
+    font-weight: 600;
+    
+    
+
+}
+
+
+.link-albums1{
+    font-weight: 500;
+    color: #81818D;
+
+}
+
+main{
+    position: absolute;
+    width: 924.5px;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    top: 104px;
+    left: 435.5px;
+    gap: 8px;
+    margin-bottom: 100px;
+ 
+}
+
+
+
+
+
+.profile-card{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    padding: 16px;
+    gap: 16px;
+    border: solid #CDCED2 1px;
+    border-radius: 10px;
+    background-color: white;
+
+
+}
+
+.edit-profile{
+    width: 100%;
+    display: flex;
+    gap: 16px;
+
+}
+.text-info{
+    width: 700px;
+    height: 18px;
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 100%
+}
+
+.edit-button{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+    gap: 10px;
+    border: solid #543C52 1px;
+    border-radius: 190px;
+    letter-spacing: -0.6%;
+    font-size: 14px;
+    font-weight: 500;
+    color: #543C52;
+    background-color: inherit;
+    cursor: pointer;
+
+}
+
+.avatar-info{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 14px;
+    align-items: center;
+    color: #070A1C;
+
+}
+
+.avatar-info img{
+    width: 96px;
+}
+
+.avatar-info div{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+
+.name-text{ 
+    font-size: 24px;
+    line-height: 100%;
+    letter-spacing: -1%;
+    font-weight: 700;
+    
+}
+
+.username-text{ 
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 100%;
+    letter-spacing: -1%;
+    
+}
+
+.info-card{
+    width: 924.5px;
+    display: flex;
+    flex-direction: column;
+    padding: 16px 14px 16px 14px ;
+    gap: 24px;
+    border: solid #CDCED2 1px;
+    border-radius: 10px;
+    background-color: white;
+}
+
+.inputs-info{
+    width: 343px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.input-class{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    color: #070A1C;
+
+}
+
+.input-class label{
+    font-size: 16px;
+    line-height: 100%;
+    letter-spacing: -0.7%;
+    font-weight: 400;
+    color: #070A1C;
+    
+}
+
+.eye-input-div{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+}
+.eye-input-div img{
+    width: 20px;
+    height: 20px;
+}
+
+.eye-input-div input{
+    width: 100%;
+    display: flex;
+    padding: 10px 16px 10px 16px;
+    gap: 10px;
+    border: solid #81818D 1px ;
+    border-radius: 10px;
+}
+
+
+.input-password{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    color: #070A1C;
+}
+
+.input-password label{
+    font-size: 16px;
+    line-height: 100%;
+    letter-spacing: -0.7%;
+    font-weight: 400;
+    color: #070A1C;
+    
+}
+
+.eye-input-password{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+}
+
+
+.eye-input-password input{
+    position: relative;
+    width: 100%;
+    display: flex;
+    padding: 10px 16px 10px 16px;
+    gap: 10px;
+    border: solid #81818D 1px ;
+    border-radius: 10px;
+}
+
+.eye-input-password img{
+    position: absolute;
+    left: 320px;
+   
+}
+
+.writing-card{
+    width: 924.5;
+    display: flex;
+    flex-direction: column;
+    padding: 16px;
+    gap: 16px;
+    border: solid #CDCED2 1px;
+    border-radius: 10px;
+    background-color: white;
+
+}
+
+.name-writing{
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+
+}
+
+.check-div{
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+
+}
+
+
+.label-name-surname{
+    display: flex;
+    gap: 8px;
+    opacity: 50%;
+
+}
+
+.writing-image{
+    width: 220px;
+    height: 65px;
+
+}

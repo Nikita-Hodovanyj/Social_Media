@@ -43,7 +43,9 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'login',
     'home_page',
-    'my_publications'
+    'my_publications',
+    'friends',
+    'settings_page'
     
     
 ]

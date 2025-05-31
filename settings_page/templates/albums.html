@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+   Альбоми
+{% endblock %}
+
+{% block link %}
+<link rel="stylesheet" href="{% static 'css/albums.css' %}">
+{% endblock %}
+
+{% block content %}
+
+   <aside>
+         <div class = 'div-link-info2'>
+             <a class = 'link-info2' href="{% url 'personal_info' %}">Особиста інформація</a>
+         </div>
+         <div class = 'div-link-albums2'>
+            <a class ='link-albums2' href="{% url 'albums' %}">Альбоми</a>
+         </div>
+        
+    </aside>
+{% endblock %}
+
+
+

@@ -24,8 +24,9 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', HomePageView.as_view(), name = 'home'),
     path('login/', include('login.urls')),
-    path('publications/' ,include("my_publications.urls") )
-
+    path('publications/' ,include("my_publications.urls") ),
+    path('friends/' ,include("friends.urls") ),
+    path('settings/', include('settings_page.urls'))
 ]
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)
