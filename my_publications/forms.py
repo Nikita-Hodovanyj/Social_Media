@@ -16,19 +16,18 @@ class PublicationForm(forms.ModelForm):
 
     class Meta:
         model = Post
-        fields = ["name", "topic", "tags", "text", "link", "image"]
+        fields = ["name", "topic", "tags", "text", "link"]
         labels = {
             'name': 'Название публикации',
             'topic': 'Тема публикации',
             'text': '',
             'link': 'Ссылка',
-            'image': '',
         }
         widgets = {
-            "name": forms.TextInput(attrs={"class": "form-field", "placeholder": "Название"}),
-            "topic": forms.TextInput(attrs={"class": "form-field", "placeholder": "Тема"}),
-            "text": forms.Textarea(attrs={"class": "form-textarea"}),
-            "link": forms.TextInput(attrs={"class": "form-field", "placeholder": "Ссылка"})
+            "name": forms.TextInput(attrs={"class": "form-field", "placeholder": "Назвіть публікацію"}),
+            "topic": forms.TextInput(attrs={"class": "form-field", "placeholder": "Придумайте тему публікації"}),
+            "text": forms.Textarea(attrs={"class": "form-textarea", "placeholder": "Опишіть публікацію"}),
+            "link": forms.TextInput(attrs={"class": "form-field", "placeholder": "Посилання на цікаву статтю"})
         }
 
     def clean_tags(self):

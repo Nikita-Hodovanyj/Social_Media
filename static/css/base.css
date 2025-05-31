@@ -25,6 +25,11 @@
     font-style: normal;
 }
 
+
+*{
+   font-family: 'GT Walsheim Pro'; 
+}
+
 body, h1, h2, h3, h4, h5, h6, p, a, span {
     font-weight: normal;
     margin: 0;
@@ -41,11 +46,12 @@ body{
   }
 
 header {
-    position: relative;
+    position: fixed;
     width: 100%;
     background-color: white;
     box-sizing: border-box;
     padding: 0;
+    z-index: 999;
 }
 
 .header-inner {

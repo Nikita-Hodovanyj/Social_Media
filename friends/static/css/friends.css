@@ -5,7 +5,32 @@ body {
     background-color: #FAF8FF;
 }
 
+
 main {
+    margin-top: 7%;
+    position: absolute;
+    display: flex;
+    justify-content: flex-start;
+    
+    padding-top: 10px;
+    padding-left: 0; 
+    width: 100%;
+    box-sizing: border-box;
+    background-color: #FAF8FF;
+}
+
+ 
+
+/* .left {
+    position: fixed;
+    margin-left: -1000px;
+    width: 350px;
+    background-color: white;
+} */
+
+
+
+/* main {
     display: flex;
     justify-content: flex-start;
     padding-top: 10px;
@@ -13,9 +38,10 @@ main {
     box-sizing: border-box;
     background-color: #FAF8FF;
     padding-left: 0; 
-}
+} */
 
 .left {
+    position: absolute;
     display: flex;
     flex-direction: column;
     box-sizing: border-box;
@@ -88,6 +114,17 @@ h2 {
     gap: 8px;
     padding: 0 0 0 290px;
 }
+
+
+/* .right {
+    flex: 1;
+    margin-left: 300px;
+    max-width: 923px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+} */
 .request{
     width: 923;
     height: 329;

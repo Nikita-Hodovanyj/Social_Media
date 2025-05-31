@@ -7,6 +7,8 @@
 
 {% block link %}
 <link rel="stylesheet" href="{% static 'css/albums.css' %}">
+<link rel="stylesheet" href="{% static 'css/personal_info.css' %}">
+
 {% endblock %}
 
 {% block content %}
@@ -20,6 +22,47 @@
          </div>
         
     </aside>
+
+
+   <main>
+        <div class="album-card">
+            <div class = 'edit-profile'>
+                <p class="text-info2">Мої фото</p>
+                <div class="button-container">
+                  <button class="edit-button">
+                    <img src="{% static 'images/image-property.svg' %}" alt="">
+                    Додати фото
+                </button>
+
+                </div>
+                
+            </div>
+            <img class = 'profile-avatar' src="{% static 'images/profile-avatar.png' %}" alt="">
+            <div class="image-album-div">
+               <img class = 'eye-image1' src="{% static 'images/eye-property.svg' %}" alt="">
+               <img  class = 'trash-image1' src="{% static 'images/trash.svg' %}" alt="">
+            </div>
+
+            
+         
+         </div>
+
+         <div class = 'edit-profile2'>
+            <p class="text-info2">Немає ще жодного альбому</p>
+            <div class="button-container">
+               <button class="edit-button">
+                  <img src="{% static 'images/image-property.svg' %}" alt="">
+                  Додати фото
+               </button>
+
+            </div>
+                
+         </div>
+
+
+
+   </main>
+
 {% endblock %}
 
 

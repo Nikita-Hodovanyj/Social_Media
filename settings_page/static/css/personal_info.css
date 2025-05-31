@@ -76,8 +76,8 @@ main{
 .edit-profile{
     width: 100%;
     display: flex;
+    align-items: center;
     gap: 16px;
-
 }
 .text-info{
     width: 700px;
