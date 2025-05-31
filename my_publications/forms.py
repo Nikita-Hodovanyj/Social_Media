@@ -8,7 +8,7 @@ class PublicationForm(forms.ModelForm):
     tags = forms.MultipleChoiceField(
         choices=TAG_CHOICES,
         widget=forms.CheckboxSelectMultiple(attrs={
-            'class': 'vertically-scroll'
+            'class': 'horizontal-scroll-checkboxes'
         }),
         required=False,
         label="Теги"
@@ -16,13 +16,12 @@ class PublicationForm(forms.ModelForm):
 
     class Meta:
         model = Post
-        fields = ["name", "topic", "tags", "text", "link", "image"]
+        fields = ["name", "topic", "tags", "text", "link"]
         labels = {
             'name': 'Название публикации',
             'topic': 'Тема публикации',
             'text': '',
             'link': 'Ссылка',
-            'image': '',
         }
         widgets = {
             "name": forms.TextInput(attrs={"class": "form-field", "placeholder": "Название"}),

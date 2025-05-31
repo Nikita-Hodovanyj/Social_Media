@@ -113,10 +113,12 @@ main{
     align-items: center;
     color: #070A1C;
 
+
 }
 
 .avatar-info img{
     width: 96px;
+    border-radius: 50px;
 }
 
 .avatar-info div{

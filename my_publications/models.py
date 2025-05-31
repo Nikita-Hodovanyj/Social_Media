@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 
+
 class Post(models.Model):
     TAG_CHOICES = [
         ('music', 'Музика'),
@@ -44,3 +45,6 @@ class Post(models.Model):
     def get_tags_list(self):
         """Возвращает список выбранных тегов"""
         return [tag.strip() for tag in self.tags.split(',')] if self.tags else []
+class Image(models.Model):
+    post = models.ForeignKey(Post, on_delete=models.CASCADE, related_name='images')
+    image = models.ImageField(upload_to='images/posts')

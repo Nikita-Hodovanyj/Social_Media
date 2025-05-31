@@ -1,7 +1,7 @@
 from django.views.generic import ListView, CreateView, DeleteView, UpdateView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse_lazy
-from .models import Post
+from .models import Post, Image
 from .forms import PublicationForm
 
 class PublicationsView(LoginRequiredMixin, ListView):
@@ -15,7 +15,7 @@ class PublicationsView(LoginRequiredMixin, ListView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['form'] = PublicationForm()
-        return context  
+        return context
 
 class CreatePublicationView(LoginRequiredMixin, CreateView):
     model = Post
@@ -24,7 +24,15 @@ class CreatePublicationView(LoginRequiredMixin, CreateView):
 
     def form_valid(self, form):
         form.instance.author = self.request.user
-        return super().form_valid(form)
+        responce = super().form_valid(form)
+        images = self.request.FILES.getlist('images')
+
+        for image in images:
+            Image.objects.create(post = form.instance, image = image)
+
+        return responce
+
+
 
 class DeletePostView(LoginRequiredMixin, DeleteView):
     model = Post

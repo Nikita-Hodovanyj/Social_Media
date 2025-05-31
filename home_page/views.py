@@ -1,4 +1,6 @@
 from django.views.generic import ListView
+from django.shortcuts import redirect
+from .forms import ModalActionForm
 from my_publications.models import Post
 
 class HomePageView(ListView):
@@ -8,3 +10,23 @@ class HomePageView(ListView):
 
     def get_queryset(self):
         return Post.objects.all()
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        form = kwargs.get('form') or ModalActionForm()
+        context['form'] = form
+
+        user = self.request.user
+        context['show_modal'] = not (user.first_name and user.last_name and user.username)
+        return context
+
+    def post(self, request, *args, **kwargs):
+        form = ModalActionForm(request.POST)
+        if form.is_valid():
+            user = request.user
+            user.first_name = form.cleaned_data['name']
+            user.last_name = form.cleaned_data['surname']
+            user.username = form.cleaned_data['login']
+            user.save()
+            return redirect('home')
+        return self.get(request, *args, form=form)

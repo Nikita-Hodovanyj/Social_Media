@@ -21,8 +21,8 @@
                             <img src="{% static '/image/avatar.png' %}" alt="">
                         </div>
                         <div class="nick" >
-                            <h5>Lina Li</h5>
-                            <h2>@thelili</h2>
+                            <h5>{{ user.first_name }}</h5>
+                            <h2>{{ user.username }}</h2>
                         </div>
 
                     </div>
@@ -208,7 +208,50 @@
             </div>
             
         </div>
-
+        {% if show_modal %}
+        <div id="userModal" class="modal-overlay show">
+            <div class="modal-content">
+                <h2 class="h22">Додайте деталі про себе</h2>
+                <form method="post" id="modalForm">
+                    {% csrf_token %}
+        
+                    <label for="{{ form.name.id_for_label }}">{{ form.name.label }}</label>
+                    {{ form.name }}
+        
+                    <label for="{{ form.surname.id_for_label }}">{{ form.surname.label }}</label>
+                    {{ form.surname }}
+        
+                    <label for="{{ form.login.id_for_label }}">{{ form.login.label }}</label>
+                    {{ form.login }}
+        
+                    <div class="hint-text">
+                        Або оберіть: <a href="#" id="suggestUsername">Запропоновані варіанти відповідно до Ім’я та Прізвища</a>
+                    </div>
+        
+                    <button type="submit" class="modal-submit-button">Продовжити</button>
+                </form>
+            </div>
+        </div>
+        {% endif %}
+        
     </main>
 
 {% endblock %}
+<script>
+    document.getElementById("suggestUsername").addEventListener("click", function(e) {
+        e.preventDefault();
+    
+        const name = document.getElementById("id_name").value.trim().toLowerCase();
+        const surname = document.getElementById("id_surname").value.trim().toLowerCase();
+        const loginInput = document.getElementById("id_login");
+    
+        if (name && surname) {
+            const login = '@' + name + '_' + surname;
+            loginInput.value = login;
+        } else {
+            alert("Будь ласка, заповніть ім’я та прізвище");
+        }
+    });
+    </script>
+    
+    

@@ -89,12 +89,43 @@ document.addEventListener('DOMContentLoaded', function () {
     })
 })
 
-document.addEventListener('click', function(e) {
-  if (e.target.classList.contains('custom-tag')) {
-    const tag = e.target.textContent.trim();
-    const textarea = document.getElementById("id_text");
-    textarea.value += ` #${tag} `;
-    textarea.focus();
-  }
 
-});
+
+let fileInput = document.getElementById('id_image');
+// let modalWIn = document.querySelector('.modal-win')
+let fileDiv = document.querySelector('.image-posts');
+let trashImage = document.querySelector('.trash-image')
+
+        fileInput.addEventListener('change', (event) => {
+            
+
+            let files = event.target.files;
+            for (let i = 0; i < files.length; i++) {
+                file = files[i];
+                console.log(file);
+                
+            
+
+                let image = document.createElement('img');
+                // image.src = {% static 'images/${file.name}'%}
+                // Створює посилання на браузері
+                image.src = URL.createObjectURL(file);
+                image.className = 'image-post';
+
+                let wrapper = document.createElement('div');
+                wrapper.className = 'image-wrapper';
+
+                let trashImage = document.createElement('img');
+                trashImage.className = 'trash-image';
+                trashImage.src = TRASH_IMAGE_SRC
+                trashImage.onclick = () => wrapper.remove();
+
+                wrapper.appendChild(image);
+                wrapper.appendChild(trashImage);
+                fileDiv.appendChild(wrapper);
+
+                
+                
+            }
+            
+        });
