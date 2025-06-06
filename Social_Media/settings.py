@@ -131,6 +131,7 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = [
     BASE_DIR / 'static',
     BASE_DIR / 'home_page' / 'static',
+    BASE_DIR / 'sattings_page' / 'static',
 ]
 
 # Default primary key field type

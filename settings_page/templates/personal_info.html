@@ -10,140 +10,175 @@
 {% endblock %}
 
 {% block content %}
-    <div class="main-wrapper">
-        
-        <aside>
-             <div class = 'div-link-info1'>
-                 <a class = 'link-info1' href="{% url 'personal_info' %}">Особиста інформація</a>
-             </div>
-             <div class = 'div-link-albums1'>
-                <a class ='link-albums1' href="{% url 'albums' %}">Альбоми</a>
-             </div>
-        </aside>
-           
-    
-        <main>
-            <div class="profile-card">
-                <div class = 'edit-profile'>
-                    <p class="text-info">Картка профілю</p>
-                    <button class="edit-button">
-                        <img src="{% static 'images/pen.svg' %}" alt="">
-                        Редагувати інформацію
-                    </button>
-                </div>
-    
-                <div class = 'avatar-info'>
-                    <img src="{% static 'images/avatar.png' %}" alt="avatar">
-                    <div>
-                        <p class="name-text">Lina Li</p>
-                        <p class="username-text">@thelili</p>
-                    </div>
-                    
+<div class="main-wrapper">
+
+    <aside>
+         <div class='div-link-info1'>
+             <a class='link-info1' href="{% url 'personal_info' %}">Особиста інформація</a>
+         </div>
+         <div class='div-link-albums1'>
+            <a class='link-albums1' href="{% url 'albums' %}">Альбоми</a>
+         </div>
+    </aside>
+
+    <main>
+        <div class="profile-card">
+            <div class='edit-profile'>
+                <p class="text-info">Картка профілю</p>
+                <button class="edit-button">
+                    <img src="{% static 'images/pen.svg' %}" alt="">
+                    Редагувати інформацію
+                </button>
+            </div>
+
+            <div class='avatar-info'>
+                <img src="{% static 'images/avatar.png' %}" alt="avatar">
+                <div>
+                    <p class="name-text">{{ user.first_name }}</p>
+                    <p class="username-text">{{ user.username}}</p>
                 </div>
             </div>
-    
-            <div class="info-card">
-                <div class = 'edit-profile'>
-                    <p class="text-info">Особиста інформація</p>
-    
-                    <button  class="edit-button">
-                        <img src="{% static 'images/pen.svg' %}" alt="">
-                        Редагувати інформацію
-                    </button>
-                </div>
-    
-                <div class="inputs-info">
-                    <div class="input-class">
-                        <label for="name">Ім’я</label>
-                        <div class="eye-input-div">
-                            <input id = 'name' type="text" placeholder="Lina">
-                            <img src="{% static 'images/open-eye.png' %}" alt="">
-                        </div>
+        </div>
+
+        <div class="info-card">
+            <div class='edit-profile'>
+                <p class="text-info">Особиста інформація</p>
+
+                <button  class="edit-button">
+                    <img src="{% static 'images/pen.svg' %}" alt="">
+                    Редагувати інформацію
+                </button>
+            </div>
+
+            <div class="inputs-info">
+                <div class="input-class">
+                    <label for="name">Ім’я</label>
+                    <div class="eye-input-div">
+                        <input name="first_name" data-field="first_name" type="text" value="{{ user.first_name }}">
+                        <img src="{% static 'images/open-eye.png' %}" alt="">
                     </div>
+                </div>
+
+                <div class="input-class">
+                     <label for="surname">Прізвище</label>
+                    
+                    <div class="eye-input-div">
+                        <input name="last_name" data-field="last_name" type="text" value="{{ user.last_name }}">
+                        <img src="{% static 'images/open-eye.png' %}" alt="">
+                    </div>
+                </div>
+
+                <div class="input-class">
+                    <label for="date">Дата народження</label>
+                    <div class="eye-input-div">
+                        <input id='date' type="" value="...">
+                        <img src="{% static 'images/open-eye.png' %}" alt="">
+                    </div>
+                </div>
+
+                <div class="input-class">
+                    <label for="email">Електронна адреса</label>
+                    <div class="eye-input-div">
+                        <input name="email" data-field="email" type="email" value="{{ user.email }}">
+                        <img src="{% static 'images/open-eye.png' %}" alt="">
+                    </div>
+                </div>
+
+                <div class="input-password">
+                    <label for="password">Пароль</label>
+                    <div class="eye-input-password">
+                        <input id='password' type="password" placeholder="⁕⁕⁕⁕⁕⁕⁕⁕⁕⁕">
+                        <img src="{% static 'images/close-eye.svg' %}" alt="">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class='writing-card'>
+            <div class='edit-profile'>
+                <p class="text-info">Варіанти підпису</p>
+                
+                <button class="edit-button">
+                    <img src="{% static 'images/pen.svg' %}" alt="">
+                    Редагувати інформацію
+                </button>
+            </div>
+
+            <div class="name-writing">
+                <div class="check-div">
+                    <label for="nameSurname" class="label-name-surname">
+                        <img src="{% static 'images/outline-checkbox.svg' %}" alt="">
+                        <p>Ім’я та прізвище</p>
+                    </label>
+                    <p>Lina Li</p>
+                </div>
+
+                <div class="check-div">
+                    <label for="myWriting" class="label-name-surname">
+                        <img src="{% static 'images/outline-checkbox.svg' %}" alt="">
+                        <p>Мій електронний підпис</p>
+                    </label>
+                    <img class='writing-image' src="{% static 'images/writing.png' %}" alt="">
+                </div>
+            </div>
+        </div>
+    </main>
+</div>
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const inputs = document.querySelectorAll('input[name="first_name"], input[name="last_name"], input[name="email"]');
     
-                    <div class="input-class">
-                         <label for="surname">Прізвище</label>
+        inputs.forEach(input => {
+            input.addEventListener('input', () => {  
+                const data = {};
+                data[input.name] = input.value;
+    
+                fetch("{% url 'update_user_info' %}", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                        "X-CSRFToken": getCookie('csrftoken'),
+                    },
+                    body: JSON.stringify(data)
+                })
+                .then(response => response.json())
+                .then(result => {
+                    if (result.status === "success") {
                         
-                        <div class="eye-input-div">
-                            <input id = 'surname' type="text" placeholder="Li">
-                            <img src="{% static 'images/open-eye.png' %}" alt="">
-                        </div>
-                    </div>
-    
-                    <div class="input-class">
-                        <label for="date">Дата народження</label>
-                        <div class="eye-input-div">
-                            <input id = 'date' type="" placeholder="15.04.2001">
-                            <img src="{% static 'images/open-eye.png' %}" alt="">
-                        </div>
-                    </div>
-    
-                    <div class="input-class">
-                        <label for="email">Електронна адреса</label>
-                        <div class="eye-input-div">
-                            <input id = 'email' type="email" placeholder="you@example.com">
-                            <img src="{% static 'images/open-eye.png' %}" alt="">
-                        </div>
-                    </div>
-    
-                    <div class="input-password">
-                        <label for="password">Пароль</label>
-                        <div class="eye-input-password">
-                            <input id = 'password' type="password" placeholder="⁕⁕⁕⁕⁕⁕⁕⁕⁕⁕">
-                            <img src="{% static 'images/close-eye.svg' %}" alt="">
-                        </div>
-                    </div>
-    
-            
-                </div>
-            </div>
-    
-            <div class = 'writing-card'>
-                <div class = 'edit-profile'>
-                    <p class="text-info">Варіанти підпису</p>
-                    
-                    <button class="edit-button">
-                        <img src="{% static 'images/pen.svg' %}" alt="">
-                        Редагувати інформацію
-                    </button>
-                </div>
-    
-                <div class="name-writing">
-                    <div class="check-div">
-                        <label for="nameSurname" class="label-name-surname">
-                            <img src="{% static 'images/outline-checkbox.svg' %}" alt="">
-                            <p>Ім’я та прізвище</p>
-                        </label>
-                        <p>Lina Li</p>
-                    </div>
-    
-                    <div class="check-div">
-                        <label for="myWriting" class="label-name-surname">
+                        if (input.name === "first_name") {
+                            document.querySelector('.name-text').textContent = input.value;
+                        }
+                        if (input.name === "last_name") {
                             
-                            <img src="{% static 'images/outline-checkbox.svg' %}" alt="">
+                            const lastNameElem = document.querySelector('.last-name-text');
+                            if (lastNameElem) lastNameElem.textContent = input.value;
+                        }
+                        if (input.name === "email") {
                             
-                            <p>Мій електронний підпис</p>
-                        </label>
-                        <img class = 'writing-image' src="{% static 'images/writing.png' %}" alt="">
-                    </div>
+                            const emailElem = document.querySelector('.email-text');
+                            if (emailElem) emailElem.textContent = input.value;
+                        }
+                    }
+                })
+                .catch(error => console.error("Помилка оновлення:", error));
+            });
+        });
     
-                </div>
-    
-    
-            </div>
-    
-    
-    
-        </main>
-    </div>
-
-    
-
-
-
-
+        function getCookie(name) {
+            let cookieValue = null;
+            if (document.cookie && document.cookie !== '') {
+                const cookies = document.cookie.split(';');
+                for (let i = 0; i < cookies.length; i++) {
+                    const cookie = cookies[i].trim();
+                    if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                        cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                        break;
+                    }
+                }
+            }
+            return cookieValue;
+        }
+    });
+</script>
 
 {% endblock %}
-
-
-
