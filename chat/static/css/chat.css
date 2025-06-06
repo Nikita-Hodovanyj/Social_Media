@@ -1,0 +1,316 @@
+
+
+
+*{
+
+    font-family: "GT Walsheim Pro";
+    box-sizing: border-box;
+  
+}
+
+.layout-wrapper {
+  position: absolute;
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+  gap: 14px;
+  padding-top: 104px; 
+  height: calc(100vh - 104px); 
+}
+
+
+.left-aside{
+    width: 21%;
+    height: 100%;
+    max-height: 100%;
+    /* width: 351px; */
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    border-radius: 10px;
+    z-index: 999;
+    
+    
+}
+.contact img{
+    width: 46px;
+    border-radius: 76.88px;
+}
+
+.create-group-button{
+    width: 100%;
+    /* height: 5vw; */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px 16px 10px 16px;
+    gap: clamp(7px, 0.7vw, 80px);
+    border-radius: 1234px;
+    color: white;
+    /* 14px */
+    font-size: clamp(7px, 1vw, 80px);
+    font-weight: 500;
+    line-height: 20px;
+    letter-spacing: -0.6%;
+    background-color: #543C52;
+    cursor: pointer;
+}
+.create-group-button img{
+    width: clamp(7px, 1.5vw, 80px);
+}
+
+
+.contacts-div{
+    width: 100%;
+    height: 100%;
+    max-height: 100%;
+    display: flex;
+    flex-direction: column;
+    padding: 16px;
+    gap: 24px;
+    border: solid #CDCED2 1px;
+    border-radius: 10px;
+    background-color: white;
+    
+}
+
+.contacts-img{
+    width: 100%;
+    display: flex;
+    gap: 8px;
+    text-align: center;
+    color: #81818D;
+    font-size: 20px;
+    font-weight: 500;
+    line-height: 100%;
+}
+
+.search-bar{
+    width: 100%;
+    display: flex;
+    gap: 6px;
+    padding: 10px 16px 10px 16px;
+    border: solid #CDCED2 1px;
+    border-radius: 10px;
+    text-align: center;
+    color: #81818D;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 22px;
+    letter-spacing: -0.7%;
+}
+
+.search-input{
+    width: 100%;
+    border: none;
+    outline: none;
+    color: #543C52;
+}
+
+.contacts-list{
+    height: 100%;
+    max-height: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    overflow: scroll;
+    scrollbar-color: #543C52 #E9E5EE;
+   
+}
+
+
+.contact{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    color: #070A1C;
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 100%;
+    gap: 16px;
+    
+}
+
+.contact span{
+    width: 100%;
+}
+
+main{
+    /* position: relative; */
+    /* width: 564px; */
+    width: 29%;
+    max-height: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    
+    justify-content: center;
+    align-items: center;
+    padding: 16px;
+    /* top: 104px;
+    left: 440px; */
+    border: 1px solid #CDCED2;
+    border-radius: 10px;
+    background-color: white;
+}
+
+.no-chat{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    /* gap: 24px; */
+    gap: clamp(10px, 1.6vw, 100px) ;
+    
+}
+.no-chat h1{
+    color: #070A1C;
+    /* font-size: 24px; */
+    font-size: clamp(10px, 1.6vw, 100px);
+    font-weight: 500;
+    line-height: 100%;
+    letter-spacing: -1%;
+}
+
+.no-chat h3{
+    color: #070A1C;
+    /* font-size: 16px; */
+    font-size: clamp(9px, 1.2vw, 80px);
+    font-weight: 400;
+    line-height: 100%;
+    letter-spacing: -1%;
+    text-wrap: wrap;
+
+}
+
+
+.right-aside{
+    /* flex: 0 1 20%; */
+    width: 19%;
+    height: 100%;
+    max-height: 100%;
+
+    /* top: 104px;
+    left: 1008.75px; */
+    /* width: 350px; */
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    border-radius: 10px;
+    overflow: hidden;
+    gap: 8px;
+
+}
+
+.personal-chats{
+    width: 100%;
+    height: 100%;
+    max-height: 100%;
+    display: flex;
+    flex-direction: column;
+    padding: 16px 0 16px 0;
+    gap: 24px;
+    border: #CDCED2 solid 1px;
+    border-radius: 10px;
+    background-color: white;
+}
+
+.group-chats{
+    width: 100%;
+    height: 100%;
+    max-height: 100%;
+    display: flex;
+    flex-direction: column;
+    padding: 16px 0 16px 0;
+    gap: 24px;
+    border: #CDCED2 solid 1px;
+    border-radius: 10px;
+    background-color: white;
+}
+
+
+
+.chat img{
+    width: 46px;
+    border-radius: 76.88px;
+}
+
+.see-all{
+    width: 100%;
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    padding: 0 16px 0 16px;
+    text-align: center;
+    
+
+}
+
+.see-all span{
+    color: #81818D;
+    font-size: 20px;
+    font-weight: 500;
+    line-height: 100%;
+    display: flex;
+    align-items: flex-end;
+    gap: 8px;
+    text-align: center;
+    text-overflow: ellipsis;
+    
+}
+
+.see-all p{
+    color: #543C52 ;
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 100%;
+    
+}
+
+.chats-div{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.chat{
+    width: 100%;
+    height: 62px;
+    display: flex;
+    padding: 8px 16px 8px 16px;
+    gap: 12px;
+
+}
+
+.chat-message{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.nickname{
+    color: #070A1C;
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 100%;
+
+}
+.date-message{
+    color: #81818D;
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 100%;
+
+}
+
+.chat-message div{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+}
+

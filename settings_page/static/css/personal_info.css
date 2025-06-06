@@ -10,9 +10,19 @@ aside{
     width: 254px;
     display: flex;
     flex-direction: column;
-    top: 104px;
+    top: 20px;
     left: 80px;
     gap: 16px;
+}
+.main-wrapper {
+    display: flex;
+    gap: 64px;
+    max-width: 1440px;
+    width: 100%;
+    padding: 0 40px;
+    margin: 0 auto; 
+    position: relative;
+    /* min-height: 100vh;  */
 }
 
 aside a{
@@ -49,7 +59,7 @@ main{
     height: auto;
     display: flex;
     flex-direction: column;
-    top: 104px;
+    top: 20px;
     left: 435.5px;
     gap: 8px;
     margin-bottom: 100px;

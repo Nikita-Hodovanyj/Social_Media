@@ -1,0 +1,301 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+
+{% block title %}
+  Чати
+{% endblock %}
+
+{% block link %}
+<link rel="stylesheet" href="{% static 'css/chat.css' %}">
+{% endblock %}
+
+{% block content %}
+
+    <div class="layout-wrapper">
+        <aside class="left-aside">
+
+        <button class="create-group-button">
+                <img src="{% static 'images/plus-vector.svg' %}">
+                Створити груповий чат
+        </button>
+
+        <div class="contacts-div">
+            <div class="contacts-img">
+                <img src="{% static 'images/people.svg' %}">
+                <p>Контакти</p>
+            </div>
+            
+
+            <div class='search-bar'>
+                <img src="{% static 'images/search.svg' %}">
+                <input type="text" placeholder="Пошук" class="search-input">
+            </div>
+
+            <div class="contacts-list">
+
+                <div class="contact">
+                    <img src="{% static 'images/avatar.png' %}" >
+                    <span>Jane Cooper</span>
+
+                </div>
+
+                <div class="contact">
+                    <img src="{% static 'images/avatar.png' %}" >
+                    <span>Jane Cooper</span>
+
+                </div>
+
+                <div class="contact">
+                    <img src="{% static 'images/avatar.png' %}" >
+                    <span>Jane Cooper</span>
+
+                </div>
+
+
+                <div class="contact">
+                    <img src="{% static 'images/avatar.png' %}" >
+                    <span>Jane Cooper</span>
+
+                </div>
+
+                <div class="contact">
+                    <img src="{% static 'images/avatar.png' %}" >
+                    <span>Jane Cooper</span>
+
+                </div>
+
+                <div class="contact">
+                    <img src="{% static 'images/avatar.png' %}" >
+                    <span>Jane Cooper</span>
+
+                </div>
+
+                <div class="contact">
+                    <img src="{% static 'images/avatar.png' %}" >
+                    <span>Jane Cooper</span>
+
+                </div>
+
+                <div class="contact">
+                    <img src="{% static 'images/avatar.png' %}" >
+                    <span>Jane Cooper</span>
+
+                </div>
+
+
+                <div class="contact">
+                    <img src="{% static 'images/avatar.png' %}" >
+                    <span>Jane Cooper</span>
+
+                </div>
+
+                <div class="contact">
+                    <img src="{% static 'images/avatar.png' %}" >
+                    <span>Jane Cooper</span>
+
+                </div>
+
+                <div class="contact">
+                    <img src="{% static 'images/avatar.png' %}" >
+                    <span>Jane Cooper</span>
+
+                </div>
+
+                <div class="contact">
+                    <img src="{% static 'images/avatar.png' %}" >
+                    <span>Jane Cooper</span>
+
+                </div>
+
+
+                 <div class="contact">
+                    <img src="{% static 'images/avatar.png' %}" >
+                    <span>Jane Cooper</span>
+
+                </div>
+
+                <div class="contact">
+                    <img src="{% static 'images/avatar.png' %}" >
+                    <span>Jane Cooper</span>
+
+                </div>
+
+
+                <div class="contact">
+                    <img src="{% static 'images/avatar.png' %}" >
+                    <span>Jane Cooper</span>
+
+                </div>
+
+
+                <div class="contact">
+                    <img src="{% static 'images/avatar.png' %}" >
+                    <span>Jane Cooper</span>
+
+                </div>
+
+                
+
+            </div>
+        </div>
+    </aside>
+
+
+
+    <main>
+        <div class="no-chat">
+            <h1>Почніть нове спілкування </h1>
+            <h3>Оберіть контакт зі списку ліворуч або створіть групу, щоб почати спілкування</h3>
+
+        </div>
+        
+    </main>
+
+
+    <aside class="right-aside">
+        
+        <div class="personal-chats">
+           <div class="see-all">
+                <span> 
+                   <img src="{% static 'images/chat-vector.svg' %}" alt="">
+                    Повідомлення
+                </span>
+
+                <p>Дивитись всі</p>
+
+           </div> 
+
+           <div class="chats-div">
+
+                <div class="chat">
+                    <img src="{% static 'images/avatar.png' %}" alt="">
+                    <div class="chat-message">
+                        <div> <p class="nickname">Jane Cooper1</p> <p class="date-message">09:41</p> </div>
+                        <span>Привіт! Як справи ?</span>
+                    </div>      
+                </div>
+
+                <div class="chat">
+                    <img src="{% static 'images/avatar.png' %}" alt="">
+                    <div class="chat-message">
+                        <div> <p class="nickname">Jane Cooper2</p> <p class="date-message">25.04.2025</p> </div>
+                        <span>Привіт! </span>
+                    </div>      
+                </div>
+
+
+                <div class="chat">
+                    <img src="{% static 'images/avatar.png' %}" alt="">
+                    <div class="chat-message">
+                        <div> <p class="nickname">Jane Cooper3</p> <p class="date-message">25.04.2025</p> </div>
+                        <span>Привіт! </span>
+                    </div>      
+                </div>
+
+
+                <div class="chat">
+                    <img src="{% static 'images/avatar.png' %}" alt="">
+                    <div class="chat-message">
+                        <div> <p class="nickname">Jane Cooper4</p> <p class="date-message">25.04.2025</p> </div>
+                        <span>Привіт! </span>
+                    </div>      
+                </div>
+
+
+                <div class="chat">
+                    <img src="{% static 'images/avatar.png' %}" alt="">
+                    <div class="chat-message">
+                       <div> <p class="nickname">Jane Cooper5</p> <p class="date-message">25.04.2025</p> </div>
+                        <span>Привіт! </span>
+                    </div>      
+                </div>
+
+
+           </div>
+
+        </div>
+
+
+
+        <div class="personal-chats">
+           <div class="see-all">
+                <span> 
+                   <img src="{% static 'images/chat-vector.svg' %}" alt="">
+                    Групові чати
+                </span>
+
+                <p>Дивитись всі</p>
+
+           </div> 
+
+           <div class="group-chats">
+
+                <div class="chat">
+                    <img src="{% static 'images/new-group.svg' %}" alt="">
+                    <div class="chat-message">
+                        <div> <p class="nickname">New group1</p> <p class="date-message">09:41</p> </div>
+                        <span>Чудово!</span>
+                    </div>      
+                </div>
+
+                <div class="chat">
+                    <img src="{% static 'images/new-group.svg' %}" alt="">
+                    <div class="chat-message">
+                        <div> <p class="nickname">New group2</p> <p class="date-message">25.04.2025</p> </div>
+                        <span>Привіт! </span>
+                    </div>      
+                </div>
+
+
+                <div class="chat">
+                    <img src="{% static 'images/new-group.svg' %}" alt="">
+                    <div class="chat-message">
+                        <div> <p class="nickname">New group3</p> <p class="date-message">25.04.2025</p> </div>
+                        <span>Привіт! </span>
+                    </div>      
+                </div>
+
+
+                <div class="chat">
+                    <img src="{% static 'images/new-group.svg' %}" alt="">
+                    <div class="chat-message">
+                        <div> <p class="nickname">New group4</p> <p class="date-message">25.04.2025</p> </div>
+                        <span>Привіт! </span>
+                    </div>      
+                </div>
+
+
+                <div class="chat">
+                    <img src="{% static 'images/new-group.svg' %}" alt="">
+                    <div class="chat-message">
+                       <div> <p class="nickname">New group5</p> <p class="date-message">25.04.2025</p> </div>
+                        <span>Привіт! </span>
+                    </div>      
+                </div>
+
+
+                <div class="chat">
+                    <img src="{% static 'images/new-group.svg' %}" alt="">
+                    <div class="chat-message">
+                        <div> <p class="nickname">New group6</p> <p class="date-message">25.04.2025</p> </div>
+                        <span>Привіт!</span>
+                    </div>      
+                </div>
+
+           </div>
+
+        </div>
+
+   
+
+
+
+    </aside> 
+
+    </div>
+
+
+    
+{% endblock %}

@@ -45,7 +45,8 @@ INSTALLED_APPS = [
     'home_page',
     'my_publications',
     'friends',
-    'settings_page'
+    'settings_page',
+    "chat"
     
     
 ]

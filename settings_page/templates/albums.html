@@ -12,56 +12,58 @@
 {% endblock %}
 
 {% block content %}
-
-   <aside>
-         <div class = 'div-link-info2'>
-             <a class = 'link-info2' href="{% url 'personal_info' %}">Особиста інформація</a>
-         </div>
-         <div class = 'div-link-albums2'>
-            <a class ='link-albums2' href="{% url 'albums' %}">Альбоми</a>
-         </div>
-        
-    </aside>
-
-
-   <main>
-        <div class="album-card">
-            <div class = 'edit-profile'>
-                <p class="text-info2">Мої фото</p>
-                <div class="button-container">
-                  <button class="edit-button">
-                    <img src="{% static 'images/image-property.svg' %}" alt="">
-                    Додати фото
-                </button>
-
-                </div>
-                
+   <div class="main-wrapper">
+      <aside>
+            <div class = 'div-link-info2'>
+                <a class = 'link-info2' href="{% url 'personal_info' %}">Особиста інформація</a>
             </div>
-            <img class = 'profile-avatar' src="{% static 'images/avatar.png' %}" alt="">
-            <div class="image-album-div">
-               <img class = 'eye-image1' src="{% static 'images/eye-property.svg' %}" alt="">
-               <img  class = 'trash-image1' src="{% static 'images/trash.svg' %}" alt="">
+            <div class = 'div-link-albums2'>
+               <a class ='link-albums2' href="{% url 'albums' %}">Альбоми</a>
             </div>
-
+           
+      </aside>
+   
+   
+      <main>
+           <div class="album-card">
+               <div class = 'edit-profile'>
+                   <p class="text-info2">Мої фото</p>
+                   <div class="button-container">
+                     <button class="edit-button">
+                       <img src="{% static 'images/image-property.svg' %}" alt="">
+                       Додати фото
+                   </button>
+   
+                   </div>
+                   
+               </div>
+               <img class = 'profile-avatar' src="{% static 'images/avatar.png' %}" alt="">
+               <div class="image-album-div">
+                  <img class = 'eye-image1' src="{% static 'images/eye-property.svg' %}" alt="">
+                  <img  class = 'trash-image1' src="{% static 'images/trash.svg' %}" alt="">
+               </div>
+   
+               
             
-         
-         </div>
-
-         <div class = 'edit-profile2'>
-            <p class="text-info2">Немає ще жодного альбому</p>
-            <div class="button-container">
-               <button class="edit-button">
-                  <img src="{% static 'images/image-property.svg' %}" alt="">
-                  Додати фото
-               </button>
-
             </div>
-                
-         </div>
+   
+            <div class = 'edit-profile2'>
+               <p class="text-info2">Немає ще жодного альбому</p>
+               <div class="button-container">
+                  <button class="edit-button">
+                     <img src="{% static 'images/image-property.svg' %}" alt="">
+                     Додати фото
+                  </button>
+   
+               </div>
+                   
+            </div>
+   
+   
+   
+      </main>
+   </div>
 
-
-
-   </main>
 
 {% endblock %}
 

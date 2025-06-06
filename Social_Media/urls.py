@@ -19,6 +19,7 @@ from django.urls import path, include
 from home_page.views import HomePageView
 from . import settings
 from django.conf.urls.static import static
+from chat.views import ChatPageView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -26,7 +27,8 @@ urlpatterns = [
     path('login/', include('login.urls')),
     path('publications/' ,include("my_publications.urls") ),
     path('friends/' ,include("friends.urls") ),
-    path('settings/', include('settings_page.urls'))
+    path('settings/', include('settings_page.urls')),
+     path('chat/', ChatPageView.as_view(), name='chat')
 ]
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)
