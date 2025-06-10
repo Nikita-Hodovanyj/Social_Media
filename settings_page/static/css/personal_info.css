@@ -113,7 +113,22 @@ main{
     cursor: pointer;
 
 }
+.edit-button1{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+    gap: 10px;
+    border: solid #543C52 1px;
+    border-radius: 190px;
+    letter-spacing: -0.6%;
+    font-size: 14px;
+    font-weight: 500;
+    color: #543C52;
+    background-color: inherit;
+    cursor: pointer;
 
+}
 .avatar-info{
     width: 100%;
     display: flex;
