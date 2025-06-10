@@ -33,10 +33,10 @@
                    </div>
                </div>
                <img class = 'profile-avatar' src="{% static 'images/avatar.png' %}" alt="">
-               <div class="image-album-div">
+               <!-- <div class="image-album-div">
                   <img class = 'eye-image1' src="{% static 'images/eye-property.svg' %}" alt="">
                   <img  class = 'trash-image1' src="{% static 'images/trash.svg' %}" alt="">
-               </div>
+               </div> -->
             </div>
    
             <div class = 'edit-profile2'>
@@ -84,16 +84,52 @@
              
              {% for album in albums %}
                <div class="album-card {% if album.is_hidden %}hidden-album{% endif %}">
-                  <h3>{{ album.name }}</h3>
-                  <p>{{ album.theme }} — {{ album.year }} рік</p>
+                  <div class="buttons-album">
+                     <h3>{{ album.name }}</h3>
 
-                  <button class="icon-button edit-album-btn"
+                     <form method="post" style="display: inline;">
+                        {% csrf_token %}
+                        <input type="hidden" name="toggle_visibility" value="{{ album.id }}">
+                        <button type="submit" class="icon-button">
+                           <img src="{% static 'images/eye-property.svg' %}" alt="Сховати/показати">
+                        </button>
+                     </form>
+
+                     <button class="icon-button edit-album-btn"
                           data-id="{{ album.id }}"
                           data-name="{{ album.name }}"
                           data-theme="{{ album.theme }}"
                           data-year="{{ album.year }}">
-                     <img src="{% static 'images/:.png' %}" alt="Редагувати">
-                  </button>
+                        <img src="{% static 'images/:.png' %}" alt="Редагувати">
+                      </button>
+
+                  </div>
+                  
+
+                  <span>
+                     <p class="theme-text">{{ album.theme }}</p>
+                     <p class="year-text">{{ album.year }} рік</p>
+                  </span>
+                 
+
+                   <p class="photo-text">Фотографії</p>
+
+                   <div class="albums-images">
+
+                     <form class="add-img-album">
+                        <input type="file" id="image-input1" name="images-album" style="display: none;" multiple>
+                    
+                        <label сlass="label-album" for="image-input1" >
+                              <img class="button-load-album" src="{% static 'images/add-plus.svg' %}" alt="Фото">
+                        </label>
+                        
+                    
+                     </form>
+
+                   </div>
+
+                  
+
 
                   <form method="post" style="display: inline;">
                      {% csrf_token %}
@@ -101,13 +137,9 @@
                      
                   </form>
 
-                  <form method="post" style="display: inline;">
-                     {% csrf_token %}
-                     <input type="hidden" name="toggle_visibility" value="{{ album.id }}">
-                     <button type="submit" class="icon-button">
-                        <img src="{% static 'images/eye-property.svg' %}" alt="Сховати/показати">
-                     </button>
-                  </form>
+                 
+
+                 
                </div>
              {% endfor %}
       </main>
@@ -155,6 +187,8 @@
          });
       });
 
-      
+      TRASH_IMAGE_SRC = "{% static 'image/trash.svg' %}"
+      EYE_IMAGE_SRC = "{% static 'images/eye-property.svg' %}"
    </script>
+   <script src="{% static 'js/album.js' %}"></script>
 {% endblock %}

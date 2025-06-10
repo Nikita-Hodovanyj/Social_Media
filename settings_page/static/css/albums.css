@@ -65,6 +65,58 @@ aside a{
 
     
 }
+.album-card span{
+  width: 100%;
+  display: flex;
+  gap: 16px;
+  padding-bottom: 12px;
+  border-bottom: 1.4px solid #CDCED2;
+
+}
+
+.buttons-album{
+  width: 100%;
+  display: flex;
+  gap: 16px;
+}
+
+.buttons-album button{
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+
+.buttons-album h3{
+  width: 100%;
+  font-family: 'GT Walsheim Pro';
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 100%;
+  color: #070A1C;
+  overflow: hidden;
+
+}
+
+.theme-text{
+  font-family: 'GT Walsheim Pro';
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 100%;
+  color: #070A1C;
+
+}
+
+
+.year-text{
+  font-family: 'GT Walsheim Pro';
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 100%;
+  color: #81818D;
+
+
+}
 
 .profile-avatar{
     position: relative;
@@ -154,18 +206,20 @@ aside a{
     width: 400px;
     box-sizing: border-box;
   }
-  
+
+
   .form-group-modal {
     display: flex;
     flex-direction: column;
     gap: 8px;
     width: 100%;
-    margin-bottom: 20px;
+    margin-bottom: 24px;
+    margin-top: 24px;
   }
   
   .form-group-modal label {
     font-family: 'GT Walsheim Pro', sans-serif;
-    font-weight: 500;
+    font-weight: 400;
     font-size: 16px;
     color: #070A1C;
   }
@@ -223,3 +277,63 @@ aside a{
     font-size: 14px;
   }
   
+.photo-text{
+  width: 100%;
+  font-family: 'GT Walsheim Pro';
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 100%;
+  color: #070A1C;
+  
+}
+
+.albums-images{
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 30px;
+}
+
+.albums-images .add-img-album {
+    order: 999; 
+  }
+
+.add-img-album{
+  width: 200px;
+  height: 200px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px dashed #81818D;
+  border-radius: 10px;
+  
+
+}
+
+.button-load-album{
+  cursor: pointer;
+}
+
+.image-album{
+  width: 200px;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 10px;
+}
+
+
+.image-wrapper {
+    position: relative;
+   
+}
+
+.icon-wrapper{
+  position: absolute;
+  top: 150px;
+  left: 99.75px;
+  display: flex;
+  gap: 10px;
+
+}
+

@@ -54,11 +54,11 @@ h1 {
     font-weight: 500;
     font-size: 16px;
     text-align: left; 
-    color: #81818D;
+    /* color: #81818D; */
 }
 
 h2 {
-    font-weight: 700;
+    
     font-size: 16px;
 }
 
@@ -180,19 +180,25 @@ h2 {
     width: 100%;
 
 }
-.icon{
+.icon {
+    position: relative;
     display: flex;
     box-sizing: border-box;
-    
-    width: 289;
-    height: 263;
+    width: 289px;
+    height: 263px;
     gap: 16px;
     border-radius: 10px;
-    padding-top: 16px;
-    padding-bottom: 16px;
-    border-width: 1px;
-    background-color: #ffffff;
+    padding: 16px;
     border: 1px solid #CDCED2;
+    background-color: #ffffff;
+    flex-direction: column;
+    justify-content: space-between;
+}
+.icon-content {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    justify-content: space-between;
 }
 .info{
     display: flex;
@@ -206,6 +212,9 @@ h2 {
 
 }
 .yehor{
+    border-radius: 50px;
+
+    margin-right: 35px;
     width: 96;
     height: 96;
 
@@ -215,8 +224,9 @@ h2 {
     justify-content: center;
     align-items: center;
     flex-direction: column; 
+    box-sizing: border-box;
 
-
+    margin-right: 35px;
     width: 289;
     height: 55;
     gap: 10px;
@@ -244,16 +254,15 @@ h2 {
     height: 18;
     color: #070A1C;
 }
-.buttons{
+.buttons {
+    position: static; 
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-left: 30px;
-    width: 221;
-    height: 40;
-    padding: 16px 0 0 0;
+    width: 100%;
+    padding: 0;
     gap: 16px;
-
+    margin-top: auto; 
 }
 .button-accept{
     display: flex;
@@ -301,3 +310,7 @@ h2 {
 
 
 
+.active-tab h1, 
+.active-tab h2 {
+    font-weight: bold;
+}

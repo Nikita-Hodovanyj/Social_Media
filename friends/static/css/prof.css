@@ -1,0 +1,722 @@
+
+
+body{
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+    background-color: #FAF8FF;
+}
+
+
+
+main {
+    margin-top: 7%;
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    padding-top: 10px;
+    width: 100%;
+    box-sizing: border-box;
+    background-color: #FAF8FF;
+}
+
+.main-wrapper {
+    display: flex;
+    /* gap: 64px; */
+    max-width: 1440px;
+    width: 100%;
+    padding: 0 40px;
+    box-sizing: border-box;
+    justify-content: center;
+    
+}
+
+.left {
+    position: fixed;
+    display:flex ;
+    flex-direction: column;
+    margin-left: -1000px;
+    width: 350px;
+    background-color: white;
+    gap: 8px;
+}
+
+
+
+
+
+.accaunt{
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid #CDCED2;
+    width: 350.87px;
+    height: 271px;
+    border-radius: 10px;
+    border-width: 1px;
+
+
+}
+.data{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 350.87px;
+    height: 175px;
+    gap: 10px;
+
+}
+.avatar img{
+    border-radius: 50px;
+    margin-top: -12px;
+    width: 96;
+    height: 96;
+
+ }
+.nick{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 350.87px;
+    height: 55;
+
+}
+
+.popular{
+    display: flex;
+    justify-content: space-between;
+    width: 350.870361328125;
+    height: 48;
+
+}
+h5{
+    width: 78;
+    height: 27;
+    margin-top: 20px;
+    font-family: GT Walsheim Pro;
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 100%;
+    letter-spacing: -1%;
+    text-align: center;
+}
+h2{
+
+    margin-top:15px ;
+    font-family: GT Walsheim Pro;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 100%;
+    letter-spacing: -1%;
+    text-align: center;
+
+
+
+
+}
+
+.popular {
+    display: flex;
+    justify-content: space-between; 
+    width: 100%;
+    padding: 0 20px; 
+    margin-top: 15px;
+}
+
+.post {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 7px;
+    width: 33%; 
+    border-right: 1px solid #CDCED2;
+ }
+
+.post h3 {
+    font-family: GT Walsheim Pro;
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 100%;
+    letter-spacing: -1%;
+    text-align: center;
+
+    margin: 0;
+
+    line-height: 1;
+}
+
+.post h4 {
+    margin: 4px 0 0 0;
+    font-weight: 500;
+    color: #81818D;
+    line-height: 1;
+    font-family: GT Walsheim Pro;
+    font-size: 16px;
+    line-height: 100%;
+    letter-spacing: -1%;
+    text-align: center;
+
+}
+
+.request{
+    box-sizing: border-box;
+    border: 1px solid #CDCED2;
+    background-color: white;
+    width: 350.87px;
+    height: 249px;
+    border-radius: 10px;
+    gap: 24px;
+    border-width: 1px;
+    padding: 16px;
+    margin-top: 8px;
+}
+.button-requests{
+    display: flex;
+    width: 318.87px;
+    height: 23px;
+    justify-content: space-between;
+    align-items: center;
+}
+h6{
+    width: 94;
+    height: 23;
+    gap: 8px;
+}
+h6{
+    display: flex;
+    font-family: GT Walsheim Pro;
+    font-weight: 500;
+    font-size: 20px;
+    line-height: 100%;
+    letter-spacing: 0%;
+    text-align: center;
+
+}
+.person-img{
+    width: 20px;
+    height: 20px;
+
+ }
+.watch{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 107px;
+    height: 18px;
+    gap: 10px;
+    background-color: #ffffff;
+    outline: none;
+    border: 0;
+    font-family: GT Walsheim Pro;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 100%;
+    letter-spacing: 0%;
+    text-align: center;
+
+ }
+
+.people{
+    box-sizing: border-box; 
+    display: flex;
+    flex-direction: column;
+    margin-top: 20px;
+    gap: 16px;
+ }
+.people-all{
+
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}   
+.people-img{
+    width: 46;
+    height: 46;
+    border-radius: 76.88px;
+}
+.name{
+    font-family: GT Walsheim Pro;
+    width: 260.87px;
+    height: 18px;
+
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 100%;
+    letter-spacing: 0%;
+
+}
+.folower{
+    font-family: GT Walsheim Pro;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 100%;
+    letter-spacing: 0%;
+    width: 105px;
+    height: 16px;
+}
+
+.frends{
+    box-sizing: border-box;
+    border: 1px solid #CDCED2;
+    background-color: white;
+    width: 350.87px;
+    height: 249px;
+    border-radius: 10px;
+    gap: 24px;
+    border-width: 1px;
+    padding: 16px;
+    margin-top: 8px;
+
+}
+.button-meessage{
+    display: flex;
+    width: 318.87px;
+    height: 23px;
+    justify-content: space-between;
+    align-items: center;
+}
+
+
+.album{
+    display: flex;
+    box-sizing: border-box;
+    flex-direction: column;
+    background-color: white;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid #CDCED2;
+    width: 350.87px;
+    height: 539px;
+    border-radius: 10px;
+    border-width: 1px;
+
+}
+.check{
+    display: flex;
+    width: 318px;
+    height: 23px;
+    justify-content: space-between;
+
+}
+.text-album{
+    display: flex;
+    width: 110;
+    height: 23;
+    gap: 8px;
+
+}
+.icon-text{
+    display: flex;
+    font-family: GT Walsheim Pro;
+    font-weight: 500;
+    font-size: 20px;
+    line-height: 100%;
+    letter-spacing: 0%;
+    color: #81818D;
+    text-align: center;
+    gap: 8px;
+    width: 82;
+    height: 23;
+
+}
+.icon-img{
+    margin-top: -1px;
+    width: 20;
+    height: 20;
+
+}
+.check-all{
+    display: flex;
+    border: none;
+    background-color: white;
+    width: 105;
+    height: 18;
+    gap: 10px;
+    font-family: GT Walsheim Pro;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 100%;
+    letter-spacing: 0%;
+    text-align: center;
+    color: #543C52;
+}
+.line{
+    /* width: 892.5; */
+    border-bottom:  1px solid #CDCED2;
+    height: 40;
+    gap: 16px;
+
+}
+.album1{
+    display: flex;
+    /* box-sizing: border-box; */
+    flex-direction: column;
+    margin-top: 20px;
+    width: 318;
+    height: 218;
+    gap: 10px;
+
+}
+.title1{
+    display: flex;
+    width: 318;
+    height: 18;
+    gap: 16px;
+
+}
+.title-text{
+    /* display:flex ; */
+    width: 318;
+    height: 18;
+    font-family: GT Walsheim Pro;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 100%;
+    letter-spacing: 0%;
+    color: #070A1C;
+}
+.description-all{
+    display: flex;
+    width: 318;
+    height: 18;
+    gap: 16px;
+
+}
+.description{
+    /* display: flex; */
+    width: 66;
+    height: 18;
+    font-family: GT Walsheim Pro;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 100%;
+    letter-spacing: 0%;
+    color: #070A1C;
+}
+.description-year{
+    /* display: flex; */
+    width: 63;
+    height: 18;
+    font-family: GT Walsheim Pro;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 100%;
+    letter-spacing: 0%;
+    color: #81818D;
+}
+.nature{
+    width: 318;
+    height: 162;
+    border-radius: 10px;
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.right {
+    flex: 1;
+    margin-left: 300px;
+    max-width: 923px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.coments {
+    width: 923px;
+    background-color: white;
+    height: 120px;
+    border-radius: 10px;
+    border: 1px solid #CDCED2;
+    padding: 16px;
+    box-sizing: border-box;
+    position: relative; 
+}
+
+.buttons {
+    display: flex;
+    gap: 10px;
+    position: absolute; 
+    right: 16px;      
+    bottom: 16px;     
+}
+
+.write-coment {
+    width: 891px;
+    height: 22px;
+    border: none;
+    margin-bottom: 40px; 
+}
+.photo-button {
+    padding: 0;
+    border: none;
+    background: none;
+    cursor: pointer;
+    border-radius: 50%;  
+    overflow: hidden;    
+    width: 40px;        
+    height: 40px;
+}
+
+.photo {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;   
+}
+
+
+.pub{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 190px;
+    height: 40px;
+    border-radius: 1234px;
+    gap: 8px;
+    
+    padding-top: 10px;
+    padding-right: 16px;
+    padding-bottom: 10px;
+    padding-left: 16px;
+    background-color: #543C52;
+    color: white;
+    white-space: nowrap
+}
+
+
+.publication{
+    height: auto;
+    border-radius: 10px;
+    border-width: 1px;
+    background:#FFFFFF;
+    border: 1px solid #CDCED2;
+    margin-bottom: 8px;
+    display: flex;
+    flex-direction: column;
+    width: 923px;
+    box-sizing: border-box;
+    
+
+}
+.header{
+    position: relative;
+    width: 100%;
+    height: 89px;
+    gap: 16px;
+    padding: 20px;
+    background:  #FFFFFF;
+    border-bottom: 1px solid  #CDCED2;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    border-radius: 10px 10px 0 0;
+    box-sizing: border-box;
+}
+.people-pub{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.people-pub img{
+    width: 46px;
+    height: 46px;
+    object-fit: cover;
+}
+.dot{
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    width: 20px;
+    height: 20px;
+
+}
+
+.pub-content {
+    flex-grow: 1;
+    padding: 32px 20px 16px 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    box-sizing: border-box;
+    min-height: 622px; 
+    overflow: hidden;
+    word-wrap: break-word; 
+}
+.photo{
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+.photo1{
+    width: 100%;
+    height: auto;
+    display: flex;
+    gap: 16px;
+    justify-content: center;
+
+}
+.photo2{
+    width: 100%;
+    height: auto;
+    display: flex;
+    gap: 16px;
+    justify-content: center;
+}
+.frame{
+    width: 283.66px;
+    height: 327px;
+    border-radius: 16px;
+
+}
+
+.reaction{
+    width: 100%;
+    height: 20px;
+    gap: 24px;
+    display: flex;
+    align-items: center;
+
+}
+.like-photo{
+    width: 20;
+    height: 20;
+}
+.likes{
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    
+
+}
+.likes p{
+
+    font-family: 'GT Walsheim Pro', sans-serif;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 20px;
+    letter-spacing: -0.006em;
+    color: var(--, #81818D);
+
+
+}
+.views{
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+.views-photo{
+    width: 20;
+    height: 20;
+}
+.coment1{
+    display: flex;
+    position: relative;
+    background-color:white;
+    border: 1px solid #CDCED2;
+    width: 923;
+    height: 208;
+    border-radius: 10px;
+    border-width: 1px;
+    flex-direction: column; 
+}
+.people-coment{
+    position: relative;
+    width: 100%;
+    height: 89px;
+    gap: 16px;
+    padding: 20px;
+    background:  #FFFFFF;
+    border-bottom: 1px solid  #CDCED2;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    border-radius: 10px 10px 0 0;
+    box-sizing: border-box;
+}
+
+.coment-avatar{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+}
+.coment-avatar img{
+    width: 46;
+    height: 46;
+
+}
+.dots{
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    width: 20px;
+    height: 20px;
+
+}
+.text-com{
+    flex-grow: 1;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    box-sizing: border-box;
+
+
+}
+.text-com p{
+    font-family: GT Walsheim Pro;
+}
+
+.post-image{
+    
+    width: 283.66px;
+    height: 327px;
+    border-radius: 16px;
+
+}
+.name{
+    display: flex;
+    font-family: GT Walsheim Pro;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 100%;
+    letter-spacing: 0%;
+    width: 638px;
+    height: 18px;
+
+    overflow: hidden; 
+    word-wrap: break-word; 
+    overflow: hidden; 
+    word-wrap: break-word; 
+
+
+}
+
+
+
+
