@@ -14,7 +14,7 @@ main {
     position: absolute;
     display: flex;
     justify-content: center;
-    padding-top: 10px;
+    padding-top: 1px;
     width: 100%;
     box-sizing: border-box;
     background-color: #FAF8FF;

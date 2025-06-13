@@ -1,11 +1,10 @@
-
-*{
+* {
     padding: 0;
     margin: 0;
     font-family: "GT Walsheim Pro";
 }
 
-aside{
+aside {
     position: absolute;
     width: 254px;
     display: flex;
@@ -14,46 +13,47 @@ aside{
     left: 80px;
     gap: 16px;
 }
+
 .main-wrapper {
     display: flex;
     gap: 64px;
     max-width: 1440px;
     width: 100%;
     padding: 0 40px;
-    margin: 0 auto; 
+    margin: 0 auto;
     position: relative;
     /* min-height: 100vh;  */
 }
 
-aside a{
+aside a {
     align-items: center;
     font-size: 16px;
     line-height: 100%;
     letter-spacing: -1;
 }
 
-.div-link-info{
+.div-link-info {
     border-bottom: solid black 2px;
-    
+
 
 }
 
-.link-info1{
+.link-info1 {
     border-bottom: solid black 2px;
     font-weight: 600;
-    
-    
+
+
 
 }
 
 
-.link-albums1{
+.link-albums1 {
     font-weight: 500;
     color: #81818D;
 
 }
 
-main{
+main {
     position: absolute;
     width: 924.5px;
     height: auto;
@@ -63,14 +63,14 @@ main{
     left: 435.5px;
     gap: 8px;
     margin-bottom: 100px;
- 
+
 }
 
 
 
 
 
-.profile-card{
+.profile-card {
     width: 100%;
     display: flex;
     flex-direction: column;
@@ -83,13 +83,14 @@ main{
 
 }
 
-.edit-profile{
+.edit-profile {
     width: 100%;
     display: flex;
     gap: 16px;
 
 }
-.text-info{
+
+.text-info {
     width: 700px;
     height: 18px;
     font-size: 16px;
@@ -97,7 +98,40 @@ main{
     line-height: 100%
 }
 
-.edit-button{
+.edit-button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+    gap: 10px;
+    border: solid #543C52 1px;
+    border-radius: 190px;
+    letter-spacing: -0.6%;
+    font-size: 14px;
+    font-weight: 500;
+    color: #543C52;
+    background-color: inherit;
+    cursor: pointer;
+    
+
+}
+
+.save-button-info{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+    gap: 10px;
+    border: solid #543C52 1px;
+    border-radius: 190px;
+    letter-spacing: -0.6%;
+    font-size: 14px;
+    font-weight: 500;
+    color: #543C52;
+    background-color: inherit;
+    cursor: pointer;
+}
+.edit-button1 {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -113,23 +147,8 @@ main{
     cursor: pointer;
 
 }
-.edit-button1{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 10px;
-    gap: 10px;
-    border: solid #543C52 1px;
-    border-radius: 190px;
-    letter-spacing: -0.6%;
-    font-size: 14px;
-    font-weight: 500;
-    color: #543C52;
-    background-color: inherit;
-    cursor: pointer;
 
-}
-.avatar-info{
+.avatar-info {
     width: 100%;
     display: flex;
     flex-direction: column;
@@ -141,12 +160,12 @@ main{
 
 }
 
-.avatar-info img{
+.avatar-info img {
     width: 96px;
     border-radius: 50px;
 }
 
-.avatar-info div{
+.avatar-info div {
     width: 100%;
     display: flex;
     flex-direction: column;
@@ -155,41 +174,46 @@ main{
     gap: 10px;
 }
 
-.name-text{ 
+.name-text {
     font-size: 24px;
     line-height: 100%;
     letter-spacing: -1%;
     font-weight: 700;
-    
+
 }
 
-.username-text{ 
+.username-text {
     font-size: 16px;
     font-weight: 500;
     line-height: 100%;
     letter-spacing: -1%;
-    
-}
 
-.info-card{
+}
+.info-card.disabled input {
+    pointer-events: none;
+    background-color: #eee;
+  }
+.info-card {
+  
     width: 924.5px;
     display: flex;
     flex-direction: column;
-    padding: 16px 14px 16px 14px ;
+    padding: 16px 14px 16px 14px;
     gap: 24px;
     border: solid #CDCED2 1px;
     border-radius: 10px;
     background-color: white;
 }
 
-.inputs-info{
+.inputs-info {
+
     width: 343px;
     display: flex;
     flex-direction: column;
     gap: 16px;
 }
 
-.input-class{
+.input-class {
     display: flex;
     flex-direction: column;
     gap: 10px;
@@ -197,38 +221,39 @@ main{
 
 }
 
-.input-class label{
+.input-class label {
     font-size: 16px;
     line-height: 100%;
     letter-spacing: -0.7%;
     font-weight: 400;
     color: #070A1C;
-    
+
 }
 
-.eye-input-div{
+.eye-input-div {
     width: 100%;
     display: flex;
     align-items: center;
     gap: 10px;
 
 }
-.eye-input-div img{
+
+.eye-input-div img {
     width: 20px;
     height: 20px;
 }
 
-.eye-input-div input{
+.eye-input-div input {
     width: 100%;
     display: flex;
     padding: 10px 16px 10px 16px;
     gap: 10px;
-    border: solid #81818D 1px ;
+    border: solid #81818D 1px;
     border-radius: 10px;
 }
 
 
-.input-password{
+.input-password {
     width: 100%;
     display: flex;
     flex-direction: column;
@@ -236,16 +261,16 @@ main{
     color: #070A1C;
 }
 
-.input-password label{
+.input-password label {
     font-size: 16px;
     line-height: 100%;
     letter-spacing: -0.7%;
     font-weight: 400;
     color: #070A1C;
-    
+
 }
 
-.eye-input-password{
+.eye-input-password {
     width: 100%;
     display: flex;
     align-items: center;
@@ -254,23 +279,23 @@ main{
 }
 
 
-.eye-input-password input{
+.eye-input-password input {
     position: relative;
     width: 100%;
     display: flex;
     padding: 10px 16px 10px 16px;
     gap: 10px;
-    border: solid #81818D 1px ;
+    border: solid #81818D 1px;
     border-radius: 10px;
 }
 
-.eye-input-password img{
+.eye-input-password img {
     position: absolute;
     left: 320px;
-   
+
 }
 
-.writing-card{
+.writing-card {
     width: 924.5;
     display: flex;
     flex-direction: column;
@@ -282,14 +307,14 @@ main{
 
 }
 
-.name-writing{
+.name-writing {
     display: flex;
     flex-direction: column;
     gap: 16px;
 
 }
 
-.check-div{
+.check-div {
     display: flex;
     flex-direction: column;
     gap: 16px;
@@ -297,15 +322,123 @@ main{
 }
 
 
-.label-name-surname{
+.label-name-surname {
     display: flex;
     gap: 8px;
     opacity: 50%;
 
 }
 
-.writing-image{
+.writing-image {
     width: 220px;
     height: 65px;
 
+}
+
+
+.personal-info {
+    border: 1px solid #a08b9f;
+    padding: 20px;
+    border-radius: 12px;
+    margin-top: 30px;
+    background-color: #fff;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+}
+
+.edit-profile {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.text-info {
+    font-weight: bold;
+    font-size: 18px;
+    margin-bottom: 10px;
+}
+
+
+.save-button {
+    background: #e8dae6;
+    border: none;
+    padding: 6px 14px;
+    border-radius: 20px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 14px;
+}
+
+.avatar-info {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-top: 10px;
+}
+
+.avatar-info img,
+.avatar-preview {
+    width: 90;
+    height: 90px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.name-text {
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.username-text {
+    color: gray;
+}
+
+.center-text {
+    margin-top: 10px;
+    margin-bottom: 20px;
+    font-size: 16px;
+    text-align: center;
+}
+
+.avatar-upload {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.photo-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin-top: 10px;
+}
+
+.custom-upload span {
+    cursor: pointer;
+    color: #633d5e;
+    font-weight: bold;
+}
+
+.profile-name {
+    font-size: 18px;
+    font-weight: bold;
+    margin: 10px 0 20px;
+    text-align: center;
+}
+
+.input-class {
+    margin-bottom: 15px;
+}
+
+.input-class label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+.input-class input {
+    width: 100%;
+    padding: 8px 12px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
 }

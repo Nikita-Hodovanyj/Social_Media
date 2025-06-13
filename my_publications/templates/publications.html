@@ -72,25 +72,29 @@
                 <div class="accaunt">
                     <div class="data">
                         <div class="avatar">
-                            <img src="{% static '/image/avatar.png' %}" alt="">
+                            {% if avatar %}
+                                <img id="profileAvatar" src="{{ avatar.url }}" alt="avatar" >
+                            {% else %}
+                                <img id="profileAvatar" src="{% static 'images/avatar.png' %}" alt="avatar" >
+                            {% endif %}
                         </div>
                         <div class="nick">
-                            <h5>Lina Li</h5>
-                            <h2>@thelili</h2>
+                            <h5>{{ user.first_name }} </h5>
+                            <h2>{{ user.username }}</h2>
                         </div>
                     </div>
                     
                     <div class="popular">
                         <div class="post">
-                            <h3>566</h3>
+                            <h3>0</h3>
                             <h4>Дописи</h4>
                         </div>
                         <div class="post">
-                            <h3>12.1К</h3>
+                            <h3>0</h3>
                             <h4>Читачі</h4>
                         </div>
                         <div class="post">
-                            <h3>222</h3>
+                            <h3>0</h3>
                             <h4>Друзі</h4>
                         </div>
                     </div>
@@ -141,7 +145,11 @@
                             </div>
                             
                             <div class="people-pub">
-                                <img src="{% static 'image/Lina.png' %}" class="avatar">
+                                {% if avatar %}
+                                    <img class = "avatar" id="profileAvatar" src="{{ avatar.url }}" alt="avatar" >
+                                {% else %}
+                                    <img class = "avatar" id="profileAvatar" src="{% static 'images/avatar.png' %}" alt="avatar" >
+                                {% endif %}
                                 <p>{% if post.author %}{{ post.author.username }}{% else %}Аноним{% endif %}</p>
                             </div>
                         </div>
@@ -167,11 +175,11 @@
                             <div class="reaction">
                                 <div class="likes">
                                     <img src="{% static 'image/Like.png' %}" class="like-photo">
-                                    <p>120 Вподобань</p>
+                                    <p>0 Вподобань</p>
                                 </div>
                                 <div class="views">
                                     <img src="{% static 'image/eye.png' %}" class="views-photo">
-                                    <p>890 Переглядів</p>
+                                    <p>0 Переглядів</p>
                                 </div>
                             </div>
                         </div>

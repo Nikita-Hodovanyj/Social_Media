@@ -78,10 +78,14 @@
                             <div class="icon-content">
                                 <a href="{% url 'user_prof' person.pk %}" class="profile-link">
                                     <div class="info">
-                                        <img class="yehor" src="{% static '/image/avatar.png' %}" alt="">
+                                        {% if avatar %}
+                                            <img class="yehor" id="profileAvatar" src="{{ avatar.url }}" alt="avatar" >
+                                        {% else %}
+                                            <img class="yehor" id="profileAvatar" src="{% static 'images/avatar.png' %}" alt="avatar" >
+                                        {% endif %}
                                         <div class="name-block">
                                             <h3 class="name">{{ person.first_name }}</h3>
-                                            <h3 class="name-with">@{{ person.username }}</h3>
+                                            <h3 class="name-with">{{ person.username }}</h3>
                                         </div>
                                     </div>
                                 </a>

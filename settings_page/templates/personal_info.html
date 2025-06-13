@@ -22,7 +22,7 @@
     </aside>
 
     <main>
-        <div class="profile-card">
+        <div class="profile-card" id="profileView">
             <div class='edit-profile'>
                 <p class="text-info">Картка профілю</p>
                 <button class="edit-button">
@@ -32,38 +32,71 @@
             </div>
 
             <div class='avatar-info'>
-                <img src="{% static 'images/avatar.png' %}" alt="avatar">
+                {% if avatar %}
+                    <img id="profileAvatar" src="{{ avatar.url }}" alt="avatar" >
+                {% else %}
+                    <img id="profileAvatar" src="{% static 'images/avatar.png' %}" alt="avatar" >
+                {% endif %}
+
                 <div>
-                    <p class="name-text">{{ user.first_name }}</p>
-                    <p class="username-text">{{ user.username}}</p>
+                    <p class="name-text" id="nameText">{{ user.first_name }}</p>
+                    <p class="username-text" id="usernameText">{{ user.username }}</p>
                 </div>
             </div>
         </div>
 
-        <div class="info-card">
+        <!-- Карточка редактирования -->
+        <div class="personal-info" id="profileEdit" style="display: none;">
+            <div class="edit-profile">
+                <p class="text-info">Картка профілю</p>
+                <button class="save-button">💾 Зберегти</button>
+            </div>
+
+            <p class="center-text">Оберіть або завантажте фото профілю</p>
+
+            <div class="avatar-upload">
+                <img id="avatarPreview" src="{% if avatar %}{{ avatar.url }}{% else %}{% static 'images/avatar.png' %}{% endif %}" alt="avatar" class="avatar-preview" style="width:150px; height:150px; object-fit:cover; border-radius:50%;">
+                <div class="photo-buttons">
+                    <label class="custom-upload">
+                        <input type="file" id="uploadPhoto" name="avatar" style="display: none;">
+                        <span>➕ Додайте фото</span>
+                    </label>
+                    
+                </div>
+            </div>
+
+            <p class="profile-name" id="profileName">{{ user.first_name }} {{ user.last_name }}</p>
+
+            <div class="input-class">
+                <label for="username">Ім’я користувача</label>
+                <input id="inputUsername" type="text" name="username" data-field="username" value="{{ user.username }}">
+            </div>
+        </div>
+
+        <div class="info-card" id="infoCard">
             <div class='edit-profile'>
                 <p class="text-info">Особиста інформація</p>
 
-                <button  class="edit-button">
+                <button  class="edit-button1">
                     <img src="{% static 'images/pen.svg' %}" alt="">
                     Редагувати інформацію
                 </button>
+                <button class="save-button-info" style="display:none;">Зберегти</button>
             </div>
 
             <div class="inputs-info">
                 <div class="input-class">
-                    <label for="name">Ім’я</label>
+                    <label for="first_name">Ім’я</label>
                     <div class="eye-input-div">
-                        <input name="first_name" data-field="first_name" type="text" value="{{ user.first_name }}">
+                        <input id="inputFirstName" name="first_name" data-field="first_name" type="text" value="{{ user.first_name }}">
                         <img src="{% static 'images/open-eye.png' %}" alt="">
                     </div>
                 </div>
 
                 <div class="input-class">
-                     <label for="surname">Прізвище</label>
-                    
+                     <label for="last_name">Прізвище</label>
                     <div class="eye-input-div">
-                        <input name="last_name" data-field="last_name" type="text" value="{{ user.last_name }}">
+                        <input id="inputLastName" name="last_name" data-field="last_name" type="text" value="{{ user.last_name }}">
                         <img src="{% static 'images/open-eye.png' %}" alt="">
                     </div>
                 </div>
@@ -71,7 +104,7 @@
                 <div class="input-class">
                     <label for="date">Дата народження</label>
                     <div class="eye-input-div">
-                        <input id='date' type="" value="...">
+                        <input id="inputDate" type="date" value="">
                         <img src="{% static 'images/open-eye.png' %}" alt="">
                     </div>
                 </div>
@@ -79,7 +112,7 @@
                 <div class="input-class">
                     <label for="email">Електронна адреса</label>
                     <div class="eye-input-div">
-                        <input name="email" data-field="email" type="email" value="{{ user.email }}">
+                        <input id="inputEmail" name="email" data-field="email" type="email" value="{{ user.email }}">
                         <img src="{% static 'images/open-eye.png' %}" alt="">
                     </div>
                 </div>
@@ -87,7 +120,7 @@
                 <div class="input-password">
                     <label for="password">Пароль</label>
                     <div class="eye-input-password">
-                        <input id='password' type="password" placeholder="⁕⁕⁕⁕⁕⁕⁕⁕⁕⁕">
+                        <input id="password" type="password" placeholder="⁕⁕⁕⁕⁕⁕⁕⁕⁕⁕">
                         <img src="{% static 'images/close-eye.svg' %}" alt="">
                     </div>
                 </div>
@@ -98,7 +131,7 @@
             <div class='edit-profile'>
                 <p class="text-info">Варіанти підпису</p>
                 
-                <button class="edit-button">
+                <button class="edit-button1">
                     <img src="{% static 'images/pen.svg' %}" alt="">
                     Редагувати інформацію
                 </button>
@@ -124,46 +157,56 @@
         </div>
     </main>
 </div>
+
 <script>
     document.addEventListener('DOMContentLoaded', () => {
-        const inputs = document.querySelectorAll('input[name="first_name"], input[name="last_name"], input[name="email"]');
+        const inputs = document.querySelectorAll('input[name="first_name"], input[name="last_name"], input[name="email"], input[name="username"]');
+        const profileView = document.getElementById('profileView');
+        const profileEdit = document.getElementById('profileEdit');
+        const editButtons = document.querySelectorAll('.edit-button');  // и для профиля, и для infoCard
+        const saveButtonProfile = document.querySelector('.save-button');  // одна общая "Зберегти"
+        const saveButtonInfo = document.querySelector('.save-button-info');  // другая "Зберегти"
+        const uploadInput = document.getElementById('uploadPhoto');
+        const avatarPreview = document.getElementById('avatarPreview');
     
-        inputs.forEach(input => {
-            input.addEventListener('input', () => {  
-                const data = {};
-                data[input.name] = input.value;
+        let selectedAvatarFile = null;
     
-                fetch("{% url 'update_user_info' %}", {
-                    method: "POST",
-                    headers: {
-                        "Content-Type": "application/json",
-                        "X-CSRFToken": getCookie('csrftoken'),
-                    },
-                    body: JSON.stringify(data)
-                })
-                .then(response => response.json())
-                .then(result => {
-                    if (result.status === "success") {
-                        
-                        if (input.name === "first_name") {
-                            document.querySelector('.name-text').textContent = input.value;
-                        }
-                        if (input.name === "last_name") {
-                            
-                            const lastNameElem = document.querySelector('.last-name-text');
-                            if (lastNameElem) lastNameElem.textContent = input.value;
-                        }
-                        if (input.name === "email") {
-                            
-                            const emailElem = document.querySelector('.email-text');
-                            if (emailElem) emailElem.textContent = input.value;
-                        }
-                    }
-                })
-                .catch(error => console.error("Помилка оновлення:", error));
+        const editButtonInfoCard = document.querySelector('.edit-button1');
+        const infoCard = document.getElementById('infoCard');
+    
+        // Сначала блокируем поля
+        inputs.forEach(input => input.setAttribute('readonly', true));
+    
+        // Разблокировать для infoCard
+        editButtonInfoCard?.addEventListener('click', () => {
+            infoCard.classList.remove('disabled');
+            inputs.forEach(input => input.removeAttribute('readonly'));
+            editButtonInfoCard.style.display = 'none';
+            saveButtonInfo.style.display = 'inline-block';
+        });
+    
+        // Загрузка аватара
+        uploadInput?.addEventListener('change', () => {
+            const file = uploadInput.files[0];
+            if (file) {
+                selectedAvatarFile = file;
+                const reader = new FileReader();
+                reader.onload = e => avatarPreview.src = e.target.result;
+                reader.readAsDataURL(file);
+            }
+        });
+    
+        // Переключение между profileView и profileEdit
+        editButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                profileView.style.display = 'none';
+                profileEdit.style.display = 'block';
+                inputs.forEach(input => input.removeAttribute('readonly'));
+                saveButtonProfile.style.display = 'inline-block';
             });
         });
     
+        // Получение CSRF токена
         function getCookie(name) {
             let cookieValue = null;
             if (document.cookie && document.cookie !== '') {
@@ -178,7 +221,65 @@
             }
             return cookieValue;
         }
+    
+        // Сохранение изменений
+        function saveChanges() {
+            const formData = new FormData();
+            inputs.forEach(input => {
+                formData.append(input.name, input.value);
+            });
+    
+            if (selectedAvatarFile) {
+                formData.append('avatar', selectedAvatarFile);
+            }
+    
+            fetch("{% url 'update_user_info' %}", {
+                method: "POST",
+                headers: {
+                    "X-CSRFToken": getCookie('csrftoken'),
+                },
+                body: formData
+            })
+            .then(res => res.json())
+            .then(data => {
+                if (data.status === "success") {
+                    // Обновляем текст
+                    document.getElementById('profileName').textContent = `${data.first_name} ${data.last_name}`;
+                    document.getElementById('nameText').textContent = data.first_name;
+                    document.getElementById('usernameText').textContent = data.username;
+    
+                    if (data.avatar_url) {
+                        avatarPreview.src = data.avatar_url;
+                        document.getElementById('profileAvatar').src = data.avatar_url;
+                    }
+    
+                    // Возвращаем в readonly
+                    inputs.forEach(input => input.setAttribute('readonly', true));
+                    infoCard.classList.add('disabled');
+    
+                    // Прячем "Зберегти", показываем "Редагувати"
+                    saveButtonProfile.style.display = 'none';
+                    saveButtonInfo.style.display = 'none';
+                    editButtonInfoCard.style.display = 'inline-block';
+    
+                    // Сброс input file
+                    selectedAvatarFile = null;
+                    uploadInput.value = "";
+    
+                    // Переключение обратно
+                    profileEdit.style.display = 'none';
+                    profileView.style.display = 'block';
+    
+                } 
+            })
+        
+        }
+    
+        // Привязка кнопок "Зберегти"
+        saveButtonProfile?.addEventListener('click', saveChanges);
+        saveButtonInfo?.addEventListener('click', saveChanges);
     });
-</script>
+    </script>
+    
 
 {% endblock %}

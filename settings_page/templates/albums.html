@@ -26,21 +26,35 @@
                <div class = 'edit-profile'>
                    <p class="text-info2">Мої фото</p>
                    <div class="button-container">
-                     <button class="edit-button">
-                       <img src="{% static 'images/image-property.svg' %}" alt="">
-                       Додати фото
-                   </button>
-                   </div>
+                  
+                  
+                 
+                  <form class = 'avatar-form' method="post" enctype="multipart/form-data" action="{% url 'albums'%}">
+                     {% csrf_token %}
+                     <input type="file" id= "image-avatar" name= "one_photo" style="display: none;">
+                     <label for="image-avatar" class="edit-label" >
+                        <img src="{% static 'images/image-property.svg' %}" alt="">
+                        Додати фото
+                     </label>
+
+                     <button class="avatar-button"  type="submit" style="display: none;"></button>
+
+                  </form>
+            
+                  </div>
                </div>
-               <img class = 'profile-avatar' src="{% static 'images/avatar.png' %}" alt="">
-               <!-- <div class="image-album-div">
-                  <img class = 'eye-image1' src="{% static 'images/eye-property.svg' %}" alt="">
-                  <img  class = 'trash-image1' src="{% static 'images/trash.svg' %}" alt="">
-               </div> -->
+               
+
+               <img src="{{ one_photo.photo.url }}" class='profile-avatar'>
+               
+                     
+
+     
             </div>
    
             <div class = 'edit-profile2'>
                <p class="text-info2">Немає ще жодного альбому</p>
+               
                <div class="button-container">
                   <button class="edit-button1" onclick="toggleModal('create')">
                      <img src="{% static 'images/image-property.svg' %}" alt="">
@@ -82,7 +96,7 @@
                </div>
              </div>
              
-             {% for album in albums %}
+            {% for album in albums %}
                <div class="album-card {% if album.is_hidden %}hidden-album{% endif %}">
                   <div class="buttons-album">
                      <h3>{{ album.name }}</h3>
@@ -116,16 +130,22 @@
 
                    <div class="albums-images">
 
-                     <form class="add-img-album">
-                        <input type="file" id="image-input1" name="images-album" style="display: none;" multiple>
-                    
-                        <label сlass="label-album" for="image-input1" >
-                              <img class="button-load-album" src="{% static 'images/add-plus.svg' %}" alt="Фото">
+                     <form method="post" class="add-img-album" enctype="multipart/form-data" action="{% url 'albums' %}">
+                        {% csrf_token %}
+                        <input type="hidden" name="album_id" value="{{ album.id }}">
+                        <input type="file" id="photo-input-{{ album.id }}" name="photo" style="display: none;" multiple>
+                        <label class="label-album" for="photo-input-{{ album.id }}">
+                           <img class="button-load-album" src="{% static 'images/add-plus.svg' %}" alt="Фото">
                         </label>
-                        
-                    
+                        <button type="submit" style="display:none;"></button>
                      </form>
-
+                    
+                     {% for photo in album.photo_set.all %}
+                        <img src="{{ photo.image.url }}" class="image-album" alt="Фото альбому">
+               
+                     {% endfor %}
+                     
+                     
                    </div>
 
                   
@@ -141,7 +161,7 @@
 
                  
                </div>
-             {% endfor %}
+            {% endfor %}
       </main>
    </div>
    
@@ -189,6 +209,8 @@
 
       TRASH_IMAGE_SRC = "{% static 'image/trash.svg' %}"
       EYE_IMAGE_SRC = "{% static 'images/eye-property.svg' %}"
+     
+      
    </script>
-   <script src="{% static 'js/album.js' %}"></script>
+   <script src="{% static 'js/album.js' %}" defer></script>
 {% endblock %}

@@ -5,7 +5,7 @@ from django.utils.decorators import method_decorator
 from django.views.decorators.csrf import csrf_exempt
 from django.views.generic import TemplateView
 from django.shortcuts import redirect, get_object_or_404
-from .models import Album, Photo
+from .models import Album, Photo, UserProfile, OnePhoto
 from django.views import View
 from django.http import JsonResponse
 
@@ -13,11 +13,9 @@ from django.contrib.auth.decorators import login_required
 
 import json
 
-class PersonalInfoPage(TemplateView):
-    template_name = 'personal_info.html'
 
-
-
+# views.py
+# view
 
 @method_decorator(csrf_exempt, name='dispatch')
 class AlbumsPage(TemplateView):
@@ -29,6 +27,7 @@ class AlbumsPage(TemplateView):
         current_year = datetime.now().year
         context['years'] = range(current_year, 1900, -1) 
         context['albums'] = Album.objects.all().order_by('-year')
+        context['one_photo'] = OnePhoto.objects.order_by('-id').first()
         return context
 
     def post(self, request, *args, **kwargs):
@@ -43,11 +42,17 @@ class AlbumsPage(TemplateView):
             album.save()
 
         elif 'photo' in request.FILES:
-            photo_file = request.FILES['photo']
+            photos = request.FILES.getlist('photo')
             album_id = request.POST.get('album_id')
-            if album_id and photo_file:
-                album = get_object_or_404(Album, id=album_id)
-                Photo.objects.create(album=album, image=photo_file)
+            for photo_file in photos:
+                if album_id and photo_file:
+                    album = get_object_or_404(Album, id=album_id)
+                    Photo.objects.create(album=album, image=photo_file)
+
+        elif 'one_photo' in request.FILES:
+            one_photo = request.FILES.get('one_photo')
+            OnePhoto.objects.create(photo=one_photo)
+
 
         else:
            
@@ -71,31 +76,88 @@ class AlbumsPage(TemplateView):
         return redirect('albums')
 
 
-@method_decorator(csrf_exempt, name='dispatch')
+
+from django.views.generic import TemplateView
+from django.utils.decorators import method_decorator
+from django.views.decorators.csrf import csrf_exempt
+from django.shortcuts import redirect, get_object_or_404
+from django.views import View
+from django.http import JsonResponse
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin
+import json
+
+from .models import Album, Photo, UserProfile
+
+
+class PersonalInfoPage(LoginRequiredMixin, TemplateView):
+    template_name = 'personal_info.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        user = self.request.user
+
+        context['user'] = user
+        try:
+            profile = user.profile
+            context['avatar'] = profile.avatar  # Теперь доступно как {{ avatar.url }}
+        except UserProfile.DoesNotExist:
+            context['avatar'] = None  # Чтобы избежать ошибки в шаблоне
+
+        return context
+
+
+
+from django.utils.decorators import method_decorator
+from django.views import View
+from django.http import JsonResponse
+from django.contrib.auth.decorators import login_required
+from settings_page.models import UserProfile  # или твоя модель профиля
+import json
+
 @method_decorator(login_required, name='dispatch')
 class UpdateUserInfoView(View):
     def post(self, request):
-        data = json.loads(request.body)
         user = request.user
-        changed = False
+        updated = False
+        avatar_url = None
 
-        first_name = data.get('first_name')
-        if first_name is not None:
-            user.first_name = first_name
-            changed = True
+        data = request.POST
 
-        last_name = data.get('last_name')
-        if last_name is not None:
-            user.last_name = last_name
-            changed = True
+        # Обновляем поля пользователя, если они есть в POST
+        for field in ['first_name', 'last_name', 'email', 'username']:
+            if field in data and getattr(user, field) != data[field]:
+                setattr(user, field, data[field])
+                updated = True
 
-        email = data.get('email')
-        if email is not None:
-            user.email = email
-            changed = True
+        # Если есть аватар в файлах — обновляем
+        if 'avatar' in request.FILES:
+            avatar_file = request.FILES['avatar']
+            profile, created = UserProfile.objects.get_or_create(user=user)
+            profile.avatar = avatar_file
+            try:
+                profile.save()
+                avatar_url = profile.avatar.url
+                updated = True
+            except Exception as e:
+                return JsonResponse({'status': 'error', 'message': f'Помилка збереження аватару: {str(e)}'}, status=500)
 
-        if changed:
-            user.save()
-            return JsonResponse({'status': 'success'})
-        else:
-            return JsonResponse({'status': 'no_changes'})
+        if updated:
+            try:
+                user.save()
+            except Exception as e:
+                return JsonResponse({'status': 'error', 'message': f'Помилка збереження користувача: {str(e)}'}, status=500)
+
+            response = {
+                'status': 'success',
+                'first_name': user.first_name,
+                'last_name': user.last_name,
+                'username': user.username,
+                'email': user.email,
+            }
+            if avatar_url:
+                response['avatar_url'] = avatar_url
+
+            return JsonResponse(response)
+
+        return JsonResponse({'status': 'error', 'message': 'Немає змін для оновлення'}, status=400)

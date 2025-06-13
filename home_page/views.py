@@ -4,7 +4,7 @@ from .forms import ModalActionForm
 from my_publications.models import Post
 from django.contrib.auth.models import User
 from django.contrib import messages
-
+from settings_page.models import UserProfile  # если UserProfile в другом приложении
 class HomePageView(ListView):
     model = Post
     template_name = "home.html"
@@ -13,6 +13,8 @@ class HomePageView(ListView):
     def get_queryset(self):
         return Post.objects.all()
 
+
+
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         form = kwargs.get('form') or ModalActionForm()
@@ -20,7 +22,14 @@ class HomePageView(ListView):
 
         user = self.request.user
         context['show_modal'] = not (user.first_name and user.last_name and user.username)
+
+        try:
+            context['avatar'] = user.profile.avatar if user.profile.avatar else None
+        except UserProfile.DoesNotExist:
+            context['avatar'] = None
+
         return context
+
 
     
     def post(self, request, *args, **kwargs):

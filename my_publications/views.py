@@ -3,6 +3,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse_lazy
 from .models import Post, Image
 from .forms import PublicationForm
+from settings_page.models import UserProfile
 
 class PublicationsView(LoginRequiredMixin, ListView):
     model = Post
@@ -15,6 +16,13 @@ class PublicationsView(LoginRequiredMixin, ListView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['form'] = PublicationForm()
+        user = self.request.user
+        context['show_modal'] = not (user.first_name and user.last_name and user.username)
+
+        try:
+            context['avatar'] = user.profile.avatar if user.profile.avatar else None
+        except UserProfile.DoesNotExist:
+            context['avatar'] = None
         return context
 
 class CreatePublicationView(LoginRequiredMixin, CreateView):

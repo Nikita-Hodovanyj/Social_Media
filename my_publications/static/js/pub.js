@@ -92,40 +92,50 @@ document.addEventListener('DOMContentLoaded', function () {
 
 
 let fileInput = document.getElementById('id_image');
-// let modalWIn = document.querySelector('.modal-win')
 let fileDiv = document.querySelector('.image-posts');
-let trashImage = document.querySelector('.trash-image')
 
-        fileInput.addEventListener('change', (event) => {
-            
+fileInput.addEventListener('change', (event) => {
+    const files = event.target.files;
+    // Создаем DataTransfer для управления файлами
+    let dt = new DataTransfer();
 
-            let files = event.target.files;
-            for (let i = 0; i < files.length; i++) {
-                file = files[i];
-                console.log(file);
-                
-            
+    // Добавляем уже существующие файлы из input в dt (если нужно)
+    for (let file of files) {
+        dt.items.add(file);
+    }
 
-                let image = document.createElement('img');
-                // image.src = {% static 'images/${file.name}'%}
-                // Створює посилання на браузері
-                image.src = URL.createObjectURL(file);
-                image.className = 'image-post';
+    // Очищаем контейнер превью, чтобы не дублировать
+    fileDiv.innerHTML = '';
 
-                let wrapper = document.createElement('div');
-                wrapper.className = 'image-wrapper';
+    for (let i = 0; i < dt.items.length; i++) {
+        const file = dt.items[i].getAsFile();
 
-                let trashImage = document.createElement('img');
-                trashImage.className = 'trash-image';
-                trashImage.src = TRASH_IMAGE_SRC
-                trashImage.onclick = () => wrapper.remove();
+        let image = document.createElement('img');
+        image.src = URL.createObjectURL(file);
+        image.className = 'image-post';
 
-                wrapper.appendChild(image);
-                wrapper.appendChild(trashImage);
-                fileDiv.appendChild(wrapper);
+        let wrapper = document.createElement('div');
+        wrapper.className = 'image-wrapper';
 
-                
-                
-            }
-            
-        });
+        let trashImage = document.createElement('img');
+        trashImage.className = 'trash-image';
+        trashImage.src = TRASH_IMAGE_SRC;
+
+        trashImage.onclick = () => {
+            // Удаляем превью
+            wrapper.remove();
+
+            // Удаляем файл из DataTransfer
+            dt.items.remove(i);
+            // Перезаписываем input.files
+            fileInput.files = dt.files;
+        };
+
+        wrapper.appendChild(image);
+        wrapper.appendChild(trashImage);
+        fileDiv.appendChild(wrapper);
+    }
+
+    // Перезаписываем input.files, на всякий случай
+    fileInput.files = dt.files;
+});

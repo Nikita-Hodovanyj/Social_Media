@@ -1,6 +1,6 @@
 from django.views.generic import ListView,DetailView
 from django.contrib.auth.models import User
-
+from settings_page.models import UserProfile
 from django.contrib.auth.mixins import LoginRequiredMixin
 from my_publications.models import Post, Image
 from my_publications.forms import PublicationForm
@@ -27,4 +27,11 @@ class UserProfileView(LoginRequiredMixin, ListView):
         user_id = self.kwargs['pk']
         context['person'] = User.objects.get(pk=user_id)
         context['form'] = PublicationForm()
+        user = self.request.user
+        context['show_modal'] = not (user.first_name and user.last_name and user.username)
+
+        try:
+            context['avatar'] = user.profile.avatar if user.profile.avatar else None
+        except UserProfile.DoesNotExist:
+            context['avatar'] = None
         return context
