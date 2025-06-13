@@ -30,7 +30,10 @@ SECRET_KEY = 'django-insecure-7i0joj&7^_hw##djex9fprd)-@$558=x83r1tva!pa7$u+fnk=
 DEBUG = True
 
 ALLOWED_HOSTS = []
-
+AUTHENTICATION_BACKENDS = [
+    'django.contrib.auth.backends.ModelBackend',  # на всякий случай
+    'login.views.EmailBackend',  # Путь к кастомному backend (замени yourapp)
+]
 
 # Application definition
 

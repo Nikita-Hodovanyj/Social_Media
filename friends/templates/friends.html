@@ -1,87 +1,76 @@
 {% extends 'base.html' %}
 {% load static %}
 
-{% block title %}
-  
-{% endblock %}
+{% block title %}Друзі{% endblock %}
 
 {% block link %}
 <link rel="stylesheet" href="{% static 'css/friends.css' %}">
 {% endblock %}
 
 {% block content %}
-    <main>
-        <div class="left">
-            <div class="tab-btn active-tab" onclick="showSection('main')">
-                <h2>Головна</h2>
-            </div>
-            <div class="tab-btn" onclick="showSection('requests')">
-                <h1>Запити</h1>
-            </div>
-            <div class="tab-btn" onclick="showSection('recommendations')">
-                <h1>Рекомендації</h1>
-            </div>
-            <div class="tab-btn" onclick="showSection('all-friends')">
-                <h1>Всі друзі</h1>
-            </div>
-        </div>
-                
-        <div class="right">
-            <div id="requests-section" class="request" style="display: none;">
-                <div class="request-in">
-                    <div class="header-reques">
-                        <div class="header-reques-in">
-                            <h3 class="h3-request">Запити</h3>
-                            <button class="check-all">
-                                Дивитись всі
-                            </button>
-                        </div>
+<main>
+    <div class="left">
+        <div class="tab-btn active-tab" onclick="showSection('main')"><h2>Головна</h2></div>
+        <div class="tab-btn" onclick="showSection('requests')"><h1>Запити</h1></div>
+        <div class="tab-btn" onclick="showSection('recommendations')"><h1>Рекомендації</h1></div>
+        <div class="tab-btn" onclick="showSection('all-friends')"><h1>Всі друзі</h1></div>
+    </div>
+    <div class="right">
+
+        <div id="requests-section" class="request" style="display: none;">
+            <div class="request-in">
+                <div class="header-reques">
+                    <div class="header-reques-in">
+                        <h3 class="h3-request">Запити</h3>
+                        <button class="check-all">Дивитись всі</button>
                     </div>
-                    <div class="icon-request">
-                        <div class="icon">
+                </div>
+                <div class="icon-request">
+                    {% for request in received_requests %}
+                        <div class="icon request-item" data-id="{{ request.id }}">
                             <div>
                                 <div class="info">
-                                    
-                                    <img class="yehor" src="{% static '/image/avatar.png' %}" alt="">
+                                    {% if request.from_user.profile.avatar %}
+                                        <img class="yehor" src="{{ request.from_user.profile.avatar.url }}" alt="avatar" >
+                                    {% else %}
+                                        <img class="yehor" src="{% static 'images/avatar.png' %}" alt="avatar" >
+                                    {% endif %}
                                     <div class="name-block">
-                                        <h3 class="name">Yehor Aung</h3>
-                                        <h3 class="name-with">@thelili</h3>
+                                        <h3 class="name">{{ request.from_user.first_name }}</h3>
+                                        <h3 class="name-with">{{ request.from_user.username }}</h3>
                                     </div>
                                 </div>
                                 <div class="buttons">
-                                    <button class="button-accept">
-                                        Підтвердити
-                                    </button>
-                                    <button class="button-del">
-                                        Видалити
-                                    </button>
+                                    <button class="button-accept" data-request-id="{{ request.id }}">Підтвердити</button>
+                                    <button class="button-del">Видалити</button>
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    {% empty %}
+                        <p>Немає нових запитів</p>
+                    {% endfor %}
                 </div>
             </div>
+        </div>
 
-            <div id="recommendations-section" class="recommendations" style="display: none;">
-                <div class="request-in">
-                    <div class="header-reques">
-                        <div class="header-reques-in">
-                            <h3 class="h3-request">Рекомендації</h3>
-                            <button class="check-all">
-                                Дивитись всі
-                            </button>
-                        </div>
+        <div id="recommendations-section" class="recommendations" style="display: none;">
+            <div class="request-in">
+                <div class="header-reques">
+                    <div class="header-reques-in">
+                        <h3 class="h3-request">Рекомендації</h3>
+                        <button class="check-all">Дивитись всі</button>
                     </div>
-                    <div class="icon-request">
-                        {% for person in persons %}
+                </div>
+                <div class="icon-request">
+                    {% for person in persons %}
                         <div class="icon">
                             <div class="icon-content">
                                 <a href="{% url 'user_prof' person.pk %}" class="profile-link">
                                     <div class="info">
-                                        {% if avatar %}
-                                            <img class="yehor" id="profileAvatar" src="{{ avatar.url }}" alt="avatar" >
+                                        {% if person.profile.avatar %}
+                                            <img class="avatar" src="{{ person.profile.avatar.url }}" alt="avatar" >
                                         {% else %}
-                                            <img class="yehor" id="profileAvatar" src="{% static 'images/avatar.png' %}" alt="avatar" >
+                                            <img class="avatar" src="{% static 'images/avatar.png' %}" alt="avatar" >
                                         {% endif %}
                                         <div class="name-block">
                                             <h3 class="name">{{ person.first_name }}</h3>
@@ -90,51 +79,55 @@
                                     </div>
                                 </a>
                                 <div class="buttons">
-                                    <button class="button-accept">Підтвердити</button>
+                                    <button class="button-add" data-user-id="{{ person.id }}">Додати</button>
                                     <button class="button-del">Видалити</button>
                                 </div>
                             </div>
                         </div>
-                        {% endfor %}
-                    </div>
-                </div>
-            </div>
-
-            <div id="all-friends-section" class="all-fr" style="display: none;">
-                <div class="request-in">
-                    <div class="header-reques">
-                        <div class="header-reques-in">
-                            <h3 class="h3-request">Всі друзі</h3>
-                            <button class="check-all">
-                                Дивитись всі
-                            </button>
-                        </div>
-                    </div>
-                    <div class="icon-request">
-                        <div class="icon">
-                            <div>
-                                <div class="info">
-                                    <img class="yehor" src="{% static '/image/avatar.png' %}" alt="">
-                                    <div class="name-block">
-                                        <h3 class="name">Yehor Aung</h3>
-                                        <h3 class="name-with">@thelili</h3>
-                                    </div>
-                                </div>
-                                <div class="buttons">
-                                    <button class="button-accept">
-                                        Підтвердити
-                                    </button>
-                                    <button class="button-del">
-                                        Видалити
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    {% empty %}
+                        <p>Немає рекомендацій</p>
+                    {% endfor %}
                 </div>
             </div>
         </div>
-        
-    </main>
-    <script src="{% static 'js/friends.js' %}"></script>
+
+        <div id="all-friends-section" class="all-fr" style="display: none;">
+            <div class="request-in">
+                <div class="header-reques">
+                    <div class="header-reques-in">
+                        <h3 class="h3-request">Всі друзі</h3>
+                    </div>
+                </div>
+                <div class="icon-request">
+                    {% for friend in all_friends %}
+                        <div class="icon">
+                            <div>
+                                <div class="info">
+                                    {% if friend.profile.avatar %}
+                                        <img class="yehor" src="{{ friend.profile.avatar.url }}" alt="avatar" >
+                                    {% else %}
+                                        <img class="yehor" src="{% static 'images/avatar.png' %}" alt="avatar" >
+                                    {% endif %}
+                                    <div class="name-block">
+                                        <h3 class="name">{{ friend.first_name }}</h3>
+                                        <h3 class="name-with">{{ friend.username }}</h3>
+                                    </div>
+                                </div>
+                                <div class="buttons">
+                                    <button class="button-add">Написати</button>
+                                    <button class="button-del">Видалити</button>
+                                </div>
+                            </div>
+                        </div>
+                    {% empty %}
+                        <p>У вас поки немає друзів</p>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+
+    </div>
+</main>
+
+<script src="{% static 'js/friends.js' %}"></script>
 {% endblock %}

@@ -8,7 +8,7 @@ from django.shortcuts import redirect, get_object_or_404
 from .models import Album, Photo, UserProfile, OnePhoto
 from django.views import View
 from django.http import JsonResponse
-
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.decorators import login_required
 
 import json
@@ -17,15 +17,21 @@ import json
 # views.py
 # view
 
+from django.views.generic import TemplateView
+from django.shortcuts import redirect, get_object_or_404
+from django.utils.decorators import method_decorator
+from django.views.decorators.csrf import csrf_exempt
+from .models import Album, Photo, OnePhoto
+
 @method_decorator(csrf_exempt, name='dispatch')
 class AlbumsPage(TemplateView):
     template_name = 'albums.html'
 
     def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
         from datetime import datetime
+        context = super().get_context_data(**kwargs)
         current_year = datetime.now().year
-        context['years'] = range(current_year, 1900, -1) 
+        context['years'] = range(current_year, 1900, -1)
         context['albums'] = Album.objects.all().order_by('-year')
         context['one_photo'] = OnePhoto.objects.order_by('-id').first()
         return context
@@ -44,50 +50,36 @@ class AlbumsPage(TemplateView):
         elif 'photo' in request.FILES:
             photos = request.FILES.getlist('photo')
             album_id = request.POST.get('album_id')
+            album = get_object_or_404(Album, id=album_id)
             for photo_file in photos:
-                if album_id and photo_file:
-                    album = get_object_or_404(Album, id=album_id)
-                    Photo.objects.create(album=album, image=photo_file)
+                Photo.objects.create(album=album, image=photo_file)
 
         elif 'one_photo' in request.FILES:
             one_photo = request.FILES.get('one_photo')
             OnePhoto.objects.create(photo=one_photo)
 
-
         else:
-           
-            album_id = request.POST.get('album_id') 
+            album_id = request.POST.get('album_id')
             name = request.POST.get('album_name')
             theme = request.POST.get('album_theme')
             year = request.POST.get('album_year')
 
             if name and theme and year:
                 if album_id:
-                   
                     album = get_object_or_404(Album, id=album_id)
                     album.name = name
                     album.theme = theme
                     album.year = int(year)
                     album.save()
                 else:
-                    
                     Album.objects.create(name=name, theme=theme, year=int(year))
 
         return redirect('albums')
 
 
 
-from django.views.generic import TemplateView
-from django.utils.decorators import method_decorator
-from django.views.decorators.csrf import csrf_exempt
-from django.shortcuts import redirect, get_object_or_404
-from django.views import View
-from django.http import JsonResponse
-from django.contrib.auth.decorators import login_required
-from django.contrib.auth.mixins import LoginRequiredMixin
-import json
 
-from .models import Album, Photo, UserProfile
+
 
 
 class PersonalInfoPage(LoginRequiredMixin, TemplateView):
@@ -108,12 +100,7 @@ class PersonalInfoPage(LoginRequiredMixin, TemplateView):
 
 
 
-from django.utils.decorators import method_decorator
-from django.views import View
-from django.http import JsonResponse
-from django.contrib.auth.decorators import login_required
-from settings_page.models import UserProfile  # или твоя модель профиля
-import json
+
 
 @method_decorator(login_required, name='dispatch')
 class UpdateUserInfoView(View):

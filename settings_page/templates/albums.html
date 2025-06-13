@@ -1,9 +1,7 @@
 {% extends 'base.html' %}
 {% load static %}
 
-{% block title %}
-   Альбоми
-{% endblock %}
+{% block title %}Альбоми{% endblock %}
 
 {% block link %}
 <link rel="stylesheet" href="{% static 'css/albums.css' %}">
@@ -11,206 +9,176 @@
 {% endblock %}
 
 {% block content %}
-   <div class="main-wrapper">
-      <aside>
-            <div class = 'div-link-info2'>
-                <a class = 'link-info2' href="{% url 'personal_info' %}">Особиста інформація</a>
-            </div>
-            <div class = 'div-link-albums2'>
-               <a class ='link-albums2' href="{% url 'albums' %}">Альбоми</a>
-            </div>
-      </aside>
-   
-      <main>
-           <div class="album-card">
-               <div class = 'edit-profile'>
-                   <p class="text-info2">Мої фото</p>
-                   <div class="button-container">
-                  
-                  
-                 
-                  <form class = 'avatar-form' method="post" enctype="multipart/form-data" action="{% url 'albums'%}">
-                     {% csrf_token %}
-                     <input type="file" id= "image-avatar" name= "one_photo" style="display: none;">
-                     <label for="image-avatar" class="edit-label" >
-                        <img src="{% static 'images/image-property.svg' %}" alt="">
-                        Додати фото
-                     </label>
+<div class="main-wrapper">
+    <aside>
+        <div class='div-link-info2'>
+            <a class='link-info2' href="{% url 'personal_info' %}">Особиста інформація</a>
+        </div>
+        <div class='div-link-albums2'>
+            <a class='link-albums2' href="{% url 'albums' %}">Альбоми</a>
+        </div>
+    </aside>
 
-                     <button class="avatar-button"  type="submit" style="display: none;"></button>
-
-                  </form>
-            
-                  </div>
-               </div>
-               
-
-               <img src="{{ one_photo.photo.url }}" class='profile-avatar'>
-               
-                     
-
-     
-            </div>
-   
-            <div class = 'edit-profile2'>
-               <p class="text-info2">Немає ще жодного альбому</p>
-               
-               <div class="button-container">
-                  <button class="edit-button1" onclick="toggleModal('create')">
-                     <img src="{% static 'images/image-property.svg' %}" alt="">
-                     Створити альбом
-                  </button>
-               </div>     
+    <main>
+        <div class="album-card">
+            <div class='edit-profile'>
+                <p class="text-info2">Мої фото</p>
+                <div class="button-container">
+                    <form class='avatar-form' method="post" enctype="multipart/form-data" action="{% url 'albums' %}">
+                        {% csrf_token %}
+                        <input type="file" id="image-avatar" name="one_photo" style="display: none;">
+                        <label for="image-avatar" class="edit-label">
+                            <img src="{% static 'images/image-property.svg' %}" alt="">
+                            Додати фото
+                        </label>
+                        <button class="avatar-button" type="submit" style="display: none;"></button>
+                    </form>
+                </div>
             </div>
 
-            <div id="albumModal" class="modal modal-hidden">
-               <div class="modal-content" style="position: relative;">
-                 <img src="{% static 'images/-.png' %}" class="close-icon" onclick="toggleModal()" alt="Закрити">
-                 <h2 id="modalTitle">Створити альбом</h2> <form id="albumForm" method="POST">
-                   {% csrf_token %}
-                   <input type="hidden" id="albumId" name="album_id" value=""> <div class="form-group-modal">
-                     <label>Назва альбому</label>
-                     <input type="text" id="albumName" name="album_name" required> </div>
-             
-                   <div class="form-group-modal">
-                     <label>Оберіть тему</label>
-                     <select id="albumTheme" name="album_theme" required> <option value="Природа">Природа</option>
-                       <option value="Подорожі">Подорожі</option>
-                       <option value="Сім'я">Сім'я</option>
-                     </select>
-                   </div>
-             
-                   <div class="form-group-modal">
-                     <label>Рік альбому</label>
-                     <select id="albumYear" name="album_year" required> {% for year in years %}
-                       <option value="{{ year }}">{{ year }}</option>
-                       {% endfor %}
-                     </select>
-                   </div>
-             
-                   <div class="modal-actions">
-                     <button type="button" class="btn-modal-secondary" onclick="toggleModal()">Скасувати</button>
-                     <button type="submit" class="btn-modal-primary">Зберегти</button>
-                   </div>
-                 </form>
-               </div>
-             </div>
-             
-            {% for album in albums %}
-               <div class="album-card {% if album.is_hidden %}hidden-album{% endif %}">
-                  <div class="buttons-album">
-                     <h3>{{ album.name }}</h3>
+            {% if one_photo %}
+                <img src="{{ one_photo.photo.url }}" class='profile-avatar'>
+            {% endif %}
+        </div>
 
-                     <form method="post" style="display: inline;">
+        <div class='edit-profile2'>
+            <p class="text-info2">Немає ще жодного альбому</p>
+
+            <div class="button-container">
+                <button class="edit-button1" onclick="toggleModal('create')">
+                    <img src="{% static 'images/image-property.svg' %}" alt="">
+                    Створити альбом
+                </button>
+            </div>
+        </div>
+
+        <div id="albumModal" class="modal modal-hidden">
+            <div class="modal-content" style="position: relative;">
+                <img src="{% static 'images/-.png' %}" class="close-icon" onclick="toggleModal()" alt="Закрити">
+                <h2 id="modalTitle">Створити альбом</h2>
+                <form id="albumForm" method="POST">
+                    {% csrf_token %}
+                    <input type="hidden" id="albumId" name="album_id" value="">
+                    <div class="form-group-modal">
+                        <label>Назва альбому</label>
+                        <input type="text" id="albumName" name="album_name" required>
+                    </div>
+                    <div class="form-group-modal">
+                        <label>Оберіть тему</label>
+                        <select id="albumTheme" name="album_theme" required>
+                            <option value="Природа">Природа</option>
+                            <option value="Подорожі">Подорожі</option>
+                            <option value="Сім'я">Сім'я</option>
+                        </select>
+                    </div>
+                    <div class="form-group-modal">
+                        <label>Рік альбому</label>
+                        <select id="albumYear" name="album_year" required>
+                            {% for year in years %}
+                                <option value="{{ year }}">{{ year }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="modal-actions">
+                        <button type="button" class="btn-modal-secondary" onclick="toggleModal()">Скасувати</button>
+                        <button type="submit" class="btn-modal-primary">Зберегти</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        {% for album in albums %}
+            <div class="album-card {% if album.is_hidden %}hidden-album{% endif %}">
+                <div class="buttons-album">
+                    <h3>{{ album.name }}</h3>
+
+                    <form method="post" style="display: inline;">
                         {% csrf_token %}
                         <input type="hidden" name="toggle_visibility" value="{{ album.id }}">
                         <button type="submit" class="icon-button">
-                           <img src="{% static 'images/eye-property.svg' %}" alt="Сховати/показати">
+                            <img src="{% static 'images/eye-property.svg' %}" alt="Сховати/показати">
                         </button>
-                     </form>
+                    </form>
 
-                     <button class="icon-button edit-album-btn"
-                          data-id="{{ album.id }}"
-                          data-name="{{ album.name }}"
-                          data-theme="{{ album.theme }}"
-                          data-year="{{ album.year }}">
+                    <button class="icon-button edit-album-btn"
+                            data-id="{{ album.id }}"
+                            data-name="{{ album.name }}"
+                            data-theme="{{ album.theme }}"
+                            data-year="{{ album.year }}">
                         <img src="{% static 'images/:.png' %}" alt="Редагувати">
-                      </button>
+                    </button>
+                </div>
 
-                  </div>
-                  
+                <span>
+                    <p class="theme-text">{{ album.theme }}</p>
+                    <p class="year-text">{{ album.year }} рік</p>
+                </span>
 
-                  <span>
-                     <p class="theme-text">{{ album.theme }}</p>
-                     <p class="year-text">{{ album.year }} рік</p>
-                  </span>
-                 
+                <p class="photo-text">Фотографії</p>
 
-                   <p class="photo-text">Фотографії</p>
-
-                   <div class="albums-images">
-
-                     <form method="post" class="add-img-album" enctype="multipart/form-data" action="{% url 'albums' %}">
+                <div class="albums-images">
+                    <form method="post" class="add-img-album" enctype="multipart/form-data" action="{% url 'albums' %}">
                         {% csrf_token %}
                         <input type="hidden" name="album_id" value="{{ album.id }}">
                         <input type="file" id="photo-input-{{ album.id }}" name="photo" style="display: none;" multiple>
                         <label class="label-album" for="photo-input-{{ album.id }}">
-                           <img class="button-load-album" src="{% static 'images/add-plus.svg' %}" alt="Фото">
+                            <img class="button-load-album" src="{% static 'images/add-plus.svg' %}" alt="Фото">
                         </label>
                         <button type="submit" style="display:none;"></button>
-                     </form>
-                    
-                     {% for photo in album.photo_set.all %}
-                        <img src="{{ photo.image.url }}" class="image-album" alt="Фото альбому">
-               
-                     {% endfor %}
-                     
-                     
-                   </div>
+                    </form>
 
-                  
+                    {% for photo in album.photo_set.all %}
+                        <img src="{{ photo.image.url }}" class="image-album" alt="Фото альбому" style="width:100px; margin: 3px;">
+                    {% endfor %}
+                </div>
 
+                <form method="post" style="display: inline;">
+                    {% csrf_token %}
+                    <input type="hidden" name="delete_album" value="{{ album.id }}">
+                </form>
+            </div>
+        {% endfor %}
+    </main>
+</div>
 
-                  <form method="post" style="display: inline;">
-                     {% csrf_token %}
-                     <input type="hidden" name="delete_album" value="{{ album.id }}">
-                     
-                  </form>
-
-                 
-
-                 
-               </div>
-            {% endfor %}
-      </main>
-   </div>
-   
-   <script>
-      function toggleModal(action = '', albumData = null) {
-         const modal = document.getElementById('albumModal');
-         modal.classList.toggle('modal-hidden');
-         
-      
-         const modalTitle = document.getElementById('modalTitle');
-         const albumIdInput = document.getElementById('albumId');
-         const albumNameInput = document.getElementById('albumName');
-         const albumThemeSelect = document.getElementById('albumTheme');
-         const albumYearSelect = document.getElementById('albumYear');
-
-         if (action === 'create') {
-            modalTitle.textContent = 'Створити альбом';
-            albumIdInput.value = ''; 
-            albumNameInput.value = '';
-            albumThemeSelect.value = 'Природа'; 
-            albumYearSelect.value = new Date().getFullYear(); 
-         } else if (albumData) { 
-            modalTitle.textContent = 'Редагувати альбом';
-            albumIdInput.value = albumData.id;
-            albumNameInput.value = albumData.name;
-            albumThemeSelect.value = albumData.theme;
-            albumYearSelect.value = albumData.year;
-         } else { 
-            
+<script>
+   document.querySelectorAll('input[type="file"]').forEach(input => {
+     input.addEventListener('change', function() {
+       const albumId = this.getAttribute('id').replace('photo-input-', '');
+       const previewContainer = this.closest('.albums-images');
+       
+       if (!previewContainer) return;
+ 
+       // Создаём контейнер для превью (или находим уже существующий)
+       let preview = previewContainer.querySelector('.preview-images');
+       if (!preview) {
+         preview = document.createElement('div');
+         preview.classList.add('preview-images');
+         preview.style.display = 'flex';
+         preview.style.gap = '10px';
+         preview.style.marginTop = '10px';
+         previewContainer.appendChild(preview);
+       }
+ 
+       preview.innerHTML = ''; // Очищаем прошлые превью
+ 
+       Array.from(this.files).forEach(file => {
+         const reader = new FileReader();
+         reader.onload = function(e) {
+           const img = document.createElement('img');
+           img.src = e.target.result;
+           img.style.width = '80px';
+           img.style.height = '80px';
+           img.style.objectFit = 'cover';
+           img.style.borderRadius = '5px';
+           preview.appendChild(img);
          }
-      }
-      
-      
-      document.querySelectorAll('.edit-album-btn').forEach(button => {
-         button.addEventListener('click', function() {
-            const albumData = {
-               id: this.getAttribute('data-id'),
-               name: this.getAttribute('data-name'),
-               theme: this.getAttribute('data-theme'),
-               year: this.getAttribute('data-year')
-            };
-            toggleModal('edit', albumData); 
-         });
-      });
+         reader.readAsDataURL(file);
+       });
+     });
+   });
+ </script>
+ 
 
-      TRASH_IMAGE_SRC = "{% static 'image/trash.svg' %}"
-      EYE_IMAGE_SRC = "{% static 'images/eye-property.svg' %}"
-     
-      
-   </script>
-   <script src="{% static 'js/album.js' %}" defer></script>
+<script src="{% static 'js/album.js' %}" defer></script>
 {% endblock %}

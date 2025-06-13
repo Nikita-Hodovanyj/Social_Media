@@ -15,9 +15,9 @@ class Album(models.Model):
 from django.db import models
 
 class Photo(models.Model):
+    album = models.ForeignKey(Album, on_delete=models.CASCADE, null=True, blank=True)
     image = models.ImageField(upload_to='photos/')
     uploaded_at = models.DateTimeField(auto_now_add=True)
-    # Можно добавить связь с пользователем или альбомом
 
 from django.contrib.auth.models import AbstractUser
 from django.db import models
@@ -33,4 +33,3 @@ class UserProfile(models.Model):
         return self.user.username
 class OnePhoto(models.Model):
     photo = models.ImageField(upload_to='one_photos/')
-
