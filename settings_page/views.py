@@ -28,51 +28,73 @@ class AlbumsPage(TemplateView):
     template_name = 'albums.html'
 
     def get_context_data(self, **kwargs):
-        from datetime import datetime
         context = super().get_context_data(**kwargs)
+        from datetime import datetime
         current_year = datetime.now().year
-        context['years'] = range(current_year, 1900, -1)
-        context['albums'] = Album.objects.all().order_by('-year')
-        context['one_photo'] = OnePhoto.objects.order_by('-id').first()
+        context['years'] = range(current_year, 1900, -1) 
+        context['albums'] = Album.objects.filter(user = self.request.user).order_by('-year')
+        context['one_photo'] = OnePhoto.objects.filter(user = self.request.user).order_by('-id').first()
         return context
 
     def post(self, request, *args, **kwargs):
         if 'delete_album' in request.POST:
             album_id = request.POST.get('delete_album')
             Album.objects.filter(id=album_id).delete()
+            print("deleted")
 
-        elif 'toggle_visibility' in request.POST:
-            album_id = request.POST.get('toggle_visibility')
-            album = get_object_or_404(Album, id=album_id)
-            album.is_hidden = not album.is_hidden
-            album.save()
-
+        # elif 'toggle_visibility' in request.POST:
+        #     album_id = request.POST.get('toggle_visibility')
+        #     album = get_object_or_404(Album, id=album_id)
+        #     album.is_hidden = True
+        #     album.save()
+        #     print("Not hidden") 
+        elif 'delete_photo' in request.POST:
+            photo_id = request.POST.get('photo_id')
+            photo = get_object_or_404(Photo, id=photo_id)
+            photo.delete()
+        
+        elif 'delete_one_photo' in request.POST:
+            one_photo_id = request.POST.get('one_photo_id')
+            one_photo = get_object_or_404(OnePhoto, id=one_photo_id)
+            one_photo.delete()
+      
+            
         elif 'photo' in request.FILES:
             photos = request.FILES.getlist('photo')
             album_id = request.POST.get('album_id')
-            album = get_object_or_404(Album, id=album_id)
+           
+            print(photos)
+
             for photo_file in photos:
-                Photo.objects.create(album=album, image=photo_file)
+                if album_id and photo_file:
+                    album = get_object_or_404(Album, id=album_id)
+                    Photo.objects.create(album=album, image=photo_file)
+             
+
 
         elif 'one_photo' in request.FILES:
             one_photo = request.FILES.get('one_photo')
-            OnePhoto.objects.create(photo=one_photo)
+            OnePhoto.objects.create(user = self.request.user, photo=one_photo)
+
 
         else:
-            album_id = request.POST.get('album_id')
+           
+            album_id = request.POST.get('album_id') 
             name = request.POST.get('album_name')
             theme = request.POST.get('album_theme')
             year = request.POST.get('album_year')
 
             if name and theme and year:
                 if album_id:
+                   
                     album = get_object_or_404(Album, id=album_id)
                     album.name = name
                     album.theme = theme
                     album.year = int(year)
                     album.save()
                 else:
-                    Album.objects.create(name=name, theme=theme, year=int(year))
+                    
+                    Album.objects.create(user = self.request.user, name=name, theme=theme, year=int(year))
 
         return redirect('albums')
 

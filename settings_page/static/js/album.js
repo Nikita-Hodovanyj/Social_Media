@@ -1,47 +1,45 @@
-let fileInput = document.getElementById('image-input1');
-let fileDiv = document.querySelector('.albums-images');
+let fileInputs = document.querySelectorAll('.input-photo-class')
+let avatarInput = document.getElementById('image-avatar');
+// let avatarInput = document.getElementById('image-avatar');
+// let avatarFile = document.querySelector('.profile-avatar');
+let toogleButtons = document.querySelectorAll(".icon-button")
+let image = document.querySelector(".image-album")
 
-        fileInput.addEventListener('change', (event) => {
-            
-            
 
-            let files = event.target.files;
-            for (let i = 0; i < files.length; i++) {
-                file = files[i];
-                console.log(file);
-                
-            
 
-                let image = document.createElement('img');
-                // image.src = {% static 'images/${file.name}'%}
-                // Створює посилання на браузері
-                image.src = URL.createObjectURL(file);
-                image.className = 'image-album';
 
-                let wrapper = document.createElement('div');
-                wrapper.className = 'image-wrapper';
+toogleButtons.forEach((button) => {
+    button.addEventListener("click", (event) =>{
+        let albumId = button.id.split('-')[1]
+        
+        let fileDiv = document.getElementById(`albums-images-${albumId}`);
 
-                let iconWrapper = document.createElement('div');
-                iconWrapper.className = 'icon-wrapper';
-                
-                let trashImage = document.createElement('img');
-                trashImage.className = 'trash-image';
-                trashImage.src = TRASH_IMAGE_SRC
-                trashImage.onclick = () => wrapper.remove();
+        if(fileDiv.style.display == "none"){
+            fileDiv.style.display = "flex"
+            console.log('hide')
 
-                let eyeImage = document.createElement('img');
-                trashImage.className = 'trash-image';
-                eyeImage.src = EYE_IMAGE_SRC
+        }
+        else {
+            fileDiv.style.display = "none"
+            console.log('show')
 
-                wrapper.appendChild(image);
-                wrapper.appendChild(iconWrapper);
-                iconWrapper.appendChild(trashImage);
-                iconWrapper.appendChild(eyeImage);
-                fileDiv.appendChild(wrapper);
+        }
+    })  
 
-  
-                
-            }
-            fileInput.value = '';
-            
-        });
+})
+
+
+fileInputs.forEach((fileInput) => {
+    fileInput.addEventListener('change', (event) => {
+        event.preventDefault();
+        
+        console.log('form submit');
+        fileInput.form.submit();
+        
+    });
+});
+
+
+avatarInput.addEventListener('change', (event) => {
+        avatarInput.form.submit();
+});
